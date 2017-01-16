@@ -2,8 +2,11 @@
 // 媒体查询 for 640 or 750
 //------------------
 
-$mediaBase: 750;
-$dpr: true;
+//config里没有设置的话就用如下变量
+$output: 640 !default;
+$dpr: false !default;
+
+@import "config";
 
 @mixin htmlFont($px) {
 	html {
@@ -21,12 +24,14 @@ $dpr: true;
 
 //根据屏幕尺寸转换字体值!
 @function conver2px($clientWidth) {
-	@if $mediaBase == 640 {
+	@if $output == 640 {
 		@return (20 * (($clientWidth + 1) / 320));
 	}
-	@if $mediaBase == 750 {
+	@if $output == 750 {
 		@return $clientWidth / 10;
 	}
+	@warn "error $output not 640 or 750";
+	@return $clientWidth / 10;
 }
 
 /**
@@ -51,54 +56,32 @@ $screens: 212px, 319px, 359px, 383px, 399px, 414px, 423px, 479px, 539px, 639px, 
 
 //兼容iphone5
 @media only screen and (min-device-width:320px) and (max-device-width:568px) {
-	@if $mediaBase == 640 {
+	@if $output == 640 {
 		@include htmlFont(20px);
 	}
-	@if $mediaBase == 750 {
+	@if $output == 750 {
 		@include htmlFont(32px); //750
 	}
 }
 
 //兼容iphone 6
 @media (device-width:375px) and (-webkit-min-device-pixel-ratio:2) {
-	@if $mediaBase == 640 {
+	@if $output == 640 {
 		@include htmlFont(23.4375px);
 	}
-	@if $mediaBase == 750 {
+	@if $output == 750 {
 		@include htmlFont(37.5px); //750
 	}
 }
 
 //兼容iphone6 plus
 @media (device-width:414px) and (-webkit-min-device-pixel-ratio:3.0) {
-	@if $mediaBase == 640 {
+	@if $output == 640 {
 		@include htmlFont(25.875px);
 	}
-	@if $mediaBase == 750 {
+	@if $output == 750 {
 		@include htmlFont(41.4px); //750
 	}
 }
 
 
-/**
- * dpr
- */
-@mixin font-dpr($font-size){
-    font-size: $font-size;
-    @if $dpr {
-    	[data-dpr="2"] & {
-	        font-size: $font-size * 2;
-	    }
-	    [data-dpr="3"] & {
-	        font-size: $font-size * 3;
-	    }
-    }
-}
-
-//common font-size
-$fzs : 12, 14, 16, 18, 20, 22, 24;
-@each $fz in $fzs { 
-	.f#{$fz} {
-		@include font-dpr($fz * 1px)
-	}
-}

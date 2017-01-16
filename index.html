@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="format-detection"content="telephone=no, email=no" />
 <title>Examples</title>
 <link rel="stylesheet" href="css/main.css">
-<script src="dist/flexible.min.js"></script>
+<script src="dist/rem.min.js"></script>
 </head>
 <body>
 
@@ -22,11 +23,17 @@
 	
 	<br>
 
-	<div class="half640">320</div>
+	<div class="half640">
+		<p>尺寸：320</p>
+		<pre>width: rem(320);</pre>
+	</div>
 
 	<br>
 
-	<div class="half750">375</div>	
+	<div class="half750">
+		<p>尺寸：375</p>
+		<pre>width: rem(375);</pre>
+	</div>	
 	
 </body>
 </html>

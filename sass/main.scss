@@ -9,22 +9,27 @@
 //移动web
 @import "base/css3";
 @import "base/media";
+@import "base/rem";
 
 //common
 @import "base/common";
 
 
 
+//for test
+pre {
+	margin: 0;
+}
 .half640 {
 	width: rem(320);
 	height: rem(320);
 	border: 1px solid #f00;
-	@include flexCenter;
+	box-sizing: border-box;
 }
 
 .half750 {
 	width: rem(375);
 	height: rem(375);
 	border: 1px solid #f00;
-	@include flexCenter;
+	box-sizing: border-box;
 }
