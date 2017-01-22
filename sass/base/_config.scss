@@ -12,7 +12,7 @@ $device: 'wap';		//设置reset.css  当前项目属于pc还是wap
  * from rem.scss
  */
 $isPX: false; 		//是否输出px单位的尺寸
-$design: 640; 		//设计稿尺寸
+$design: 750; 		//设计稿尺寸
 
 //*PS:修改次数值需修改对应的js引用    640=>rem.js  750=>flexible.js
 $output: 640;		//输出的代码尺寸 
