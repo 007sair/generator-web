@@ -1,0 +1,435 @@
+@charset "UTF-8";
+/**!
+ * Reset
+ */
+/**!
+ * from reset.scss
+ */
+/**!
+ * from rem.scss
+ */
+/**!
+ * from media.scss
+ */
+html {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 62.5%; }
+
+body {
+  margin: 0;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  color: #333;
+  background: #fff;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; }
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+[hidden],
+template {
+  display: none; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+a {
+  background: transparent;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  color: #08c; }
+
+a:active {
+  outline: 0; }
+
+a:active {
+  color: #069; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+b,
+strong {
+  font-weight: bold; }
+
+dfn {
+  font-style: italic; }
+
+mark {
+  background: #ff0;
+  color: #000; }
+
+small {
+  font-size: 80%; }
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+img {
+  border: 0;
+  vertical-align: top; }
+
+hr {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  height: 0; }
+
+pre {
+  overflow: auto;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0; }
+
+button {
+  overflow: visible; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: none;
+  cursor: pointer; }
+
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+input {
+  line-height: normal;
+  outline: 0; }
+
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 0; }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+input[type="search"] {
+  -webkit-appearance: textfield; }
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="text"] {
+  -webkit-appearance: none; }
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: .35em .625em .75em; }
+
+legend {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto;
+  resize: vertical; }
+
+optgroup {
+  font-weight: bold; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td,
+th {
+  padding: 0; }
+
+html,
+button,
+input,
+select,
+textarea {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+form,
+blockquote {
+  margin: 0; }
+
+ul,
+ol,
+li,
+dl,
+dd {
+  margin: 0;
+  padding: 0; }
+
+ul,
+ol {
+  list-style: none outside none; }
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #ccc; }
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #ccc; }
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #ccc; }
+
+/**
+ * 清除浮动
+ * @param  {[type]} $legacy-support-for-ie: true     [是否支持ie8-  默认支持]
+ */
+/**
+ * [半透明]
+ * @param  {[type]} $opacity:.65         [透明数值 0-1]
+ * @param  {[type]} $support-for-ie:true [是否支持ie8-  默认支持]
+ */
+/**
+ * 背景半透明
+ * @param  {[type]} $color               [色值 如：#f00]
+ * @param  {[type]} $opacity             [透明度  0-1]
+ * @param  {[type]} $support-for-ie:true [是否支持ie  默认支持]
+ */
+/**
+ * 绝对定位版 绝对居中
+ */
+/**
+ * 全屏遮罩
+ */
+/**
+ * 使用原生滚动 & 隐藏滚动条
+ */
+/**!
+ * from reset.scss
+ */
+/**!
+ * from rem.scss
+ */
+/**!
+ * from media.scss
+ */
+/**
+ * 213px显示屏样式 LG Optimus One
+ * 320px显示屏样式 苹果4/4S/5C/5S黑莓Z30
+ * 360px显示屏样式 索尼Z1
+ * 384px显示屏样式 黑莓Z10 谷歌 Nexus 6 LG Optimus G
+ * 399px显示屏样式 三星galaxyNote
+ * 414px显示屏样式 苹果6plus
+ * 424px显示屏样式 LG 4X
+ * 480px显示屏样式 索尼MT27i Xperia sola
+ * 640px显示屏样式 摩托罗拉Droid3/4/Razr Atrix 4g
+ * 640px显示屏样式
+ * 640px以上显示屏样式
+ */
+@media screen and (min-width: 212px) {
+  html {
+    font-size: 13.3125px; } }
+
+@media screen and (min-width: 319px) {
+  html {
+    font-size: 20px; } }
+
+@media screen and (min-width: 359px) {
+  html {
+    font-size: 22.5px; } }
+
+@media screen and (min-width: 383px) {
+  html {
+    font-size: 24px; } }
+
+@media screen and (min-width: 399px) {
+  html {
+    font-size: 25px; } }
+
+@media screen and (min-width: 414px) {
+  html {
+    font-size: 25.9375px; } }
+
+@media screen and (min-width: 423px) {
+  html {
+    font-size: 26.5px; } }
+
+@media screen and (min-width: 479px) {
+  html {
+    font-size: 30px; } }
+
+@media screen and (min-width: 539px) {
+  html {
+    font-size: 33.75px; } }
+
+@media screen and (min-width: 639px) {
+  html {
+    font-size: 40px; } }
+
+@media screen and (min-width: 640px) {
+  html {
+    font-size: 40.0625px; } }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  html {
+    font-size: 20px; } }
+
+@media (device-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+  html {
+    font-size: 23.4375px; } }
+
+@media (device-width: 414px) and (-webkit-min-device-pixel-ratio: 3) {
+  html {
+    font-size: 25.875px; } }
+
+/**!
+ * from reset.scss
+ */
+/**!
+ * from rem.scss
+ */
+/**!
+ * from media.scss
+ */
+/**
+ * 根据当前设计稿进行单位转换
+ * $isPX   {[boolean]}    	[是否使用px单位 	true => 始终返回640比例的尺寸   false => 返回rem单位]
+ * $design {[number]} 	  	[当前设计稿尺寸	640/750]
+ * $output {[number]} 	  	[需要输出的数值类型  640/750 	修改数值需修改对应的js   640=>rem.js   750=>flexible.js]
+ * @param  {[number]} $px 	[不带单位的数值]
+ * 
+ * @return {[string]}     	[返回rem或px 取决于$isPX]
+ */
+/**!
+ * from reset.scss
+ */
+/**!
+ * from rem.scss
+ */
+/**!
+ * from media.scss
+ */
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.clearfix {
+  *zoom: 1; }
+  .clearfix:before, .clearfix:after {
+    content: "";
+    display: table; }
+  .clearfix:after {
+    clear: both;
+    overflow: hidden; }
+
+.f12 {
+  font-size: 12px; }
+
+.f14 {
+  font-size: 14px; }
+
+.f16 {
+  font-size: 16px; }
+
+.f18 {
+  font-size: 18px; }
+
+.f20 {
+  font-size: 20px; }
+
+.f22 {
+  font-size: 22px; }
+
+.f24 {
+  font-size: 24px; }
+
+body {
+  position: relative;
+  z-index: 101;
+  background: #fff; }
+
+pre {
+  margin: 0; }
+
+.half640 {
+  width: 6.82667rem;
+  height: 6.82667rem;
+  border: 1px solid #f00;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.half750 {
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid #f00;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; }
+
+/*# sourceMappingURL=main.css.map */

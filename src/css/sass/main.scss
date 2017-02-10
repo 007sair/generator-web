@@ -14,7 +14,11 @@
 //common
 @import "base/common";
 
-
+body {
+	position: relative;
+	z-index: 101;
+	background: #fff
+}
 
 //for test
 pre {

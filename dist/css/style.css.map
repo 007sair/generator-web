@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.css"],"names":[],"mappings":"AACA;;;;;GAKG;AAGH;EACC,iBAAiB,EACjB","file":"style.css","sourcesContent":["@charset \"UTF-8\";\r\n/**\r\n * \r\n * @authors Your Name (you@example.org)\r\n * @date    2017-02-09 17:27:19\r\n * @version $Id$\r\n */\r\n\r\n\r\nbody {\r\n\tbackground: #ff0;\r\n}"]}
