@@ -27,9 +27,9 @@ module.exports = {
     entry: getEntry(),
     output: {
         path: path.join(__dirname, "dist/js/"),
-        publicPath: "dist/js/",
+        publicPath: "js/",
         filename: "[name].js",
-        chunkFilename: "[chunkhash].js"
+        chunkFilename: "[name].js"
     },
     resolve: {
         alias: {
