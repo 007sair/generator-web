@@ -66,10 +66,10 @@ gulp.task('sassmin', function (done) {
             .pipe(sass())
             .pipe(postcss(processors))
             .pipe(cleanCSS())
-            // .pipe(rev())
+            .pipe(rev())
             .pipe(gulp.dest('./dist/css/'))
-            // .pipe(rev.manifest())
-            // .pipe(gulp.dest('./rev'))
+            .pipe(rev.manifest())
+            .pipe(gulp.dest('./rev'))
     }
     done()
 });
@@ -87,17 +87,9 @@ gulp.task('html', function(done){
     done()
 });
 
-gulp.task('rev:before', function(done){
-    gulp.src(['dist/**/*.css'])
-        .pipe(rev())
-        .pipe(gulp.dest('./dist/'))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest('./rev'))
-    done()
-})
 
-gulp.task('rev', ['rev:before'], function(done) {
-    gulp.src(['./rev/*.json', './src/**/*.html'])   		//- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
+gulp.task('rev', function(done) {
+    return gulp.src(['./rev/*.json', './src/**/*.html'])   		//- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
         .pipe(revCollector())                           //- 执行文件内css名的替换
         .pipe(gulp.dest('dist/'))                   	//- 替换后的文件输出的目录
     done()
@@ -151,7 +143,7 @@ gulp.task("build-js", function(callback) {
 });
 
 gulp.task('md5:js', ['build-js'], function(done) {
-    gulp.src('dist/js/*.js')
+    return gulp.src('dist/js/*.js')
         .pipe(rev())
         .pipe(gulp.dest('./dist/js'))
         .pipe(rev.manifest())
@@ -165,7 +157,7 @@ gulp.task('md5:js', ['build-js'], function(done) {
 //发布
 gulp.task('default', ['clean'], function(cb) {
     // gulp.start('connect', 'sassmin', 'md5', 'rev', 'open')
-    gulpSequence('sassmin', 'rev', 'connect', 'open', cb);
+    gulpSequence('sassmin', 'md5:js', 'rev', 'connect', 'open', cb);
 });
 
 //开发
