@@ -2,7 +2,6 @@
  * 脚手架项目
  * create by lc
  */
-
 var gulp = require('gulp'),
     os = require('os'),
     path = require('path'),
@@ -12,103 +11,110 @@ var gulp = require('gulp'),
     gulpOpen = require('gulp-open'),
     uglify = require('gulp-uglify'),
     cleanCSS = require('gulp-clean-css'),
-    md5 = require('gulp-md5-plus'),
-    fileinclude = require('gulp-file-include'),
-    clean = require('gulp-clean'),
     spriter = require('gulp-css-spriter'),
     webpack = require('webpack'),
-    webpackConfig = require('./webpack.config.js'),
+    webpackConfig = require('./build/webpack.config.js'),
     connect = require('gulp-connect');
-
-require('shelljs/global')
-
-var rev = require('gulp-rev');                                  //- 对文件名加MD5后缀
-var revCollector = require('gulp-rev-collector');               //- 路径替换
-var gulpSequence = require('gulp-sequence');   					//- gulp串行任务
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
-var sourcemaps = require('gulp-sourcemaps');
-
+    require('shelljs/global'),
+    rev = require('gulp-rev'),
+    revCollector = require('gulp-rev-collector'),
+    gulpSequence = require('gulp-sequence'),  //- gulp串行任务   //gulpSequence：圆括号串行，中括号并行
+    postcss = require('gulp-postcss'),
+    autoprefixer = require('autoprefixer'),
+    sourcemaps = require('gulp-sourcemaps');
 
 var processors = [
 	autoprefixer({
 		browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
 	})
 ];
-
-var isProduction = gutil.env._[0] == 'dev';
-
-
+var prod = gutil.env._[0] == 'dev' ? true : false;
 var host = {
     path: 'dist/',
     port: 3000,
     html: 'index.html'
 };
 
-//mac chrome: "Google chrome", 
+//mac chrome: "Google chrome"
 var browser = os.platform() === 'linux' ? 'Google chrome' : (
   os.platform() === 'darwin' ? 'Google chrome' : (
   os.platform() === 'win32' ? 'chrome' : 'firefox'));
 var pkg = require('./package.json');
 
-//压缩合并css
-gulp.task('sassmin', function (done) {
-    if (isProduction) { //dev
-        gulp.src(['src/css/sass/main.scss', 'src/css/style.css'], {base: 'src/css/'})
+//压缩合并css 生成环境生成为md5的文件
+gulp.task('sassmin', function () {
+    if (prod) { //dev
+        return gulp.src(['src/css/main.scss', 'src/css/**/*.css'], {base: 'src/css/'})
             .pipe(sourcemaps.init())
-            .pipe(sass())
+            .pipe(sass().on('error', sass.logError))
             .pipe(postcss(processors))
+            .pipe(cleanCSS({
+                format:{
+                    breaks:{//控制在哪里插入断点
+                      afterBlockEnds:true,//控制在一个块结束后是否有换行符,默认为`false`
+                      afterRuleEnds:true,//控制在规则结束后是否有换行符;默认为`false`
+                    }
+                }
+            }))
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest('dist/css/'))
             .pipe(connect.reload())
     } else {
-        gulp.src(['src/css/sass/main.scss', 'src/css/style.css'], {base: 'src/css/'})
+        return gulp.src(['src/css/main.scss', 'src/css/**/*.css'])
             .pipe(sass())
             .pipe(postcss(processors))
             .pipe(cleanCSS())
             .pipe(rev())
             .pipe(gulp.dest('./dist/css/'))
-            .pipe(rev.manifest())
+            .pipe(rev.manifest('css-version.json'))
             .pipe(gulp.dest('./rev'))
     }
+});
+
+//修改css在html中的引用路径，该动作依赖build-js sassmin
+gulp.task('rev:css', ['build-js', 'sassmin'], function(done) {
+    return gulp.src(['./rev/*.json', './dist/**/*.html'])     //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
+        .pipe(revCollector())                                 //- 执行文件内css名的替换
+        .pipe(gulp.dest('dist/'))                             //- 替换后的文件输出的目录
     done()
+});
+
+
+//引用webpack对js进行操作 生成带有hash的html页
+var myDevConfig = Object.create(webpackConfig);
+var devCompiler = webpack(myDevConfig);
+gulp.task("build-js", function(callback) {
+    devCompiler.run(function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack:build-js", err);
+        gutil.log("[webpack:build-js]", stats.toString({
+            colors: true
+        }));
+        callback();
+    });
+});
+
+gulp.task('copy:images', function (done) {
+    gulp.src(['src/images/**/*']).pipe(gulp.dest('dist/images')).on('end', done);
 });
 
 
 gulp.task('clean', function (done) {
-    rm('-rf', 'dist/');
+    rm('-rf', 'dist/')
+    rm('-rf', 'rev/')
+    mkdir('-p', 'dist/')
     done();
 });
-
-gulp.task('html', function(done){
-    gulp.src('src/**/*.html')
-        .pipe(gulp.dest('./dist'))
-        .pipe(connect.reload())
-    done()
-});
-
-
-gulp.task('rev', function(done) {
-    return gulp.src(['./rev/*.json', './src/**/*.html'])   		//- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
-        .pipe(revCollector())                           //- 执行文件内css名的替换
-        .pipe(gulp.dest('dist/'))                   	//- 替换后的文件输出的目录
-    done()
-});
-
 
 gulp.task('watch', function (done) {
     gulp.watch('src/**/*.scss', ['sassmin']).on('change', function(event){
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
-    gulp.watch('src/**/*.js', ['build-js']).on('change', function(event){
+    gulp.watch(['src/**/*.html', 'src/**/*.js'], ['build-js']).on('change', function(event){
+        gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
-    gulp.watch('src/**/*.html', ['html']).on('change', function(event){
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
+    })
     done()
 });
-
 
 gulp.task('connect', function (done) {
     connect.server({
@@ -128,40 +134,15 @@ gulp.task('open', function (done) {
     done()
 });
 
-var myDevConfig = Object.create(webpackConfig);
-var devCompiler = webpack(myDevConfig);
-
-//引用webpack对js进行操作
-gulp.task("build-js", function(callback) {
-    devCompiler.run(function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack:build-js", err);
-        gutil.log("[webpack:build-js]", stats.toString({
-            colors: true
-        }));
-        callback();
-    });
-});
-
-gulp.task('md5:js', ['build-js'], function(done) {
-    return gulp.src('dist/js/*.js')
-        .pipe(rev())
-        .pipe(gulp.dest('./dist/js'))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest('./rev'))
-    done()
-})
 
 
-//gulpSequence：圆括号串行，中括号并行
 
 //发布
-gulp.task('default', ['clean'], function(cb) {
-    // gulp.start('connect', 'sassmin', 'md5', 'rev', 'open')
-    gulpSequence('sassmin', 'md5:js', 'rev', 'connect', 'open', cb);
+gulp.task('build', ['clean'], function(cb) {
+    gulpSequence('copy:images', 'rev:css', 'connect', 'open', cb);
 });
 
 //开发
-gulp.task('dev', function(cb) {
-    gulpSequence('clean', ['html', 'sassmin', 'build-js', 'connect', 'open'], 'watch', cb);
+gulp.task('dev', ['clean'], function(cb) {
+    gulpSequence('build-js', ['copy:images', 'sassmin', 'connect', 'open'], 'watch', cb);
 });
-

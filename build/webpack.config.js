@@ -1,10 +1,12 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-
+var gutil = require('gulp-util');
 var srcDir = path.resolve(process.cwd(), 'src');
+var prod = gutil.env._[0] == 'dev' ? true : false;
 
 //获取多页面的每个入口文件，用于配置中的entry
 function getEntry() {
@@ -23,23 +25,20 @@ function getEntry() {
 
 module.exports = {
     cache: true,
-    devtool: "source-map",
+    devtool: prod ? "source-map" : '',
     entry: getEntry(),
     output: {
-        path: path.join(__dirname, "dist/js/"),
-        publicPath: "js/",
-        filename: "[name].js",
-        chunkFilename: "[name].js"
-    },
-    resolve: {
-        alias: {
-            jquery: srcDir + "/js/lib/jquery.min.js",
-            core: srcDir + "/js/core",
-            ui: srcDir + "/js/ui"
-        }
+        path: path.join(process.cwd(), "dist/"),
+        publicPath: "",
+        filename: prod ? 'js/[name].js' : 'js/[name].[chunkhash:10].js',
+        chunkFilename: "js/[name].js"
     },
     plugins: [
-        new CommonsChunkPlugin('common.js'),
+        // new CommonsChunkPlugin('common.js'),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/index.html'
+        }),
         new uglifyJsPlugin({
             compress: {
                 warnings: false

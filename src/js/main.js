@@ -9,3 +9,5 @@ document.body.addEventListener('click', function() {
 	
 	
 }, false)
+
+document.title = 'xssdd'
