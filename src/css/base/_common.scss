@@ -4,7 +4,7 @@
 
 $dpr: false !default;
 
-@import "config";
+@import "../config";
 
 .fl {
 	float: left;
@@ -17,7 +17,6 @@ $dpr: false !default;
 .clearfix {
 	@include clearfix;
 }
-
 
 //是否使用dpr的共用单位
 @mixin font-dpr($font-size){

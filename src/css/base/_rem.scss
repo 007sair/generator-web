@@ -7,7 +7,7 @@ $isPX: false !default;
 $design: 750 !default;
 $output: 750 !default; //修改次数值需修改对应的js引用 640=>rem.js  750=>flexible.js
 
-@import "config";
+@import "../config";
 
 /**
  * 根据当前设计稿进行单位转换

@@ -20,6 +20,7 @@
         overflow: hidden;
     }
 }
+
 %clearfix {
     @include clearfix;
 }
@@ -57,7 +58,7 @@
 
 
 /**
- * 绝对定位版 绝对居中
+ * 居中（绝对定位）
  */
 @mixin center($width: null, $height: null) {
 	position: absolute;
@@ -123,16 +124,16 @@
 
 //input等输入框的默认样式重置
 @mixin placeholder($color){
-	&::-webkit-input-placeholder { 
+	&::-webkit-input-placeholder {
 		color: $color; 
 	} 
 	&:-moz-placeholder {
 		color: $color;
 	} 
-	&::-moz-placeholder { 
+	&::-moz-placeholder {
 		color: $color;
 	}
-	&:-ms-input-placeholder { 
+	&:-ms-input-placeholder {
 		color: $color; 
 	}
 }
@@ -157,11 +158,162 @@
 //@param  {[value]}  $else:null 	[可不填，background的其他值]
 @mixin bgSize($url, $size, $else:null){
 	@if not $else{
-		background: url(unquote($url)); 
+		background: url(unquote($url));
 	} @else{
-		background: url(unquote($url)) $else; 
+		background: url(unquote($url)) $else;
 	}
 	@include prefixer(background-size, $size);
+}
+
+
+//小三角箭头
+//@param  {[type]} $direction [箭头朝向]
+//@param  {[type]} $width     [箭头宽度]
+//@param  {[type]} $color     [箭头背景色]
+@mixin minArrow($direction, $width, $color){
+	width: 0;
+	height: 0;
+	border-width: $width;
+	border-style: solid;
+	@if $direction == top {
+		border-color: transparent transparent $color transparent;
+	}
+	@if $direction == right {
+		border-color: transparent transparent transparent $color;
+	}
+	@if $direction == bottom {
+		border-color: $color transparent transparent transparent;
+	}
+	@if $direction == left {
+		border-color: transparent $color transparent transparent;
+	}
+}
+
+
+//控制文字行数溢出点点点
+@mixin ellipsis($line: 1, $substract: null) {
+    @if $line == 1 {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    } @else {
+        display: -webkit-box;
+        display: box;
+        -webkit-line-clamp: $line;
+        line-clamp: $line;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        @if $substract {
+			width: 100% - $substract;
+        }
+    }
+    overflow: hidden;
+}
+
+
+//居中 绝对定位版 + CSS3
+//@param  {[string]} $direction      [both] 上下左右都设置,[horizontal] 左右居中,[vertical] 上下居中
+@mixin centerTranslate($direction: both) {
+	position: absolute;
+	//横轴和纵轴都居中
+	@if $direction == both {
+		top: 50%;
+		left: 50%;
+		@include prefixer(transform, translate3d(-50%, -50%, 0));
+	}
+	//横轴居中
+	@else if $direction == horizontal {
+		left: 50%;
+		@include prefixer(transform, translate3d(-50%, 0, 0));
+	}
+	//纵轴居中
+	@else if $direction == vertical {
+		top: 50%;
+		@include prefixer(transform, translate3d(0, -50%, 0));
+	}
+}
+
+//弹性布局
+@mixin flexbox {
+	display: -webkit-box;           //OLD - iOS 6-, Safari 3.1-6 //老版本语法: Safari,  iOS, Android browser, older WebKit browsers.
+	display: -moz-box;              //OLD - Firefox 19- (doesn't work very well) //老版本语法: Firefox (buggy) 
+	display: -ms-flexbox;           //TWEENER - IE 10 //混合版本语法: IE 10
+	display: -webkit-flex;          //NEW - Chrome //新版本语法： Chrome 21+
+	display: flex;                  //NEW, Spec - Opera 12.1, Firefox 20+ //新版本语法： Opera 12.1, Firefox 22+
+}
+
+//弹性布局子元素
+@mixin flex($num:1) {
+	display: block;					   /*! x5 bug */
+	-webkit-box-flex: $num;            //OLD - iOS 6-, Safari 3.1-6
+	-moz-box-flex: $num;               //OLD - Firefox 19-
+	-webkit-flex: $num;                //Chrome
+	-ms-flex: $num;                    //IE 10
+	flex: $num;                        //NEW, Spec - Opera 12.1, Firefox 20+
+}
+
+//弹性布局的布局方向
+@mixin flex-direc($direction:x) {
+	//水平方向
+	@if ($direction == x) {
+		//09版
+		-webkit-box-orient: horizontal;
+		//12版
+		@include prefixer(flex-direction, row);
+	}
+	//垂直方向
+	@if ($direction == y) {
+		//09版
+		-webkit-box-orient: vertical;
+		//12版
+		@include prefixer(flex-direction, column);
+	}
+}
+
+//弹性布局重拍列顺序
+@mixin flex-order($num) {
+	-webkit-box-ordinal-group: $num;		//OLD - iOS 6-, Safari 3.1-6
+	-moz-box-ordinal-group: $num;      	//OLD - Firefox 19-
+	-ms-flex-order: $num;              	//TWEENER - IE 10
+	-webkit-order: $num;               	//NEW - Chrome
+	order: $num;                       	//NEW, Spec - Opera 12.1, Firefox 20+
+}
+
+
+//[center-children flex居中]
+//@param  {[type]} $x: true        [水平方向居中，false时表示不设置]
+//@param  {[type]} $y: true        [垂直方向居中，false时表示不设置]
+@mixin center-children($x: true, $y: true) {
+	@include flexbox;
+	//水平居中
+	@if($x != false) {
+		//老版本语法
+		-webkit-box-pack: center; 
+		-moz-box-pack: center; 
+		//混合版本语法
+		-ms-flex-pack: center; 
+		//新版本语法
+		-webkit-justify-content: center;
+		justify-content: center;
+	}
+
+	//垂直居中
+	@if($y != false) {
+		//老版本语法
+		-webkit-box-align: center; 
+		-moz-box-align: center;
+		//混合版本语法
+		-ms-flex-align: center; 
+		//新版本语法
+		-webkit-align-items: center;
+		align-items: center;
+	}
+}
+
+
+@mixin flexCenter() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 
@@ -170,6 +322,7 @@
  */
 @mixin scrollbar() {
 	-webkit-overflow-scrolling: touch;
+	overflow-x: auto;
 	&::-webkit-scrollbar {
 		display: none;
 	}

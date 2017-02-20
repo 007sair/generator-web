@@ -6,7 +6,7 @@
 $output: 640 !default;
 $dpr: false !default;
 
-@import "config";
+@import "../config";
 
 @mixin htmlFont($px) {
 	html {
@@ -83,5 +83,3 @@ $screens: 212px, 319px, 359px, 383px, 399px, 414px, 423px, 479px, 539px, 639px, 
 		@include htmlFont(41.4px); //750
 	}
 }
-
-

@@ -51,6 +51,7 @@ gulp.task('sassmin', function () {
             .pipe(cleanCSS({
                 format:{
                     breaks:{//控制在哪里插入断点
+                      afterAtRule: true,
                       afterBlockEnds:true,//控制在一个块结束后是否有换行符,默认为`false`
                       afterRuleEnds:true,//控制在规则结束后是否有换行符;默认为`false`
                     }

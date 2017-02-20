@@ -1,13 +1,10 @@
-console.log('main1')
+var rem = require('./lib/rem.js') //根据 /src/css/_config.scss 的$output输出，引用不同的脚本
+
 
 document.body.addEventListener('click', function() {
-
-	//异步加载module1.js
+	//点击body时异步加载module1.js
 	require.ensure(["./mods/module1.js"], function(require) {
-		var module2 = require("./mods/module1.js");
+		var module2 = require("./mods/module2.js");
+		document.title = module2.title
 	}, 'module1');
-	
-	
 }, false)
-
-document.title = 'xssdd'
