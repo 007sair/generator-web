@@ -1,0 +1,44 @@
+/**
+ * Tools First
+ */
+@import "base/mixin";
+@import "base/rem";
+@import "base/css3";
+
+/**
+ * Init Styles
+ */
+// @import "base/reset";
+// @import "base/media";
+// @import "base/common";
+
+
+/**
+ * Demo Styles
+ */
+@import "base/common";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	line-height: 1.5;
+	background: #fff;
+	font-size: 12px;
+}
+
+.half640 {
+	width: rem(320);
+	height: rem(320);
+	border: 1px solid #f00;
+	box-sizing: border-box;
+}
+
+.half750 {
+	width: rem(375);
+	height: rem(375);
+	border: 1px solid #f00;
+	box-sizing: border-box;
+}

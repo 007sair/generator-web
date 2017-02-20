@@ -1,109 +1,149 @@
-(function(){
+/**
+ * 脚手架项目
+ * create by lc
+ */
+var gulp = require('gulp'),
+    os = require('os'),
+    path = require('path'),
+    gutil = require('gulp-util'),
+    sass = require('gulp-sass'),
+    concat = require('gulp-concat'),
+    gulpOpen = require('gulp-open'),
+    uglify = require('gulp-uglify'),
+    cleanCSS = require('gulp-clean-css'),
+    spriter = require('gulp-css-spriter'),
+    webpack = require('webpack'),
+    webpackConfig = require('./build/webpack.config.js'),
+    connect = require('gulp-connect');
+    require('shelljs/global'),
+    rev = require('gulp-rev'),
+    revCollector = require('gulp-rev-collector'),
+    gulpSequence = require('gulp-sequence'),  //- gulp串行任务   //gulpSequence：圆括号串行，中括号并行
+    postcss = require('gulp-postcss'),
+    autoprefixer = require('autoprefixer'),
+    sourcemaps = require('gulp-sourcemaps');
 
-	//基础包
-	var gulp = require("gulp");
-	var sass = require('gulp-sass');
-	var sourcemaps = require('gulp-sourcemaps');
-
-	/**
-	 * JS
-	 */
-	var concat = require('gulp-concat');
-	var uglify = require("gulp-uglify");
-	var rename = require('gulp-rename');
-	
-	/**
-	 * CSS
-	 */
-	var cleanCSS = require('gulp-clean-css');
-	//PostCSS
-	var postcss = require('gulp-postcss');
-	var autoprefixer = require('autoprefixer');
-	var processors = [
-		autoprefixer({
-			browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
-		})
-	];
-
-	//增强
-	var browserSync = require('browser-sync').create();
-	var reload = browserSync.reload;
-
-	var changed = require('gulp-changed');
-	var replace = require('gulp-replace');
-	var filter  = require('gulp-filter');
-
-
-	var paths = {
-		root: './',
-		src: 'src/',
-		dist: 'dist/',
-		sass: 'sass/',
-		css: 'css/'
-	};
-
-
-	/**
-	 * sass转css任务
-	 * 生成css.css & css.min.css文件
-	 */
-	gulp.task('sass', function() {
-		return gulp.src(paths.sass + '**/*.scss')
-			.pipe(sourcemaps.init())
-			.pipe(sass({
-				outputStyle: 'compact'
-			}).on('error', sass.logError))
-			.pipe(postcss(processors))
-			.pipe(cleanCSS({
-				keepBreaks: true,
-				compatibility: 'ie7',
-				advanced: false
-			}))
-			.pipe(sourcemaps.write('.map/'))
-			.pipe(gulp.dest(paths.css))
-			.pipe(filter(paths.css + '**/*.css')) // Filtering stream to only css files
-			.pipe(reload({
-				stream: true
-			})) //need browserSync
-			.pipe(gulp.dest(paths.css))
-			.pipe(cleanCSS({
-				keepBreaks: false,
-				compatibility: 'ie7'
-			}))
-			.pipe(rename(function(path) {
-				path.basename += '.min';
-			}))
-			.pipe(gulp.dest(paths.css));
-	});
-
-	gulp.task('script', function(){
-		return gulp.src(paths.src + '**/*.js')
-			.pipe(uglify())
-			.pipe(rename({
-				suffix : '.min'
-			}))
-			.pipe(gulp.dest(paths.dist));
+var processors = [
+	autoprefixer({
+		browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
 	})
+];
+var prod = gutil.env._[0] == 'dev' ? true : false;
+var host = {
+    path: 'dist/',
+    port: 3000,
+    html: 'index.html'
+};
+
+//mac chrome: "Google chrome"
+var browser = os.platform() === 'linux' ? 'Google chrome' : (
+  os.platform() === 'darwin' ? 'Google chrome' : (
+  os.platform() === 'win32' ? 'chrome' : 'firefox'));
+var pkg = require('./package.json');
+
+//压缩合并css 生成环境生成为md5的文件
+gulp.task('sassmin', function () {
+    if (prod) { //dev
+        return gulp.src(['src/css/main.scss', 'src/css/**/*.css'], {base: 'src/css/'})
+            .pipe(sourcemaps.init())
+            .pipe(sass().on('error', sass.logError))
+            .pipe(postcss(processors))
+            .pipe(cleanCSS({
+                format:{
+                    breaks:{//控制在哪里插入断点
+                      afterAtRule: true,
+                      afterBlockEnds:true,//控制在一个块结束后是否有换行符,默认为`false`
+                      afterRuleEnds:true,//控制在规则结束后是否有换行符;默认为`false`
+                    }
+                }
+            }))
+            .pipe(sourcemaps.write('.'))
+            .pipe(gulp.dest('dist/css/'))
+            .pipe(connect.reload())
+    } else {
+        return gulp.src(['src/css/main.scss', 'src/css/**/*.css'])
+            .pipe(sass())
+            .pipe(postcss(processors))
+            .pipe(cleanCSS())
+            .pipe(rev())
+            .pipe(gulp.dest('./dist/css/'))
+            .pipe(rev.manifest('css-version.json'))
+            .pipe(gulp.dest('./rev'))
+    }
+});
+
+//修改css在html中的引用路径，该动作依赖build-js sassmin
+gulp.task('rev:css', ['build-js', 'sassmin'], function(done) {
+    return gulp.src(['./rev/*.json', './dist/**/*.html'])     //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
+        .pipe(revCollector())                                 //- 执行文件内css名的替换
+        .pipe(gulp.dest('dist/'))                             //- 替换后的文件输出的目录
+    done()
+});
 
 
-	gulp.task('default', function() {
-		//指定文件，用browserSync监听文件变化
-		browserSync.init({
-			server: {
-	            baseDir: "./"
-	        }
-		});
+//引用webpack对js进行操作 生成带有hash的html页
+var myDevConfig = Object.create(webpackConfig);
+var devCompiler = webpack(myDevConfig);
+gulp.task("build-js", function(callback) {
+    devCompiler.run(function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack:build-js", err);
+        gutil.log("[webpack:build-js]", stats.toString({
+            colors: true
+        }));
+        callback();
+    });
+});
 
-		//监听文件变化并执行sass任务
-		gulp.watch(paths.sass + '**/*.scss', ['sass']);
-
-		gulp.watch(paths.src + '**/*.js', ['script']);
-
-		//监听html发生变化时手动重载浏览器
-		gulp.watch("*.html").on("change", browserSync.reload);
-
-	});
-
+gulp.task('copy:images', function (done) {
+    gulp.src(['src/images/**/*']).pipe(gulp.dest('dist/images')).on('end', done);
+});
 
 
-})();
+gulp.task('clean', function (done) {
+    rm('-rf', 'dist/')
+    rm('-rf', 'rev/')
+    mkdir('-p', 'dist/')
+    done();
+});
+
+gulp.task('watch', function (done) {
+    gulp.watch('src/**/*.scss', ['sassmin']).on('change', function(event){
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+    gulp.watch(['src/**/*.html', 'src/**/*.js'], ['build-js']).on('change', function(event){
+        gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    })
+    done()
+});
+
+gulp.task('connect', function (done) {
+    connect.server({
+        root: host.path,
+        port: host.port,
+        livereload: true
+    });
+    done()
+});
+
+gulp.task('open', function (done) {
+    gulp.src('')
+        .pipe(gulpOpen({
+            app: browser,
+            uri: 'http://localhost:3000/'
+        }))
+    done()
+});
+
+
+
+
+//发布
+gulp.task('build', ['clean'], function(cb) {
+    gulpSequence('copy:images', 'rev:css', 'connect', 'open', cb);
+});
+
+//开发
+gulp.task('dev', ['clean'], function(cb) {
+    gulpSequence('build-js', ['copy:images', 'sassmin', 'connect', 'open'], 'watch', cb);
+});
