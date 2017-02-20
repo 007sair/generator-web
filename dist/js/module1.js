@@ -1,2 +1,0 @@
-webpackJsonp([1],[,,function(e,n){var o=document.createElement("h1");o.innerHTML="module1模块已被加载11111",document.body.appendChild(o)},function(e,n){e.exports={title:"module2"}}]);
-//# sourceMappingURL=module1.js.map
