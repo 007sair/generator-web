@@ -1,6 +1,6 @@
 /**
  * 脚手架项目
- * create by lc
+ * created by lc
  */
 var gulp = require('gulp'),
     os = require('os'),
@@ -28,7 +28,9 @@ var processors = [
 		browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
 	})
 ];
+
 var prod = gutil.env._[0] == 'dev' ? true : false;
+
 var host = {
     path: 'dist/',
     port: 3000,
