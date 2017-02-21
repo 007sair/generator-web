@@ -30,6 +30,9 @@ gulp dev
 gulp build
 ```
 
+**node_modules**
+
+项目中包含了`node-sass`经常安装不上的`vendor`
 
 ## TODO
 
