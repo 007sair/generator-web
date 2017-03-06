@@ -97,6 +97,7 @@ gulp.task("build-js", function(callback) {
 });
 
 gulp.task('copy:images', function (done) {
+    rm('-rf', 'dist/images/');
     gulp.src(['src/images/**/*']).pipe(gulp.dest('dist/images')).on('end', done);
 });
 
@@ -115,7 +116,10 @@ gulp.task('watch', function (done) {
     gulp.watch(['src/**/*.html', 'src/**/*.js'], ['build-js']).on('change', function(event){
         gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    })
+    });
+    gulp.watch('src/images/**', ['copy:images']).on('change', function(event) {
+
+    });
     done()
 });
 
