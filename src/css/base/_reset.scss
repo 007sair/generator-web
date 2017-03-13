@@ -3,6 +3,7 @@
  */
 
 $device: 'wap' !default;
+
 @import "../config";
 
 @if $device == 'wap' { //wap

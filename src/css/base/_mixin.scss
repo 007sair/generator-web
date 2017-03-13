@@ -10,7 +10,7 @@
     @if $legacy-support-for-ie {
         *zoom: 1;
     }
-    &:before,&:after {
+    &:before, &:after {
         content: "";
         display: table;
     }
@@ -47,7 +47,7 @@
  */
 @mixin rgba($color, $opacity, $support-for-ie: true) {
 	background-color:rgba($color,$opacity);
-	@if $support-for-ie{
+	@if $support-for-ie {
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str(rgba($color,$opacity))},endColorstr=#{ie-hex-str(rgba($color,$opacity))});
 		:root & { //for ie9
 			filter: none;
@@ -59,7 +59,7 @@
 //float 
 @mixin float($direction: left, $support-for-ie: false) {
 	float: unquote($direction);
-	@if $support-for-ie{
+	@if $support-for-ie {
 		_display: inline;
 	}
 }
@@ -84,13 +84,13 @@
  * @param  {[type]} $type [width or height]
  * @param  {[type]} $num  [数值]
  */
-@mixin min-wh($type, $num){
-	@if ($type == width or $type == both ){
+@mixin min-wh($type, $num) {
+	@if ($type == width or $type == both ) {
 		min-width: $num;
 		width: auto !important; 
 		_width: $num;
 	}
-	@if ($type == height or $type == both){
+	@if ($type == height or $type == both) {
 		min-height: $num;
 		height: auto !important; 
 		_height: $num;
@@ -102,7 +102,7 @@
  * input等输入框的默认样式重置
  * @param  {[type]} $color [文字色值]
  */
-@mixin placeholder($color){
+@mixin placeholder($color) {
 	&::-webkit-input-placeholder {
 		color: $color; 
 	} 
@@ -121,7 +121,7 @@
 /**
  * 全屏遮罩
  */
-@mixin mask($zIndex: 1000){
+@mixin mask($zIndex: 1000) {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -137,7 +137,7 @@
  * @param  {[type]} $width     [箭头宽度]
  * @param  {[type]} $color     [箭头背景色]
  */
-@mixin minArrow($direction, $width, $color){
+@mixin minArrow($direction, $width, $color) {
 	width: 0;
 	height: 0;
 	border-width: $width;
