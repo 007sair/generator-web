@@ -8,7 +8,6 @@ $device: 'wap' !default;
 
 @if $device == 'wap' { //wap
 	html {
-		font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
 		-ms-text-size-adjust: 100%; 	
 		-webkit-text-size-adjust: 100%;  /* 关闭字体大小自动调整功能 */
 		font-size: 62.5%;
@@ -161,7 +160,7 @@ $device: 'wap' !default;
 		padding: 0;
 	}
 	html, button, input, select, textarea {
-		font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+		font-family: "PingFang SC", "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
 	}
 	h1, h2, h3, h4, h5, h6, p, figure, form, blockquote {
 		margin: 0;

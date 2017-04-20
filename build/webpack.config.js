@@ -37,7 +37,13 @@ module.exports = {
         // new CommonsChunkPlugin('common.js'),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'src/index.html'
+            template: 'src/index.html',
+            chunks: ['index']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'test.html',
+            template: 'src/test.html',
+            chunks: ['test']
         }),
         new uglifyJsPlugin({
             compress: {
