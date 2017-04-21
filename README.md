@@ -116,7 +116,7 @@ function fomatFloat(src, pos) {
 
 rem需要background-size支持
 
-```
+```css
 {{{selector}}} {
   background-image: url({{{escaped_image}}});
   background-position: {{px.offset_x}} {{px.offset_y}};
@@ -132,7 +132,7 @@ rem需要background-size支持
 
 87行后新增如下代码：
 
-```
+```scss
 %sprite-common {
   background-image: url('{{{spritesheet.escaped_image}}}');
   background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
@@ -141,7 +141,7 @@ rem需要background-size支持
 
 修改如下代码：
 
-```
+```scss
 @mixin sprites($sprites) {
   @each $sprite in $sprites {
     $sprite-name: nth($sprite, 10);
