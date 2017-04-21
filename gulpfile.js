@@ -164,10 +164,10 @@ gulp.task('open', function (done) {
 
 //发布
 gulp.task('build', ['clean'], function(cb) {
-    gulpSequence('copy:images', 'rev:css', 'connect', 'open', cb);
+    gulpSequence('copy:images', 'sprites', 'rev:css', 'connect', 'open', cb);
 });
 
 //开发
 gulp.task('dev', ['clean'], function(cb) {
-    gulpSequence('build-js', ['copy:images', 'sprites', 'sassmin', 'connect', 'open'], 'watch', cb);
+    gulpSequence('build-js', 'sprites', ['copy:images', 'sassmin', 'connect', 'open'], 'watch', cb);
 });

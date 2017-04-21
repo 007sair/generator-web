@@ -14,6 +14,7 @@
 |   ├── css                    
 |   |   ├── base                #sass库
 |   |   ├── _config.scss        #sass配置文件
+|   |   ├── _sprites.scss       #css雪碧图生成的sass文件
 |   |   └── main.scss           #页面样式 可以有多个
 |   ├── images                  
 |   |   └── sprites             #雪碧图目录

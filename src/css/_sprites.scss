@@ -1,0 +1,122 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$icon-cancel-name: 'icon-cancel';
+$icon-cancel-x: 1.24rem;
+$icon-cancel-y: 0rem;
+$icon-cancel-offset-x: -1.24rem;
+$icon-cancel-offset-y: 0rem;
+$icon-cancel-width: 0.32rem;
+$icon-cancel-height: 0.32rem;
+$icon-cancel-total-width: 1.56rem;
+$icon-cancel-total-height: 1.56rem;
+$icon-cancel-image: '../images/icon-sprite.png';
+$icon-cancel: (1.24rem, 0rem, -1.24rem, 0rem, 0.32rem, 0.32rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-cancel', );
+$icon-clear-name: 'icon-clear';
+$icon-clear-x: 1.24rem;
+$icon-clear-y: 0.59rem;
+$icon-clear-offset-x: -1.24rem;
+$icon-clear-offset-y: -0.58667rem;
+$icon-clear-width: 0.32rem;
+$icon-clear-height: 0.32rem;
+$icon-clear-total-width: 1.56rem;
+$icon-clear-total-height: 1.56rem;
+$icon-clear-image: '../images/icon-sprite.png';
+$icon-clear: (1.24rem, 0.59rem, -1.24rem, -0.58667rem, 0.32rem, 0.32rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-clear', );
+$icon-soldout-name: 'icon-soldout';
+$icon-soldout-x: 0rem;
+$icon-soldout-y: 0rem;
+$icon-soldout-offset-x: 0rem;
+$icon-soldout-offset-y: 0rem;
+$icon-soldout-width: 0.97rem;
+$icon-soldout-height: 0.97rem;
+$icon-soldout-total-width: 1.56rem;
+$icon-soldout-total-height: 1.56rem;
+$icon-soldout-image: '../images/icon-sprite.png';
+$icon-soldout: (0rem, 0rem, 0rem, 0rem, 0.97rem, 0.97rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-soldout', );
+$icon-tips-name: 'icon-tips';
+$icon-tips-x: 0rem;
+$icon-tips-y: 1.24rem;
+$icon-tips-offset-x: 0rem;
+$icon-tips-offset-y: -1.24rem;
+$icon-tips-width: 0.32rem;
+$icon-tips-height: 0.32rem;
+$icon-tips-total-width: 1.56rem;
+$icon-tips-total-height: 1.56rem;
+$icon-tips-image: '../images/icon-sprite.png';
+$icon-tips: (0rem, 1.24rem, 0rem, -1.24rem, 0.32rem, 0.32rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-tips', );
+$spritesheet-width: 1.56rem;
+$spritesheet-height: 1.56rem;
+$spritesheet-image: '../images/icon-sprite.png';
+$spritesheet-sprites: ($icon-cancel, $icon-clear, $icon-soldout, $icon-tips, );
+$spritesheet: (1.56rem, 1.56rem, '../images/icon-sprite.png', $spritesheet-sprites, );
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+  background-size: 1.56rem 1.56rem;
+}
+
+@mixin sprite($sprite) {
+  //@include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+%sprite-common {
+  background-image: url('../images/icon-sprite.png');
+  background-size: 1.56rem 1.56rem;
+}
+
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @extend %sprite-common;
+      @include sprite($sprite);
+    }
+  }
+}
