@@ -89,9 +89,9 @@ new HtmlWebpackPlugin({
 
 **gulp.spritesmith**
 
-gulp.spritesmith默认生成px为单位的雪碧图样式，作者将其改为rem单位：
+`gulp.spritesmith`默认生成`px`为单位的雪碧图样式，作者将其改为`rem`单位：
 
-1、首先修改gulp.spritesmith\node_modules\spritesheet-templates\lib\spritesheet-templates.js
+1、首先修改`gulp.spritesmith\node_modules\spritesheet-templates\lib\spritesheet-templates.js`
 
 ```javascript
 ['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
@@ -112,9 +112,9 @@ function fomatFloat(src, pos) {
 }
 ```
 
-2、修改gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\css.template.handlebars
+2、修改`gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\css.template.handlebars`
 
-rem需要background-size支持
+`rem`需要`background-size`支持
 
 ```css
 {{{selector}}} {
@@ -126,9 +126,9 @@ rem需要background-size支持
 }
 ```
 
-3、修改gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\scss.template.handlebars
+3、修改`gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\scss.template.handlebars`
 
-生成的雪碧图每个class都带有相同的url，修改后将url抽离为公共代码
+抽离`background-image`和`background-size`
 
 87行后新增如下代码：
 
