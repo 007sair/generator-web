@@ -37,7 +37,7 @@
 - 实时刷新
 - 生产环境自动生成版本号
 - 640/750的rem单位随时切换
-- Css Sprite
+- Css Sprite(图片必须为.png)
 
 ## 使用方法
 
@@ -97,9 +97,19 @@ gulp.spritesmith默认生成px为单位的雪碧图样式，作者将其改为re
 ['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
 if (item[key] !== undefined) {
   // px[key] = item[key] + 'px';
-  px[key] = fomatFloat(item[key]/75, 2) + 'rem'; //此处的75根据config.scss的$output值进行设置   750 -> 75   640 -> 40
+  px[key] = fomatFloat(item[key]/75, 4) + 'rem'; //此处的75根据config.scss的$output值进行设置   750 -> 75   640 -> 40
 }
 });
+
+//添加fomatFloat函数
+function fomatFloat(src, pos) {
+     if (!arguments.length) return -1;
+     if (!isNaN(src)) {
+          pos = (src > 0 && src < 1) ? 2 : pos || 1;
+          return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
+     }
+     return src
+}
 ```
 
 2、修改gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\css.template.handlebars
