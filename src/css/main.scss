@@ -16,7 +16,7 @@
 /**
  * Demo Styles
  */
-@import "base/common";
+@import "sprites";
 
 * {
 	margin: 0;
@@ -24,21 +24,26 @@
 }
 
 body {
-	line-height: 1.5;
-	background: #fff;
 	font-size: 12px;
 }
 
-.half640 {
+.rem320 {
 	width: rem(320);
-	height: rem(320);
-	border: 1px solid #f00;
-	box-sizing: border-box;
+	background-color: #f00;
+	color: #fff;
 }
 
-.half750 {
+.rem375 {
 	width: rem(375);
-	height: rem(375);
-	border: 1px solid #f00;
-	box-sizing: border-box;
+	background-color: #f00;
+	color: #fff;
+}
+
+.sprites {
+	li {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 5px;
+	}
+	@include sprites($spritesheet-sprites);
 }

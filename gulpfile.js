@@ -21,7 +21,9 @@ var gulp = require('gulp'),
     gulpSequence = require('gulp-sequence'),  //- gulp串行任务   //gulpSequence：圆括号串行，中括号并行
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    spritesmith = require('gulp.spritesmith'),
+    imagemin = require('gulp-imagemin');
 
 var processors = [
 	autoprefixer({
@@ -48,7 +50,9 @@ gulp.task('sassmin', function () {
     if (prod) { //dev
         return gulp.src(['src/css/main.scss', 'src/css/**/*.css'], {base: 'src/css/'})
             .pipe(sourcemaps.init())
-            .pipe(sass().on('error', sass.logError))
+            .pipe(sass({
+                precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
+            }).on('error', sass.logError))
             .pipe(postcss(processors))
             .pipe(cleanCSS({
                 format:{
@@ -82,7 +86,6 @@ gulp.task('rev:css', ['build-js', 'sassmin'], function(done) {
     done()
 });
 
-
 //引用webpack对js进行操作 生成带有hash的html页
 var myDevConfig = Object.create(webpackConfig);
 var devCompiler = webpack(myDevConfig);
@@ -98,9 +101,26 @@ gulp.task("build-js", function(callback) {
 
 gulp.task('copy:images', function (done) {
     rm('-rf', 'dist/images/');
-    gulp.src(['src/images/**/*']).pipe(gulp.dest('dist/images')).on('end', done);
+    gulp.src(['src/images/**/*'])
+        .pipe(gulp.dest('dist/images'))
+        .on('end', done);
 });
 
+gulp.task('sprites', function() {
+    var spriteData = gulp.src('src/images/sprites/*.png')
+        .pipe(spritesmith({
+            cssName: '_sprites.scss',
+            cssFormat: 'scss',
+            imgName: 'icon-sprite.png',
+            imgPath: '../images/icon-sprite.png',
+            padding: 20
+        }));
+    spriteData.img
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'));
+    spriteData.css
+        .pipe(gulp.dest('src/css'));
+});
 
 gulp.task('clean', function (done) {
     rm('-rf', 'dist/')
@@ -117,7 +137,7 @@ gulp.task('watch', function (done) {
         gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
-    gulp.watch('src/images/**', ['copy:images']).on('change', function(event) {
+    gulp.watch('src/images/**', ['copy:images', 'sprites']).on('change', function(event) {
 
     });
     done()
@@ -142,8 +162,6 @@ gulp.task('open', function (done) {
 });
 
 
-
-
 //发布
 gulp.task('build', ['clean'], function(cb) {
     gulpSequence('copy:images', 'rev:css', 'connect', 'open', cb);
@@ -151,5 +169,5 @@ gulp.task('build', ['clean'], function(cb) {
 
 //开发
 gulp.task('dev', ['clean'], function(cb) {
-    gulpSequence('build-js', ['copy:images', 'sassmin', 'connect', 'open'], 'watch', cb);
+    gulpSequence('build-js', ['copy:images', 'sprites', 'sassmin', 'connect', 'open'], 'watch', cb);
 });

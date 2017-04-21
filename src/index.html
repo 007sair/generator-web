@@ -8,30 +8,36 @@
 <meta name="format-detection"content="telephone=no, email=no" />
 <title>Examples</title>
 <link href="css/main.css" rel="stylesheet">
+
 </head>
 <body>
 
-	<h1>这是一个简单的脚手架工具</h1>
-	<p class="f24">字号为24px</p>
-	<p class="f22">字号为22px</p>
-	<p class="f20">字号为20px</p>
-	<p class="f18">字号为18px</p>
-	<p class="f16">字号为16px</p>
-	<p class="f14">字号为14px</p>
-	<p class="f12">字号为12px</p>
+	<h1>gulp css sprites</h1>
+	<ul class="sprites">
+		<li class="icon-cancel"></li>
+		<li class="icon-clear"></li>
+		<li class="icon-soldout"></li>
+	</ul>
+
+	<h1>根据config.scss设置输出rem</h1>
 	<br>
+	<h4>容器一：</h4>
+	<div style="width:50%;background-color:#f00;color:#fff;">
+		<pre>width:50%</pre>
+	</div>
+	<br>
+	<h4>容器二：</h4>
+	<div class="rem320">
+		若$output=640，则此容器应与容器一宽度一致
+	</div>
+	<br>
+	<h4>容器三：</h4>
+	<div class="rem375">
+		若$output=750，则此容器应与容器一宽度一致
+	</div>
+
 	
-	<div class="half640">
-		<p>尺寸：320</p>
-		<pre>width: rem(320);</pre>
-	</div>
 
-	<br>
-
-	<div class="half750">
-		<p>尺寸：375</p>
-		<pre>width: rem(375);</pre>
-	</div>
 
 </body>
 </html>
