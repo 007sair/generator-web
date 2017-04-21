@@ -1,6 +1,33 @@
 # 脚手架工具
 
-> 最终文件生成到dist目录
+> 启动gulp后会生成`dist`目录
+
+```
+.
+├── build                       
+|   └── webpack.config.js       #webpack配置文件
+├── dist                        #发布目录
+├── node_modules                #包文件夹
+|   ├── gulp.spritesmith        #css雪碧图需要的配置修改
+│   └── node-sass               #解决node-sass在国内安装失败的问题
+├── src                         #源文件
+|   ├── css                    
+|   |   ├── base                #sass库
+|   |   ├── _config.scss        #sass配置文件
+|   |   └── main.scss           #页面样式 可以有多个
+|   ├── images                  
+|   |   └── sprites             #雪碧图目录
+|   ├── js                      
+|   |   ├── lib                 #js库
+|   |   ├── mods                #js模块
+|   |   ├── index.js            #入口文件1
+|   |   └── test.js             #入口文件2
+|   ├── index.html              #页面1
+|   └── test.html               #页面2
+├── .gitignore     
+├── gulpfile.js                 
+└── package.json
+```
 
 ## 功能
 
@@ -16,9 +43,10 @@
 **安装：**
 
 ```
-#有淘宝镜像使用cnpm  修改命令：npm install -g cnpm --registry=https://registry.npm.taobao.org
+# 有淘宝镜像使用cnpm  修改命令：npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install   
-#无则使用npm
+
+# 无则使用npm
 npm install
 ```
 
@@ -34,6 +62,24 @@ gulp dev
 gulp build
 ```
 
+## 多页开发
+
+修改build/webpack.config.js
+
+```javascript
+new HtmlWebpackPlugin({
+    filename: 'index.html',
+    template: 'src/index.html',
+    chunks: ['index'] //chunks代表当前页使用的入口文件 src/js/index.js
+}),
+new HtmlWebpackPlugin({
+    filename: 'test.html',
+    template: 'src/test.html',
+    chunks: ['test'] //chunks代表当前页使用的入口文件 src/js/test.js
+}),
+```
+
+
 ## node_modules
 
 **node-sass**
@@ -47,13 +93,12 @@ gulp.spritesmith默认生成px为单位的雪碧图样式，作者将其改为re
 1、首先修改gulp.spritesmith\node_modules\spritesheet-templates\lib\spritesheet-templates.js
 
 ```javascript
-// For each of the x, y, offset_x, offset_y, height, width, add a px after that
-  ['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
-    if (item[key] !== undefined) {
-      // px[key] = item[key] + 'px';
-      px[key] = fomatFloat(item[key]/75, 2) + 'rem'; //此处的75根据config.scss的$output值进行设置   750 -> 75   640 -> 40
-    }
-  });
+['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
+if (item[key] !== undefined) {
+  // px[key] = item[key] + 'px';
+  px[key] = fomatFloat(item[key]/75, 2) + 'rem'; //此处的75根据config.scss的$output值进行设置   750 -> 75   640 -> 40
+}
+});
 ```
 
 2、修改gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\css.template.handlebars
@@ -71,6 +116,8 @@ rem需要background-size支持
 ```
 
 3、修改gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\scss.template.handlebars
+
+生成的雪碧图每个class都带有相同的url，修改后将url抽离为公共代码
 
 87行后新增如下代码：
 
@@ -94,5 +141,3 @@ rem需要background-size支持
   }
 }
 ```
-
-目的：生成的雪碧图每个class都带有相同的url，修改后将url抽离为公共代码
