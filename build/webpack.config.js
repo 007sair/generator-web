@@ -34,16 +34,19 @@ module.exports = {
         chunkFilename: "js/[name].js"
     },
     plugins: [
-        // new CommonsChunkPlugin('common.js'),
+        new CommonsChunkPlugin({
+            name: 'common',
+            minChunks: 2
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'src/index.html',
-            chunks: ['index']
+            chunks: ['common','index']
         }),
         new HtmlWebpackPlugin({
-            filename: 'test.html',
-            template: 'src/test.html',
-            chunks: ['test']
+            filename: 'index2.html',
+            template: 'src/index2.html',
+            chunks: ['common','test']
         }),
         new uglifyJsPlugin({
             compress: {
