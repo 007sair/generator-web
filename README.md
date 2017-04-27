@@ -130,9 +130,27 @@ function fomatFloat(src, pos) {
 
 抽离`background-image`和`background-size`
 
-87行后新增如下代码：
+将如下代码：
 
 ```scss
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+```
+
+改为：
+
+```
+@mixin sprite($sprite) {
+  //@include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
 %sprite-common {
   background-image: url('{{{spritesheet.escaped_image}}}');
   background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
