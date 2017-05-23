@@ -66,7 +66,7 @@ gulp build
 
 ## 多页开发
 
-修改build/webpack.config.js
+修改build/config.js
 
 ```javascript
 new HtmlWebpackPlugin({
@@ -75,9 +75,9 @@ new HtmlWebpackPlugin({
     chunks: ['index'] //chunks代表当前页使用的入口文件 src/js/index.js
 }),
 new HtmlWebpackPlugin({
-    filename: 'test.html',
-    template: 'src/test.html',
-    chunks: ['test'] //chunks代表当前页使用的入口文件 src/js/test.js
+    filename: 'page2.html',
+    template: 'src/page2.html',
+    chunks: ['page2'] //chunks代表当前页使用的入口文件 src/js/page2.js
 }),
 ```
 
