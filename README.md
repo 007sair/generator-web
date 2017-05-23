@@ -81,15 +81,7 @@ new HtmlWebpackPlugin({
 }),
 ```
 
-## node_modules目录
-
-### node-sass
-
-`node-sass`目录下包含经常安装不上的`vendor`
-
-### gulp.spritesmith
-
-**gulp.spritesmith**
+## spritesmith目录
 
 `gulp.spritesmith`默认生成`px`为单位的雪碧图样式，将其改为`rem`单位，方法如下：
 
