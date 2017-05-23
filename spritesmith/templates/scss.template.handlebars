@@ -86,22 +86,6 @@ The provided mixins are intended to be used with the array-like variables
   @include sprite-height($sprite);
 }
 
-/*
-这个引用图片的变量后期可以修改
-例如：
-    @import "sprites";
-
-    $sprite-icons: 'images/xxx.jpg'; //变量可以放在这里重置
-
-    @include sprites($spritesheet-sprites);
- */
-$sprite-icons: '{{{spritesheet.escaped_image}}}' !default;
-
-%sprite-common {
-  background-image: url($sprite-icons);
-  background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
-}
-
 {{/if}}
 {{/block}}
 
@@ -111,13 +95,31 @@ $sprite-icons: '{{{spritesheet.escaped_image}}}' !default;
 The `sprites` mixin generates identical output to the CSS template
   but can be overridden inside of SCSS
 
-@include sprites($spritesheet-sprites);
+在sass文件中的调用方法：
+@include sprites($spritesheet-sprites, $url);
+
+第二个参数$url的使用时机 如下（需要在线上链接与线下链接切换时）：
+--------------------
+$online: true;
+
+$sprite-icons: '../images/icon-sprite.png';
+
+@if $online {
+  $sprite-icons: 'http://xxx.xxx.icon-sprite.png';
+} 
+
+@include sprites($spritesheet-sprites, $sprite-icons);
+--------------------
 */
 {{/if}}
 {{/block}}
 {{#block "spritesheet-functions"}}
 {{#if options.functions}}
-@mixin sprites($sprites) {
+@mixin sprites($sprites, $url: '{{{spritesheet.escaped_image}}}') {
+  %sprite-common {
+    background-image: url($url);
+    background-size: 6.04rem 4.66667rem;
+  }
   @each $sprite in $sprites {
     $sprite-name: nth($sprite, 10);
     .#{$sprite-name} {
