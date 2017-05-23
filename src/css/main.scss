@@ -1,23 +1,28 @@
 /**
  * Tools
  */
-@import "base/mixin";
-@import "base/rem";
-@import "base/css3";
+@import "base/mixin.scss";
+@import "base/rem.scss";
+@import "base/css3.scss";
 
 /**
  * Init Styles
  */
-// @import "base/reset";
-// @import "base/media";
-// @import "base/common";
+// @import "base/reset.scss";
+// @import "base/media.scss";
+// @import "base/common.scss";
+
+
+/**
+ * Sprites
+ */
+@import "sprites.scss";
+@include sprites($spritesheet-sprites);
 
 
 /**
  * Demo Styles
  */
-@import "sprites";
-
 * {
 	margin: 0;
 	padding: 0;
@@ -39,11 +44,3 @@ body {
 	color: #fff;
 }
 
-.sprites {
-	li {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 5px;
-	}
-	@include sprites($spritesheet-sprites);
-}

@@ -11,55 +11,154 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
+$entry-cztj-name: 'entry-cztj';
+$entry-cztj-x: 0rem;
+$entry-cztj-y: 0.8rem;
+$entry-cztj-offset-x: 0rem;
+$entry-cztj-offset-y: -0.8rem;
+$entry-cztj-width: 1.2rem;
+$entry-cztj-height: 1.2rem;
+$entry-cztj-total-width: 6.04rem;
+$entry-cztj-total-height: 4.66667rem;
+$entry-cztj-image: '../images/icon-sprite.png';
+$entry-cztj: (0rem, 0.8rem, 0rem, -0.8rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-cztj', );
+$entry-jkt-name: 'entry-jkt';
+$entry-jkt-x: 1.46667rem;
+$entry-jkt-y: 2.26667rem;
+$entry-jkt-offset-x: -1.46667rem;
+$entry-jkt-offset-y: -2.26667rem;
+$entry-jkt-width: 1.2rem;
+$entry-jkt-height: 1.2rem;
+$entry-jkt-total-width: 6.04rem;
+$entry-jkt-total-height: 4.66667rem;
+$entry-jkt-image: '../images/icon-sprite.png';
+$entry-jkt: (1.46667rem, 2.26667rem, -1.46667rem, -2.26667rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-jkt', );
+$entry-mxt-name: 'entry-mxt';
+$entry-mxt-x: 1.46667rem;
+$entry-mxt-y: 0.8rem;
+$entry-mxt-offset-x: -1.46667rem;
+$entry-mxt-offset-y: -0.8rem;
+$entry-mxt-width: 1.2rem;
+$entry-mxt-height: 1.2rem;
+$entry-mxt-total-width: 6.04rem;
+$entry-mxt-total-height: 4.66667rem;
+$entry-mxt-image: '../images/icon-sprite.png';
+$entry-mxt: (1.46667rem, 0.8rem, -1.46667rem, -0.8rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-mxt', );
+$entry-xlb-name: 'entry-xlb';
+$entry-xlb-x: 0rem;
+$entry-xlb-y: 2.26667rem;
+$entry-xlb-offset-x: 0rem;
+$entry-xlb-offset-y: -2.26667rem;
+$entry-xlb-width: 1.2rem;
+$entry-xlb-height: 1.2rem;
+$entry-xlb-total-width: 6.04rem;
+$entry-xlb-total-height: 4.66667rem;
+$entry-xlb-image: '../images/icon-sprite.png';
+$entry-xlb: (0rem, 2.26667rem, 0rem, -2.26667rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-xlb', );
 $icon-cancel-name: 'icon-cancel';
-$icon-cancel-x: 1.24rem;
-$icon-cancel-y: 0rem;
-$icon-cancel-offset-x: -1.24rem;
-$icon-cancel-offset-y: 0rem;
+$icon-cancel-x: 5.65333rem;
+$icon-cancel-y: 2.17333rem;
+$icon-cancel-offset-x: -5.65333rem;
+$icon-cancel-offset-y: -2.17333rem;
 $icon-cancel-width: 0.32rem;
 $icon-cancel-height: 0.32rem;
-$icon-cancel-total-width: 1.56rem;
-$icon-cancel-total-height: 1.56rem;
+$icon-cancel-total-width: 6.04rem;
+$icon-cancel-total-height: 4.66667rem;
 $icon-cancel-image: '../images/icon-sprite.png';
-$icon-cancel: (1.24rem, 0rem, -1.24rem, 0rem, 0.32rem, 0.32rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-cancel', );
+$icon-cancel: (5.65333rem, 2.17333rem, -5.65333rem, -2.17333rem, 0.32rem, 0.32rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-cancel', );
 $icon-clear-name: 'icon-clear';
-$icon-clear-x: 1.24rem;
-$icon-clear-y: 0.59rem;
-$icon-clear-offset-x: -1.24rem;
-$icon-clear-offset-y: -0.58667rem;
+$icon-clear-x: 5.06667rem;
+$icon-clear-y: 2.17333rem;
+$icon-clear-offset-x: -5.06667rem;
+$icon-clear-offset-y: -2.17333rem;
 $icon-clear-width: 0.32rem;
 $icon-clear-height: 0.32rem;
-$icon-clear-total-width: 1.56rem;
-$icon-clear-total-height: 1.56rem;
+$icon-clear-total-width: 6.04rem;
+$icon-clear-total-height: 4.66667rem;
 $icon-clear-image: '../images/icon-sprite.png';
-$icon-clear: (1.24rem, 0.59rem, -1.24rem, -0.58667rem, 0.32rem, 0.32rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-clear', );
+$icon-clear: (5.06667rem, 2.17333rem, -5.06667rem, -2.17333rem, 0.32rem, 0.32rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-clear', );
+$icon-my-name: 'icon-my';
+$icon-my-x: 5.06667rem;
+$icon-my-y: 1.24rem;
+$icon-my-offset-x: -5.06667rem;
+$icon-my-offset-y: -1.24rem;
+$icon-my-width: 0.67rem;
+$icon-my-height: 0.67rem;
+$icon-my-total-width: 6.04rem;
+$icon-my-total-height: 4.66667rem;
+$icon-my-image: '../images/icon-sprite.png';
+$icon-my: (5.06667rem, 1.24rem, -5.06667rem, -1.24rem, 0.67rem, 0.67rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-my', );
 $icon-soldout-name: 'icon-soldout';
-$icon-soldout-x: 0rem;
+$icon-soldout-x: 5.06667rem;
 $icon-soldout-y: 0rem;
-$icon-soldout-offset-x: 0rem;
+$icon-soldout-offset-x: -5.06667rem;
 $icon-soldout-offset-y: 0rem;
 $icon-soldout-width: 0.97rem;
 $icon-soldout-height: 0.97rem;
-$icon-soldout-total-width: 1.56rem;
-$icon-soldout-total-height: 1.56rem;
+$icon-soldout-total-width: 6.04rem;
+$icon-soldout-total-height: 4.66667rem;
 $icon-soldout-image: '../images/icon-sprite.png';
-$icon-soldout: (0rem, 0rem, 0rem, 0rem, 0.97rem, 0.97rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-soldout', );
-$icon-tips-name: 'icon-tips';
-$icon-tips-x: 0rem;
-$icon-tips-y: 1.24rem;
-$icon-tips-offset-x: 0rem;
-$icon-tips-offset-y: -1.24rem;
-$icon-tips-width: 0.32rem;
-$icon-tips-height: 0.32rem;
-$icon-tips-total-width: 1.56rem;
-$icon-tips-total-height: 1.56rem;
-$icon-tips-image: '../images/icon-sprite.png';
-$icon-tips: (0rem, 1.24rem, 0rem, -1.24rem, 0.32rem, 0.32rem, 1.56rem, 1.56rem, '../images/icon-sprite.png', 'icon-tips', );
-$spritesheet-width: 1.56rem;
-$spritesheet-height: 1.56rem;
+$icon-soldout: (5.06667rem, 0rem, -5.06667rem, 0rem, 0.97rem, 0.97rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-soldout', );
+$icon-title-name: 'icon-title';
+$icon-title-x: 0rem;
+$icon-title-y: 0rem;
+$icon-title-offset-x: 0rem;
+$icon-title-offset-y: 0rem;
+$icon-title-width: 3.46667rem;
+$icon-title-height: 0.53rem;
+$icon-title-total-width: 6.04rem;
+$icon-title-total-height: 4.66667rem;
+$icon-title-image: '../images/icon-sprite.png';
+$icon-title: (0rem, 0rem, 0rem, 0rem, 3.46667rem, 0.53rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-title', );
+$mark-dpt-name: 'mark-dpt';
+$mark-dpt-x: 3.73333rem;
+$mark-dpt-y: 2.45333rem;
+$mark-dpt-offset-x: -3.73333rem;
+$mark-dpt-offset-y: -2.45333rem;
+$mark-dpt-width: 1.06667rem;
+$mark-dpt-height: 0.96rem;
+$mark-dpt-total-width: 6.04rem;
+$mark-dpt-total-height: 4.66667rem;
+$mark-dpt-image: '../images/icon-sprite.png';
+$mark-dpt: (3.73333rem, 2.45333rem, -3.73333rem, -2.45333rem, 1.06667rem, 0.96rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-dpt', );
+$mark-jkt-name: 'mark-jkt';
+$mark-jkt-x: 3.73333rem;
+$mark-jkt-y: 1.22667rem;
+$mark-jkt-offset-x: -3.73333rem;
+$mark-jkt-offset-y: -1.22667rem;
+$mark-jkt-width: 1.06667rem;
+$mark-jkt-height: 0.96rem;
+$mark-jkt-total-width: 6.04rem;
+$mark-jkt-total-height: 4.66667rem;
+$mark-jkt-image: '../images/icon-sprite.png';
+$mark-jkt: (3.73333rem, 1.22667rem, -3.73333rem, -1.22667rem, 1.06667rem, 0.96rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-jkt', );
+$mark-rqt-name: 'mark-rqt';
+$mark-rqt-x: 3.73333rem;
+$mark-rqt-y: 0rem;
+$mark-rqt-offset-x: -3.73333rem;
+$mark-rqt-offset-y: 0rem;
+$mark-rqt-width: 1.06667rem;
+$mark-rqt-height: 0.96rem;
+$mark-rqt-total-width: 6.04rem;
+$mark-rqt-total-height: 4.66667rem;
+$mark-rqt-image: '../images/icon-sprite.png';
+$mark-rqt: (3.73333rem, 0rem, -3.73333rem, 0rem, 1.06667rem, 0.96rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-rqt', );
+$mark-xpt-name: 'mark-xpt';
+$mark-xpt-x: 0rem;
+$mark-xpt-y: 3.73333rem;
+$mark-xpt-offset-x: 0rem;
+$mark-xpt-offset-y: -3.73333rem;
+$mark-xpt-width: 1.06667rem;
+$mark-xpt-height: 0.93rem;
+$mark-xpt-total-width: 6.04rem;
+$mark-xpt-total-height: 4.66667rem;
+$mark-xpt-image: '../images/icon-sprite.png';
+$mark-xpt: (0rem, 3.73333rem, 0rem, -3.73333rem, 1.06667rem, 0.93rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-xpt', );
+$spritesheet-width: 6.04rem;
+$spritesheet-height: 4.66667rem;
 $spritesheet-image: '../images/icon-sprite.png';
-$spritesheet-sprites: ($icon-cancel, $icon-clear, $icon-soldout, $icon-tips, );
-$spritesheet: (1.56rem, 1.56rem, '../images/icon-sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($entry-cztj, $entry-jkt, $entry-mxt, $entry-xlb, $icon-cancel, $icon-clear, $icon-my, $icon-soldout, $icon-title, $mark-dpt, $mark-jkt, $mark-rqt, $mark-xpt, );
+$spritesheet: (6.04rem, 4.66667rem, '../images/icon-sprite.png', $spritesheet-sprites, );
 
 /*
 The provided mixins are intended to be used with the array-like variables
@@ -89,7 +188,7 @@ The provided mixins are intended to be used with the array-like variables
 @mixin sprite-image($sprite) {
   $sprite-image: nth($sprite, 9);
   background-image: url(#{$sprite-image});
-  background-size: 1.56rem 1.56rem;
+  background-size: 6.04rem 4.66667rem;
 }
 
 @mixin sprite($sprite) {
@@ -99,9 +198,20 @@ The provided mixins are intended to be used with the array-like variables
   @include sprite-height($sprite);
 }
 
+/*
+这个引用图片的变量后期可以修改
+例如：
+    @import "sprites";
+
+    $sprite-icons: 'images/xxx.jpg'; //变量可以放在这里重置
+
+    @include sprites($spritesheet-sprites);
+ */
+$sprite-icons: '../images/icon-sprite.png' !default;
+
 %sprite-common {
-  background-image: url('../images/icon-sprite.png');
-  background-size: 1.56rem 1.56rem;
+  background-image: url($sprite-icons);
+  background-size: 6.04rem 4.66667rem;
 }
 
 
