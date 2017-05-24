@@ -132,7 +132,7 @@
 
 
 /**
- * 三角箭头
+ * 纯色三角箭头
  * @param  {[type]} $direction [箭头方向]
  * @param  {[type]} $width     [箭头宽度]
  * @param  {[type]} $color     [箭头背景色]
@@ -302,6 +302,7 @@
  * 使用原生滚动 & 隐藏滚动条
  */
 @mixin scrollbar() {
+	white-space: nowrap;
 	-webkit-overflow-scrolling: touch;
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -309,6 +310,7 @@
 		display: none;
 	}
 }
+
 
 /**
  * 根据宽、高，色值设置一个向右箭头 xxx >
@@ -332,6 +334,7 @@
 		transform: translateY(-50%) rotate(45deg);
 	}
 }
+
 
 /**
  * 根据字号、行数、行高设置最大高
