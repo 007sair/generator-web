@@ -222,7 +222,7 @@
 
 //弹性布局重拍列顺序
 @mixin flex-order($num) {
-	-webkit-box-ordinal-group: $num;		//OLD - iOS 6-, Safari 3.1-6
+	-webkit-box-ordinal-group: $num;	//OLD - iOS 6-, Safari 3.1-6
 	-moz-box-ordinal-group: $num;      	//OLD - Firefox 19-
 	-ms-flex-order: $num;              	//TWEENER - IE 10
 	-webkit-order: $num;               	//NEW - Chrome
@@ -304,7 +304,45 @@
 @mixin scrollbar() {
 	-webkit-overflow-scrolling: touch;
 	overflow-x: auto;
+	overflow-y: hidden;
 	&::-webkit-scrollbar {
 		display: none;
 	}
+}
+
+/**
+ * 根据宽、高，色值设置一个向右箭头 xxx >
+ * @param  {[type]} $width  [宽]
+ * @param  {[type]} $height [高]
+ * @param  {[type]} $color  [色值]
+ * @return {[type]}         [description]
+ */
+@mixin sideArrow($size, $color) {
+	position: relative;
+	padding-right: rem($size * 2);
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		right: 0;
+		border-top: 1px solid $color;
+		border-right: 1px solid $color;
+		width: rem($size);
+		height: rem($size);
+		transform: translateY(-50%) rotate(45deg);
+	}
+}
+
+/**
+ * 根据字号、行数、行高设置最大高
+ * @param  {[type]} $fontSize:   24            [description]
+ * @param  {[type]} $line:       2             [description]
+ * @param  {[type]} $lineHeight: 1.5           [description]
+ * @return {[type]}              [description]
+ */
+@mixin maxHeight($fontSize: 24, $line: 2, $lineHeight: 1.5) {
+	font-size: rem($fontSize);
+	line-height: $lineHeight;
+	height: rem($fontSize * $line * $lineHeight);
+	overflow: hidden;
 }

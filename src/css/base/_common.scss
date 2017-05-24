@@ -18,6 +18,15 @@ $dpr: false !default;
 	@include clearfix;
 }
 
+.sticky { 
+    position: sticky !important;
+    position: -webkit-sticky !important;
+}
+
+.disable-event {
+//    pointer-events: none;
+}
+
 //是否使用dpr的共用单位
 @mixin font-dpr($font-size){
     font-size: $font-size;
@@ -37,4 +46,19 @@ $fzs : 12, 14, 16, 18, 20, 22, 24;
 	.f#{$fz} {
         @include font-dpr($fz * 1px)
     }
+}
+
+
+// common price icon
+%rmb {
+    &:before {
+        content: '\00A5';
+    }
+}
+.sp em {
+    @extend %rmb;
+    font-style: normal;
+}
+.mp del {
+    @extend %rmb;
 }
