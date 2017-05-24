@@ -70,7 +70,30 @@ The provided mixins are intended to be used with the array-like variables
 @mixin sprite-position($sprite) {
   $sprite-offset-x: nth($sprite, 3);
   $sprite-offset-y: nth($sprite, 4);
-  background-position: $sprite-offset-x  $sprite-offset-y;
+
+  /* 
+    将position换成百分比的写法，参考自：https://github.com/banricho/webLog/issues/1
+    offset_x 3
+    offset_y 4
+    width 5
+    height 6
+    total_width 7
+    total_height 8
+  */
+  
+  $offset_x: nth($sprite, 3);
+  $offset_y: nth($sprite, 4);
+  $width: nth($sprite, 5);
+  $height: nth($sprite, 6);
+  $total_width: nth($sprite, 7);
+  $total_height: nth($sprite, 8);
+
+  background-position: $offset_x / ($width - $total_width) * 100% $offset_y / ($height - $total_height) * 100%;
+
+  /**
+   * 这是rem的position
+   */
+  //background-position: $sprite-offset-x  $sprite-offset-y;
 }
 
 @mixin sprite-image($sprite) {
@@ -98,19 +121,17 @@ The `sprites` mixin generates identical output to the CSS template
 在sass文件中的调用方法：
 @include sprites($spritesheet-sprites, $url);
 
-第二个参数$url的使用时机 如下（需要在线上链接与线下链接切换时）：
---------------------
-$online: true;
-
-$sprite-icons: '../images/icon-sprite.png';
-
-@if $online {
-  $sprite-icons: 'http://xxx.xxx.icon-sprite.png';
-} 
-
-@include sprites($spritesheet-sprites, $sprite-icons);
---------------------
+参数$url使用方法：
+  1. 不填时默认使用插件生成的地址
+  2. 如何填入？举例说明：
+        $online: true; //需要根据变量切换线上与线下图片链接
+        $sprite-icons: '../images/icon-sprite.png'; //默认线下
+        @if $online {
+          $sprite-icons: 'http://xxx.xxx.icon-sprite.png'; //此处放线上链接
+        } 
+        @include sprites($spritesheet-sprites, $sprite-icons); //此处调用，传入第二个参数
 */
+
 {{/if}}
 {{/block}}
 {{#block "spritesheet-functions"}}
@@ -118,7 +139,7 @@ $sprite-icons: '../images/icon-sprite.png';
 @mixin sprites($sprites, $url: '{{{spritesheet.escaped_image}}}') {
   %sprite-common {
     background-image: url($url);
-    background-size: 6.04rem 4.66667rem;
+    background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
   }
   @each $sprite in $sprites {
     $sprite-name: nth($sprite, 10);
