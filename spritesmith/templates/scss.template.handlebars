@@ -71,15 +71,9 @@ The provided mixins are intended to be used with the array-like variables
   $sprite-offset-x: nth($sprite, 3);
   $sprite-offset-y: nth($sprite, 4);
 
-  /* 
-    将position换成百分比的写法，参考自：https://github.com/banricho/webLog/issues/1
-    offset_x 3
-    offset_y 4
-    width 5
-    height 6
-    total_width 7
-    total_height 8
-  */
+  /** 
+   * 将position换成百分比的写法，参考自：https://github.com/banricho/webLog/issues/1
+   */
   
   $offset_x: nth($sprite, 3);
   $offset_y: nth($sprite, 4);
@@ -88,7 +82,11 @@ The provided mixins are intended to be used with the array-like variables
   $total_width: nth($sprite, 7);
   $total_height: nth($sprite, 8);
 
-  background-position: $offset_x / ($width - $total_width) * 100% $offset_y / ($height - $total_height) * 100%;
+  //分母为0时让其为1rem，解决除法分母为0时报错的bug
+  $x_fm: if( (($width - $total_width) == 0) , 1rem, ($width - $total_width));
+  $y_fm: if( (($height - $total_height) == 0) , 1rem, ($height - $total_height));
+
+  background-position: percentage($offset_x / $x_fm) percentage($offset_y / $y_fm);
 
   /**
    * 这是rem的position
