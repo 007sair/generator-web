@@ -1,5 +1,11 @@
 # 脚手架工具
 
+TODO: 
+
+- `gulp-svgstore` svg的合并，使用，预览，管理。
+- `src` 资源目录优化管理
+
+
 > 启动gulp后会生成`dist`目录
 
 ```
