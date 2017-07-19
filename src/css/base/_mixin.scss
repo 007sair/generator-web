@@ -140,19 +140,20 @@
 @mixin minArrow($direction, $width, $color) {
 	width: 0;
 	height: 0;
+	border: solid transparent;
 	border-width: $width;
 	border-style: solid;
 	@if $direction == top {
-		border-color: transparent transparent $color transparent;
+		border-bottom-color: $color;
 	}
 	@if $direction == right {
-		border-color: transparent transparent transparent $color;
+		border-left-color: $color;
 	}
 	@if $direction == bottom {
-		border-color: $color transparent transparent transparent;
+		border-top-color: $color;
 	}
 	@if $direction == left {
-		border-color: transparent $color transparent transparent;
+		border-right-color: $color;
 	}
 }
 
@@ -308,27 +309,28 @@
 	overflow-y: hidden;
 	&::-webkit-scrollbar {
 		display: none;
+		height: 0;
+		opacity: 0;
 	}
 }
 
 
 /**
- * 根据宽、高，色值设置一个向右箭头 xxx >
- * @param  {[type]} $width  [宽]
- * @param  {[type]} $height [高]
- * @param  {[type]} $color  [色值]
- * @return {[type]}         [description]
+ * 根据宽、高、色值、边框大小 设置一个向右箭头，如：查看更多 >
+ * @param  {[type]} $size  		[宽/高]
+ * @param  {[type]} $color  	[色值]
+ * @param  {[type]} $border  	[色值]
  */
-@mixin sideArrow($size, $color) {
+@mixin sideArrow($size, $color, $border: 1px) {
 	position: relative;
 	padding-right: rem($size * 2);
 	&:after {
 		content: '';
 		position: absolute;
 		top: 50%;
-		right: 0;
-		border-top: 1px solid $color;
-		border-right: 1px solid $color;
+		right: rem(4);
+		border-top: $border solid $color;
+		border-right: $border solid $color;
 		width: rem($size);
 		height: rem($size);
 		transform: translateY(-50%) rotate(45deg);
@@ -348,4 +350,74 @@
 	line-height: $lineHeight;
 	height: rem($fontSize * $line * $lineHeight);
 	overflow: hidden;
+}
+
+
+/**
+ * inline-block center
+ * 让子元素垂直居中  
+ */
+@mixin center-ib() {
+	font-size: 0;
+	& > *, &:after {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	&:after {
+		content: '';
+		height: 100%;
+		width: 1px;
+	}
+}
+
+
+/**
+ * css3圆形关闭按钮
+ *   $roundSize					圆形关闭按钮的宽、高
+ *   $lineWidth/lineHeight		里面x的宽/高
+ *   $lineColor 				里面x的色值
+ */
+@mixin icon-close($roundSize: 58, $lineWidth: 32, $lineHeight: 4, $lineColor: #999) {
+	width: rem($roundSize);
+	height: rem($roundSize);
+	border-radius: 100%;
+	transform: rotate(45deg);
+	&:before, &:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: $lineColor;
+		border-radius: rem(4);
+	}
+	&:before {
+		width: rem($lineWidth);
+		height: rem($lineHeight);
+	}
+	&:after {
+		width: rem($lineHeight);
+		height: rem($lineWidth);
+	}
+}
+
+
+//抢光啦 用于图片层上
+@mixin soldout($size: 96, $fontsize: 22, $opacity: 0.6) {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: rem(- $size / 2) 0 0 rem(- $size / 2);
+	width: rem($size);
+	height: rem($size);
+	background: rgba(0, 0, 0, $opacity);
+	border-radius: 100%;
+	color: #fff;
+	line-height: rem($size);
+	text-align: center;
+	&:after {
+		content: '抢光啦';
+		font-style: normal;
+		font-size: rem($fontsize);
+	}
 }
