@@ -13,34 +13,34 @@
 // @import "base/common.scss";
 
 
-/**
- * Sprites
+/*!
+ * Sprites 具体用法参考：_sprites.scss 中的注释
  */
+$icons: '../images/icon-sprite.png'; //雪碧图生成后的图片地址
 @import "sprites.scss";
-@include sprites($spritesheet-sprites);
+@include sprites($spritesheet-sprites, $icons); //图片地址发生变化时，可使用第二个参数传入
 
 
-/**
- * Demo Styles
+/*!
+ * Page Styles
  */
-* {
-	margin: 0;
-	padding: 0;
-}
 
 body {
 	font-size: 12px;
 }
 
-.rem320 {
-	width: rem(320);
-	background-color: #f00;
-	color: #fff;
+ul {
+	li {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0.25rem;
+	}
 }
 
-.rem375 {
-	width: rem(375);
-	background-color: #f00;
-	color: #fff;
+.sprites-svg {
+	.icon-svg {
+		width: 2em;
+		height: 2em;
+	}
 }
 

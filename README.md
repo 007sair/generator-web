@@ -7,23 +7,25 @@
 ├── build 
 |   ├── config.js               #多页面配置                      
 |   └── webpack.config.js       #webpack配置文件
-├── dist                        #发布文件存放目录
+├── dist                        #生成目录
 ├── node_modules                #包文件夹
 │   └── node-sass               #解决node-sass在国内安装失败的问题
-├── spritesmith                 #修改雪碧图px2rem的配置
+├── spritesmith                 #修改雪碧图、px2rem的配置
 ├── src                         #源文件
+|   ├── assets                  #此目录不会被生成到dist中
+|   |   ├── sprites             #雪碧图碎片文件目录
+|   |   └── svg                 #svg碎片文件目录
 |   ├── css                    
 |   |   ├── base                #sass库目录
 |   |   ├── _config.scss        #sass配置文件
 |   |   ├── _sprites.scss       #css雪碧图生成的sass文件
+|   |   ├── svg.css             #svg预览页面调用样式，实际开发可忽略
 |   |   └── main.scss           #页面样式 可以有多个
-|   ├── images                  
-|   |   └── sprites             #雪碧图目录
-|   ├── assets
-|   |   └── svg                 #svg文件目录
+|   ├── images                  #图片目录，会被copy到dist目录
+|   |   └── data                #存放一些json数据，便于被copy至dist
 |   ├── js                      
-|   |   ├── lib                 #js库目录
-|   |   ├── mods                #js模块目录
+|   |   ├── lib                 #库目录
+|   |   ├── mods                #模块目录
 |   |   ├── index.js            #页面1入口文件
 |   |   └── page2.js            #页面2入口文件
 |   ├── index.html              #页面1
@@ -35,12 +37,12 @@
 
 ## 功能
 
-- sass转css
+- sass编译
 - js合并压缩
-- 实时刷新
-- 生产环境自动生成版本号
-- 640/750的rem单位切换
-- css sprite(图片必须为.png)
+- 浏览器实时刷新
+- rem单位切换
+- css雪碧图(图片后缀须为.png)
+- svg合并(symbol)
 
 ## 使用方法
 
@@ -60,9 +62,6 @@ npm install
 ```
 #开发环境
 gulp dev
-
-#生产环境
-gulp build
 ```
 
 ## 多页开发
@@ -94,6 +93,4 @@ new HtmlWebpackPlugin({
 
 ## TODO
 
-- `gulp-svgstore` svg的合并，使用，预览，管理
-- `src` 资源目录优化管理
 - `PostCss` 加入

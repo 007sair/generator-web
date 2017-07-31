@@ -6,38 +6,32 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="format-detection"content="telephone=no, email=no" />
-<title>Examples</title>
+<title>脚手架</title>
 <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 
-	<h1>gulp css sprites</h1>
-	<ul class="sprites">
+	<h1>雪碧图：</h1>
+	<ul class="sprites-img">
+		<li class="icon-arr-rt"></li>
 		<li class="icon-cancel"></li>
 		<li class="icon-clear"></li>
-		<li class="icon-soldout"></li>
-		<li class="entry-cztj"></li>
+		<li class="icon-nav"></li>
+		<li class="icon-search"></li>
 	</ul>
 
-	<h1>根据config.scss设置输出rem</h1>
-	<br>
-	<h4>容器一：</h4>
-	<div style="width:50%;background-color:#f00;color:#fff;">
-		<pre>width:50%</pre>
-	</div>
-	<br>
-	<h4>容器二：</h4>
-	<div class="rem320">
-		若$output=640，则此容器应与容器一宽度一致
-	</div>
-	<br>
-	<h4>容器三：</h4>
-	<div class="rem375">
-		若$output=750，则此容器应与容器一宽度一致
-	</div>
-
-	
-
+	<h1>svg：</h1>
+	<ul class="sprites-svg">
+		<li>
+			<svg class="icon-svg svg-arrow"><use xlink:href="images/svg-icon.svg#svg-arrow"></use></svg>
+		</li>
+		<li>
+			<svg class="icon-svg svg-clock"><use xlink:href="images/svg-icon.svg#svg-clock"></use></svg>
+		</li>
+		<li>
+			<svg class="icon-svg svg-kf"><use xlink:href="images/svg-icon.svg#svg-kf"></use></svg>
+		</li>
+	</ul>
 
 </body>
 </html>

@@ -48,7 +48,6 @@ $fzs : 12, 14, 16, 18, 20, 22, 24;
     }
 }
 
-
 // common price icon
 %rmb {
     &:before {
@@ -61,25 +60,4 @@ $fzs : 12, 14, 16, 18, 20, 22, 24;
 }
 .mp del {
     @extend %rmb;
-}
-
-.icon-svg {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    stroke-width: 0;
-    stroke: currentColor;
-    fill: currentColor;
-}
-
-
-//弹层公共遮罩
-.module-pop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.75);
-	z-index: 1000;
 }

@@ -1,0 +1,8 @@
+/* 此文件专用于svg.html 实际开发请忽略 */
+.icon-svg {
+    width: 3em;
+    height: 3em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: black;
+}

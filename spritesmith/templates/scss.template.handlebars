@@ -6,16 +6,16 @@
 
 {{#block "sprites-comment"}}
 /*
-SCSS variables are information about icon's compiled state, stored under its original file name
-
+scss变量包含了icon的编译状态信息，存储在各自icon命名的变量下。
+例如：
 .icon-home {
-  width: $icon-home-width;
+	width: $icon-home-width;
 }
 
-The large array-like variables contain all information about a single icon
-$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+大型数组变量包含了单个图标的所有信息，例如：
+$icon-home: x y offset_x offset_y width height total_width total_height image_path name;
 
-At the bottom of this section, we provide information about the spritesheet itself
+在本节的底部，我们提供有关spritesheet本身的信息：
 $spritesheet: width height image $spritesheet-sprites;
 */
 {{/block}}
@@ -45,14 +45,13 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
 {{#block "sprite-functions-comment"}}
 {{#if options.functions}}
 /*
-The provided mixins are intended to be used with the array-like variables
-
+以下mixins旨在与数组类型变量一起使用，也可单独使用！
 .icon-home {
-  @include sprite-width($icon-home);
+	@include sprite-width($icon-home);
 }
 
 .icon-email {
-  @include sprite($icon-email);
+	@include sprite($icon-email);
 }
 */
 {{/if}}
@@ -60,51 +59,49 @@ The provided mixins are intended to be used with the array-like variables
 {{#block "sprite-functions"}}
 {{#if options.functions}}
 @mixin sprite-width($sprite) {
-  width: nth($sprite, 5);
+	width: nth($sprite, 5);
 }
 
 @mixin sprite-height($sprite) {
-  height: nth($sprite, 6);
+	height: nth($sprite, 6);
 }
 
 @mixin sprite-position($sprite) {
-  $sprite-offset-x: nth($sprite, 3);
-  $sprite-offset-y: nth($sprite, 4);
+	$sprite-offset-x: nth($sprite, 3);
+	$sprite-offset-y: nth($sprite, 4);
 
-  /** 
-   * 将position换成百分比的写法，参考自：https://github.com/banricho/webLog/issues/1
-   */
-  
-  $offset_x: nth($sprite, 3);
-  $offset_y: nth($sprite, 4);
-  $width: nth($sprite, 5);
-  $height: nth($sprite, 6);
-  $total_width: nth($sprite, 7);
-  $total_height: nth($sprite, 8);
+	/** 
+	* background-position百分比单位
+	* 参考自：https://github.com/banricho/webLog/issues/1
+	*/
+	$offset_x: nth($sprite, 3);
+	$offset_y: nth($sprite, 4);
+	$width: nth($sprite, 5);
+	$height: nth($sprite, 6);
+	$total_width: nth($sprite, 7);
+	$total_height: nth($sprite, 8);
 
-  //分母为0时让其为1rem，解决除法分母为0时报错的bug
-  $x_fm: if( (($width - $total_width) == 0) , 1rem, ($width - $total_width));
-  $y_fm: if( (($height - $total_height) == 0) , 1rem, ($height - $total_height));
+	//分母为0时让其为1rem（解决除法分母为0时报错问题）
+	$x_fm: if( (($width - $total_width) == 0) , 1rem, ($width - $total_width));
+	$y_fm: if( (($height - $total_height) == 0) , 1rem, ($height - $total_height));
 
-  background-position: percentage($offset_x / $x_fm) percentage($offset_y / $y_fm);
+	background-position: percentage($offset_x / $x_fm) percentage($offset_y / $y_fm);
 
-  /**
-   * 这是rem的position
-   */
-  //background-position: $sprite-offset-x  $sprite-offset-y;
+	//background-position rem单位
+	//background-position: $sprite-offset-x  $sprite-offset-y;
 }
 
 @mixin sprite-image($sprite, $url: '{{{spritesheet.escaped_image}}}') {
-  $sprite-image: nth($sprite, 9);
-  background-image: url(#{$url});
-  background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
+	//$sprite-image: nth($sprite, 9);
+	background-image: url(#{$url});
+	background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
 }
 
 @mixin sprite($sprite) {
-  //@include sprite-image($sprite);
-  @include sprite-position($sprite);
-  @include sprite-width($sprite);
-  @include sprite-height($sprite);
+	@include sprite-image($sprite);
+	@include sprite-position($sprite);
+	@include sprite-width($sprite);
+	@include sprite-height($sprite);
 }
 
 {{/if}}
@@ -113,37 +110,37 @@ The provided mixins are intended to be used with the array-like variables
 {{#block "spritesheet-functions-comment"}}
 {{#if options.functions}}
 /*
-The `sprites` mixin generates identical output to the CSS template
-  but can be overridden inside of SCSS
-
-在sass文件中的调用方法：
-@include sprites($spritesheet-sprites, $url);
-
-参数$url使用方法：
-  1. 不填时默认使用插件生成的地址
-  2. 如何填入？举例说明：
-        $online: true; //需要根据变量切换线上与线下图片链接
-        $sprite-icons: '../images/icon-sprite.png'; //默认线下
-        @if $online {
-          $sprite-icons: 'http://xxx.xxx.icon-sprite.png'; //此处放线上链接
-        } 
-        @include sprites($spritesheet-sprites, $sprite-icons); //此处调用，传入第二个参数
-*/
-
+ `sprites` mixin生成与CSS模板相同的输出，但可以在SCSS内部覆盖
+ @include sprites($spritesheet-sprites, $url);
+ sprites调用方法：
+     @param $spritesheet-sprites 	数组类型变量，所有图片名的变量
+     @param $url  图片地址，默认可以不传入，使用gulp生产的名称，当需要外部修改时可传入
+     $url使用场景：
+	   //定义：
+	   $online: true; //需要根据变量切换线上与线下图片链接
+	   $sprite-icons: '../images/icon-sprite.png'; //默认链接
+	   @if $online {
+	       $sprite-icons: 'http://xxx.xxx.icon-sprite.png'; //线上链接
+	   }
+	   //使用：
+	   @include sprites($spritesheet-sprites, $sprite-icons);
+ */
 {{/if}}
 {{/block}}
 {{#block "spritesheet-functions"}}
 {{#if options.functions}}
 @mixin sprites($sprites, $url: '{{{spritesheet.escaped_image}}}') {
-  %sprite-common {
-    background-image: url($url);
+  %sprite-common { //提取公共的url
+    background-image: url(#{$url});
     background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
   }
   @each $sprite in $sprites {
     $sprite-name: nth($sprite, 10);
     .#{$sprite-name} {
       @extend %sprite-common;
-      @include sprite($sprite);
+      @include sprite-width($sprite);
+      @include sprite-height($sprite);
+      @include sprite-position($sprite);
     }
   }
 }

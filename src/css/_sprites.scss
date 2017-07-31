@@ -1,232 +1,206 @@
 /*
-SCSS variables are information about icon's compiled state, stored under its original file name
-
+scss变量包含了icon的编译状态信息，存储在各自icon命名的变量下。
+例如：
 .icon-home {
-  width: $icon-home-width;
+	width: $icon-home-width;
 }
 
-The large array-like variables contain all information about a single icon
-$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+大型数组变量包含了单个图标的所有信息，例如：
+$icon-home: x y offset_x offset_y width height total_width total_height image_path name;
 
-At the bottom of this section, we provide information about the spritesheet itself
+在本节的底部，我们提供有关spritesheet本身的信息：
 $spritesheet: width height image $spritesheet-sprites;
 */
 $entry-cztj-name: 'entry-cztj';
 $entry-cztj-x: 0rem;
-$entry-cztj-y: 0.8rem;
+$entry-cztj-y: 0rem;
 $entry-cztj-offset-x: 0rem;
-$entry-cztj-offset-y: -0.8rem;
+$entry-cztj-offset-y: 0rem;
 $entry-cztj-width: 1.2rem;
 $entry-cztj-height: 1.2rem;
-$entry-cztj-total-width: 6.04rem;
-$entry-cztj-total-height: 4.66667rem;
+$entry-cztj-total-width: 3.49333rem;
+$entry-cztj-total-height: 3.22667rem;
 $entry-cztj-image: '../images/icon-sprite.png';
-$entry-cztj: (0rem, 0.8rem, 0rem, -0.8rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-cztj', );
+$entry-cztj: (0rem, 0rem, 0rem, 0rem, 1.2rem, 1.2rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'entry-cztj', );
 $entry-jkt-name: 'entry-jkt';
 $entry-jkt-x: 1.46667rem;
-$entry-jkt-y: 2.26667rem;
+$entry-jkt-y: 0rem;
 $entry-jkt-offset-x: -1.46667rem;
-$entry-jkt-offset-y: -2.26667rem;
+$entry-jkt-offset-y: 0rem;
 $entry-jkt-width: 1.2rem;
 $entry-jkt-height: 1.2rem;
-$entry-jkt-total-width: 6.04rem;
-$entry-jkt-total-height: 4.66667rem;
+$entry-jkt-total-width: 3.49333rem;
+$entry-jkt-total-height: 3.22667rem;
 $entry-jkt-image: '../images/icon-sprite.png';
-$entry-jkt: (1.46667rem, 2.26667rem, -1.46667rem, -2.26667rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-jkt', );
+$entry-jkt: (1.46667rem, 0rem, -1.46667rem, 0rem, 1.2rem, 1.2rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'entry-jkt', );
 $entry-mxt-name: 'entry-mxt';
-$entry-mxt-x: 1.46667rem;
-$entry-mxt-y: 0.8rem;
-$entry-mxt-offset-x: -1.46667rem;
-$entry-mxt-offset-y: -0.8rem;
+$entry-mxt-x: 0rem;
+$entry-mxt-y: 1.46667rem;
+$entry-mxt-offset-x: 0rem;
+$entry-mxt-offset-y: -1.46667rem;
 $entry-mxt-width: 1.2rem;
 $entry-mxt-height: 1.2rem;
-$entry-mxt-total-width: 6.04rem;
-$entry-mxt-total-height: 4.66667rem;
+$entry-mxt-total-width: 3.49333rem;
+$entry-mxt-total-height: 3.22667rem;
 $entry-mxt-image: '../images/icon-sprite.png';
-$entry-mxt: (1.46667rem, 0.8rem, -1.46667rem, -0.8rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-mxt', );
+$entry-mxt: (0rem, 1.46667rem, 0rem, -1.46667rem, 1.2rem, 1.2rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'entry-mxt', );
 $entry-xlb-name: 'entry-xlb';
-$entry-xlb-x: 0rem;
-$entry-xlb-y: 2.26667rem;
-$entry-xlb-offset-x: 0rem;
-$entry-xlb-offset-y: -2.26667rem;
+$entry-xlb-x: 1.46667rem;
+$entry-xlb-y: 1.46667rem;
+$entry-xlb-offset-x: -1.46667rem;
+$entry-xlb-offset-y: -1.46667rem;
 $entry-xlb-width: 1.2rem;
 $entry-xlb-height: 1.2rem;
-$entry-xlb-total-width: 6.04rem;
-$entry-xlb-total-height: 4.66667rem;
+$entry-xlb-total-width: 3.49333rem;
+$entry-xlb-total-height: 3.22667rem;
 $entry-xlb-image: '../images/icon-sprite.png';
-$entry-xlb: (0rem, 2.26667rem, 0rem, -2.26667rem, 1.2rem, 1.2rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'entry-xlb', );
+$entry-xlb: (1.46667rem, 1.46667rem, -1.46667rem, -1.46667rem, 1.2rem, 1.2rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'entry-xlb', );
+$icon-arr-rt-name: 'icon-arr-rt';
+$icon-arr-rt-x: 0rem;
+$icon-arr-rt-y: 2.93333rem;
+$icon-arr-rt-offset-x: 0rem;
+$icon-arr-rt-offset-y: -2.93333rem;
+$icon-arr-rt-width: 0.16rem;
+$icon-arr-rt-height: 0.29rem;
+$icon-arr-rt-total-width: 3.49333rem;
+$icon-arr-rt-total-height: 3.22667rem;
+$icon-arr-rt-image: '../images/icon-sprite.png';
+$icon-arr-rt: (0rem, 2.93333rem, 0rem, -2.93333rem, 0.16rem, 0.29rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'icon-arr-rt', );
 $icon-cancel-name: 'icon-cancel';
-$icon-cancel-x: 5.65333rem;
-$icon-cancel-y: 2.17333rem;
-$icon-cancel-offset-x: -5.65333rem;
-$icon-cancel-offset-y: -2.17333rem;
+$icon-cancel-x: 2.93333rem;
+$icon-cancel-y: 1.65333rem;
+$icon-cancel-offset-x: -2.93333rem;
+$icon-cancel-offset-y: -1.65333rem;
 $icon-cancel-width: 0.32rem;
 $icon-cancel-height: 0.32rem;
-$icon-cancel-total-width: 6.04rem;
-$icon-cancel-total-height: 4.66667rem;
+$icon-cancel-total-width: 3.49333rem;
+$icon-cancel-total-height: 3.22667rem;
 $icon-cancel-image: '../images/icon-sprite.png';
-$icon-cancel: (5.65333rem, 2.17333rem, -5.65333rem, -2.17333rem, 0.32rem, 0.32rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-cancel', );
+$icon-cancel: (2.93333rem, 1.65333rem, -2.93333rem, -1.65333rem, 0.32rem, 0.32rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'icon-cancel', );
 $icon-clear-name: 'icon-clear';
-$icon-clear-x: 5.06667rem;
-$icon-clear-y: 2.17333rem;
-$icon-clear-offset-x: -5.06667rem;
-$icon-clear-offset-y: -2.17333rem;
+$icon-clear-x: 2.93333rem;
+$icon-clear-y: 2.24rem;
+$icon-clear-offset-x: -2.93333rem;
+$icon-clear-offset-y: -2.24rem;
 $icon-clear-width: 0.32rem;
 $icon-clear-height: 0.32rem;
-$icon-clear-total-width: 6.04rem;
-$icon-clear-total-height: 4.66667rem;
+$icon-clear-total-width: 3.49333rem;
+$icon-clear-total-height: 3.22667rem;
 $icon-clear-image: '../images/icon-sprite.png';
-$icon-clear: (5.06667rem, 2.17333rem, -5.06667rem, -2.17333rem, 0.32rem, 0.32rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-clear', );
-$icon-my-name: 'icon-my';
-$icon-my-x: 5.06667rem;
-$icon-my-y: 1.24rem;
-$icon-my-offset-x: -5.06667rem;
-$icon-my-offset-y: -1.24rem;
-$icon-my-width: 0.67rem;
-$icon-my-height: 0.67rem;
-$icon-my-total-width: 6.04rem;
-$icon-my-total-height: 4.66667rem;
-$icon-my-image: '../images/icon-sprite.png';
-$icon-my: (5.06667rem, 1.24rem, -5.06667rem, -1.24rem, 0.67rem, 0.67rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-my', );
-$icon-soldout-name: 'icon-soldout';
-$icon-soldout-x: 5.06667rem;
-$icon-soldout-y: 0rem;
-$icon-soldout-offset-x: -5.06667rem;
-$icon-soldout-offset-y: 0rem;
-$icon-soldout-width: 0.97rem;
-$icon-soldout-height: 0.97rem;
-$icon-soldout-total-width: 6.04rem;
-$icon-soldout-total-height: 4.66667rem;
-$icon-soldout-image: '../images/icon-sprite.png';
-$icon-soldout: (5.06667rem, 0rem, -5.06667rem, 0rem, 0.97rem, 0.97rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-soldout', );
-$icon-title-name: 'icon-title';
-$icon-title-x: 0rem;
-$icon-title-y: 0rem;
-$icon-title-offset-x: 0rem;
-$icon-title-offset-y: 0rem;
-$icon-title-width: 3.46667rem;
-$icon-title-height: 0.53rem;
-$icon-title-total-width: 6.04rem;
-$icon-title-total-height: 4.66667rem;
-$icon-title-image: '../images/icon-sprite.png';
-$icon-title: (0rem, 0rem, 0rem, 0rem, 3.46667rem, 0.53rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'icon-title', );
-$mark-dpt-name: 'mark-dpt';
-$mark-dpt-x: 3.73333rem;
-$mark-dpt-y: 2.45333rem;
-$mark-dpt-offset-x: -3.73333rem;
-$mark-dpt-offset-y: -2.45333rem;
-$mark-dpt-width: 1.06667rem;
-$mark-dpt-height: 0.96rem;
-$mark-dpt-total-width: 6.04rem;
-$mark-dpt-total-height: 4.66667rem;
-$mark-dpt-image: '../images/icon-sprite.png';
-$mark-dpt: (3.73333rem, 2.45333rem, -3.73333rem, -2.45333rem, 1.06667rem, 0.96rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-dpt', );
-$mark-jkt-name: 'mark-jkt';
-$mark-jkt-x: 3.73333rem;
-$mark-jkt-y: 1.22667rem;
-$mark-jkt-offset-x: -3.73333rem;
-$mark-jkt-offset-y: -1.22667rem;
-$mark-jkt-width: 1.06667rem;
-$mark-jkt-height: 0.96rem;
-$mark-jkt-total-width: 6.04rem;
-$mark-jkt-total-height: 4.66667rem;
-$mark-jkt-image: '../images/icon-sprite.png';
-$mark-jkt: (3.73333rem, 1.22667rem, -3.73333rem, -1.22667rem, 1.06667rem, 0.96rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-jkt', );
-$mark-rqt-name: 'mark-rqt';
-$mark-rqt-x: 3.73333rem;
-$mark-rqt-y: 0rem;
-$mark-rqt-offset-x: -3.73333rem;
-$mark-rqt-offset-y: 0rem;
-$mark-rqt-width: 1.06667rem;
-$mark-rqt-height: 0.96rem;
-$mark-rqt-total-width: 6.04rem;
-$mark-rqt-total-height: 4.66667rem;
-$mark-rqt-image: '../images/icon-sprite.png';
-$mark-rqt: (3.73333rem, 0rem, -3.73333rem, 0rem, 1.06667rem, 0.96rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-rqt', );
-$mark-xpt-name: 'mark-xpt';
-$mark-xpt-x: 0rem;
-$mark-xpt-y: 3.73333rem;
-$mark-xpt-offset-x: 0rem;
-$mark-xpt-offset-y: -3.73333rem;
-$mark-xpt-width: 1.06667rem;
-$mark-xpt-height: 0.93rem;
-$mark-xpt-total-width: 6.04rem;
-$mark-xpt-total-height: 4.66667rem;
-$mark-xpt-image: '../images/icon-sprite.png';
-$mark-xpt: (0rem, 3.73333rem, 0rem, -3.73333rem, 1.06667rem, 0.93rem, 6.04rem, 4.66667rem, '../images/icon-sprite.png', 'mark-xpt', );
-$spritesheet-width: 6.04rem;
-$spritesheet-height: 4.66667rem;
+$icon-clear: (2.93333rem, 2.24rem, -2.93333rem, -2.24rem, 0.32rem, 0.32rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'icon-clear', );
+$icon-nav-name: 'icon-nav';
+$icon-nav-x: 2.93333rem;
+$icon-nav-y: 0rem;
+$icon-nav-offset-x: -2.93333rem;
+$icon-nav-offset-y: 0rem;
+$icon-nav-width: 0.56rem;
+$icon-nav-height: 0.56rem;
+$icon-nav-total-width: 3.49333rem;
+$icon-nav-total-height: 3.22667rem;
+$icon-nav-image: '../images/icon-sprite.png';
+$icon-nav: (2.93333rem, 0rem, -2.93333rem, 0rem, 0.56rem, 0.56rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'icon-nav', );
+$icon-search-name: 'icon-search';
+$icon-search-x: 2.93333rem;
+$icon-search-y: 0.83rem;
+$icon-search-offset-x: -2.93333rem;
+$icon-search-offset-y: -0.82667rem;
+$icon-search-width: 0.56rem;
+$icon-search-height: 0.56rem;
+$icon-search-total-width: 3.49333rem;
+$icon-search-total-height: 3.22667rem;
+$icon-search-image: '../images/icon-sprite.png';
+$icon-search: (2.93333rem, 0.83rem, -2.93333rem, -0.82667rem, 0.56rem, 0.56rem, 3.49333rem, 3.22667rem, '../images/icon-sprite.png', 'icon-search', );
+$spritesheet-width: 3.49333rem;
+$spritesheet-height: 3.22667rem;
 $spritesheet-image: '../images/icon-sprite.png';
-$spritesheet-sprites: ($entry-cztj, $entry-jkt, $entry-mxt, $entry-xlb, $icon-cancel, $icon-clear, $icon-my, $icon-soldout, $icon-title, $mark-dpt, $mark-jkt, $mark-rqt, $mark-xpt, );
-$spritesheet: (6.04rem, 4.66667rem, '../images/icon-sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($entry-cztj, $entry-jkt, $entry-mxt, $entry-xlb, $icon-arr-rt, $icon-cancel, $icon-clear, $icon-nav, $icon-search, );
+$spritesheet: (3.49333rem, 3.22667rem, '../images/icon-sprite.png', $spritesheet-sprites, );
 
 /*
-The provided mixins are intended to be used with the array-like variables
-
+以下mixins旨在与数组类型变量一起使用，也可单独使用！
 .icon-home {
-  @include sprite-width($icon-home);
+	@include sprite-width($icon-home);
 }
 
 .icon-email {
-  @include sprite($icon-email);
+	@include sprite($icon-email);
 }
 */
 @mixin sprite-width($sprite) {
-  width: nth($sprite, 5);
+	width: nth($sprite, 5);
 }
 
 @mixin sprite-height($sprite) {
-  height: nth($sprite, 6);
+	height: nth($sprite, 6);
 }
 
 @mixin sprite-position($sprite) {
-  $sprite-offset-x: nth($sprite, 3);
-  $sprite-offset-y: nth($sprite, 4);
-  background-position: $sprite-offset-x  $sprite-offset-y;
+	$sprite-offset-x: nth($sprite, 3);
+	$sprite-offset-y: nth($sprite, 4);
+
+	/** 
+	* background-position百分比单位
+	* 参考自：https://github.com/banricho/webLog/issues/1
+	*/
+	$offset_x: nth($sprite, 3);
+	$offset_y: nth($sprite, 4);
+	$width: nth($sprite, 5);
+	$height: nth($sprite, 6);
+	$total_width: nth($sprite, 7);
+	$total_height: nth($sprite, 8);
+
+	//分母为0时让其为1rem（解决除法分母为0时报错问题）
+	$x_fm: if( (($width - $total_width) == 0) , 1rem, ($width - $total_width));
+	$y_fm: if( (($height - $total_height) == 0) , 1rem, ($height - $total_height));
+
+	background-position: percentage($offset_x / $x_fm) percentage($offset_y / $y_fm);
+
+	//background-position rem单位
+	//background-position: $sprite-offset-x  $sprite-offset-y;
 }
 
-@mixin sprite-image($sprite) {
-  $sprite-image: nth($sprite, 9);
-  background-image: url(#{$sprite-image});
-  background-size: 6.04rem 4.66667rem;
+@mixin sprite-image($sprite, $url: '../images/icon-sprite.png') {
+	//$sprite-image: nth($sprite, 9);
+	background-image: url(#{$url});
+	background-size: 3.49333rem 3.22667rem;
 }
 
 @mixin sprite($sprite) {
-  //@include sprite-image($sprite);
-  @include sprite-position($sprite);
-  @include sprite-width($sprite);
-  @include sprite-height($sprite);
+	@include sprite-image($sprite);
+	@include sprite-position($sprite);
+	@include sprite-width($sprite);
+	@include sprite-height($sprite);
 }
 
+
 /*
-这个引用图片的变量后期可以修改
-例如：
-    @import "sprites";
-
-    $sprite-icons: 'images/xxx.jpg'; //变量可以放在这里重置
-
-    @include sprites($spritesheet-sprites);
+ `sprites` mixin生成与CSS模板相同的输出，但可以在SCSS内部覆盖
+ @include sprites($spritesheet-sprites, $url);
+ sprites调用方法：
+     @param $spritesheet-sprites 	数组类型变量，所有图片名的变量
+     @param $url  图片地址，默认可以不传入，使用gulp生产的名称，当需要外部修改时可传入
+     $url使用场景：
+	   //定义：
+	   $online: true; //需要根据变量切换线上与线下图片链接
+	   $sprite-icons: '../images/icon-sprite.png'; //默认链接
+	   @if $online {
+	       $sprite-icons: 'http://xxx.xxx.icon-sprite.png'; //线上链接
+	   }
+	   //使用：
+	   @include sprites($spritesheet-sprites, $sprite-icons);
  */
-$sprite-icons: '../images/icon-sprite.png' !default;
-
-%sprite-common {
-  background-image: url($sprite-icons);
-  background-size: 6.04rem 4.66667rem;
-}
-
-
-/*
-The `sprites` mixin generates identical output to the CSS template
-  but can be overridden inside of SCSS
-
-@include sprites($spritesheet-sprites);
-*/
-@mixin sprites($sprites) {
+@mixin sprites($sprites, $url: '../images/icon-sprite.png') {
+  %sprite-common { //提取公共的url
+    background-image: url(#{$url});
+    background-size: 3.49333rem 3.22667rem;
+  }
   @each $sprite in $sprites {
     $sprite-name: nth($sprite, 10);
     .#{$sprite-name} {
       @extend %sprite-common;
-      @include sprite($sprite);
+      @include sprite-width($sprite);
+      @include sprite-height($sprite);
+      @include sprite-position($sprite);
     }
   }
 }
