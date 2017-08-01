@@ -43,6 +43,7 @@
 - rem单位切换
 - css雪碧图(图片后缀须为.png)
 - svg合并(symbol)
+- postcss，用法见`src/css/postcss.css`
 
 ## 使用方法
 
@@ -93,4 +94,4 @@ new HtmlWebpackPlugin({
 
 ## TODO
 
-- `PostCss` 加入
+- null
