@@ -1,10 +1,10 @@
 //======================
-// Common
+// 公共样式
 //======================
 
 $dpr: false !default;
 
-@import "../config";
+@import "config.scss";
 
 .fl {
 	float: left;
@@ -40,19 +40,25 @@ $dpr: false !default;
     }
 }
 
-//common font-size
-$fzs : 12, 14, 16, 18, 20, 22, 24;
-@each $fz in $fzs {
-	.f#{$fz} {
-        @include font-dpr($fz * 1px)
+/**
+ * DPR公共字体
+ */
+@if $dpr {
+    $fzs : 12, 14, 16, 18, 20, 22, 24;
+    @each $fz in $fzs {
+        .f#{$fz} {
+            @include font-dpr($fz * 1px)
+        }
     }
 }
 
-// common price icon
+/* 价格专用样式
+ * -----------
+ * <p class="sp">现价：<em>56</em></p>
+ * <p class="mp">市场价：<del>100</del></p>
+ */
 %rmb {
-    &:before {
-        content: '\00A5';
-    }
+    &:before { content: '\00A5';}
 }
 .sp em {
     @extend %rmb;

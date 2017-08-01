@@ -10,17 +10,19 @@
  */
 // @import "base/reset.scss";
 // @import "base/media.scss";
-// @import "base/common.scss";
+@import "common.scss";
 
 
 /*!
- * Sprites 具体用法参考：_sprites.scss 中的注释
+ * Sprites 具体用法参考【src/css/_sprites.scss】中的注释
  */
 @import "sprites.scss";
 @include sprites($spritesheet-sprites); //图片地址发生变化时，可使用第二个参数传入
 
 
-//postcss使用方法
+/*!
+ * PostCss用法
+ */
 @import "postcss.scss";
 
 

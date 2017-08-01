@@ -1,11 +1,14 @@
 /*!
- * 此文件用于【dist/svg.html】预览使用
- * 实际开发请忽略此文件
+ * 此文件用于【dist/svg.html】预览使用，实际开发请忽略
  */
 .icon-svg {
-    width: 3em;
-    height: 3em;
+    width: 4em;
+    height: 4em;
     stroke-width: 0;
     stroke: currentColor;
     fill: black;
+}
+
+header {
+    padding: 0 3em !important;
 }

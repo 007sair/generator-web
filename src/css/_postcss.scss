@@ -1,7 +1,7 @@
 /*
  * postCss用法
  * -----------
- * Tips: 由于本文件会经sass编译，所以某些postcss功能在这里会有冲突
+ * Tips: 由于本文件会经sass编译，所以某些postcss功能在这里会有冲突，甚至报错，请慎用
  */
 
 /* 可以将rem转换成px，rootValue为基数 */
@@ -46,8 +46,9 @@
 
 /* 简短写法 */
 .short {
+    position: relative;
 	size: 10px;
-    position: absolute 1px 2px _ 4px; 
+    -s-position: absolute 1px 2px _ 4px;
     margin: _ 10px; 
     color: blue red;
     overflow: hidden auto;

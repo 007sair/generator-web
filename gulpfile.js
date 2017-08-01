@@ -20,32 +20,12 @@ var gulp = require('gulp'),
     spritesmith = require('gulp.spritesmith'),
     imagemin = require('gulp-imagemin');
     
-
 require('shelljs/global');
 var svgSprite = require("gulp-svg-sprites");
 var svgmin = require('gulp-svgmin');
 
-/**
- * postcss plugins
- */
-var cssnext = require("postcss-cssnext"); //http://cssnext.io/features/
-var postuse = require('postcss-use'); //https://github.com/postcss/postcss-use
-
-var processors = [  
-    cssnext({
-        browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
-    }),
-    require('postcss-short')({ //使用'_'下划线跳过，默认的星号跳过在scss中会被运算
-        position: {skip: '_'},
-        spacing: {skip: '_'}
-    }),
-    postuse({
-        modules: ['pixrem']
-    })
-];
-
+var processors = require('./build/postcss.config.js');
 var prod = gutil.env._[0] == 'dev' ? true : false;
-
 var host = {
     path: 'dist/',
     port: 3000,
@@ -66,7 +46,7 @@ gulp.task('sassmin', function () {
             precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
         })
         .on('error', sass.logError))
-        .pipe(postcss(processors))
+        .pipe(postcss(processors.config))
         .pipe(cleanCSS({
             format: {
                 breaks: {//控制在哪里插入断点
@@ -133,7 +113,7 @@ gulp.task('sprite:svg', function () {
             svg: {
                 symbols: 'images/svg-icon.svg'
             },
-            cssFile: 'css/main.css'
+            cssFile: 'css/svg.css'
         }))
         .pipe(gulp.dest("dist/"));
 });
