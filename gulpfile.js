@@ -16,20 +16,32 @@ var gulp = require('gulp'),
     connect = require('gulp-connect');
     gulpSequence = require('gulp-sequence'),  //- gulp串行任务   //gulpSequence：圆括号串行，中括号并行
     postcss = require('gulp-postcss'),
-    autoprefixer = require('autoprefixer'),
     sourcemaps = require('gulp-sourcemaps'),
     spritesmith = require('gulp.spritesmith'),
-    imagemin = require('gulp-imagemin'),
-    svgSprite = require("gulp-svg-sprites");
+    imagemin = require('gulp-imagemin');
+    
 
 require('shelljs/global');
-
+var svgSprite = require("gulp-svg-sprites");
 var svgmin = require('gulp-svgmin');
 
-var processors = [
-	autoprefixer({
-		browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
-	})
+/**
+ * postcss plugins
+ */
+var cssnext = require("postcss-cssnext"); //http://cssnext.io/features/
+var postuse = require('postcss-use'); //https://github.com/postcss/postcss-use
+
+var processors = [  
+    cssnext({
+        browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
+    }),
+    require('postcss-short')({ //使用'_'下划线跳过，默认的星号跳过在scss中会被运算
+        position: {skip: '_'},
+        spacing: {skip: '_'}
+    }),
+    postuse({
+        modules: ['pixrem']
+    })
 ];
 
 var prod = gutil.env._[0] == 'dev' ? true : false;
@@ -52,7 +64,8 @@ gulp.task('sassmin', function () {
         .pipe(sourcemaps.init())
         .pipe(sass({
             precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
-        }).on('error', sass.logError))
+        })
+        .on('error', sass.logError))
         .pipe(postcss(processors))
         .pipe(cleanCSS({
             format: {
@@ -109,6 +122,7 @@ gulp.task('sprite:image', function() {
 //合并svg
 gulp.task('sprite:svg', function () {
     return gulp.src('src/assets/svg/*.svg')
+        .pipe(svgmin())
         .pipe(svgSprite({
             mode: "symbols",
             common: 'icon-svg',
@@ -121,7 +135,6 @@ gulp.task('sprite:svg', function () {
             },
             cssFile: 'css/svg.css'
         }))
-        // .pipe(svgmin())
         .pipe(gulp.dest("dist/"));
 });
 
@@ -132,7 +145,7 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('watch', function (done) {
-    gulp.watch('src/**/*.scss', ['sassmin']);
+    gulp.watch(['src/**/*.scss', 'src/**/*.css'], ['sassmin']);
     gulp.watch(['src/**/*.html', 'src/**/*.js'], ['build-js']).on('change', function (event) {
         gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
     });
