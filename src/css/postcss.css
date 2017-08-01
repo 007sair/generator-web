@@ -4,6 +4,7 @@
  * Tips: 由于本文件会经sass编译，所以某些postcss功能在这里会有冲突
  */
 
+/* 可以将rem转换成px，rootValue为基数 */
 @use pixrem {
     rootValue: 75;
 };
@@ -43,6 +44,7 @@
     display: flex;
 }
 
+/* 简短写法 */
 .short {
 	size: 10px;
     position: absolute 1px 2px _ 4px; 

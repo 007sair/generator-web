@@ -20,6 +20,7 @@
 |   |   ├── _config.scss        #sass配置文件
 |   |   ├── _sprites.scss       #css雪碧图生成的sass文件
 |   |   ├── svg.css             #svg预览页面调用样式，实际开发可忽略
+|   |   ├── postcss.css         #postcss
 |   |   └── main.scss           #页面样式 可以有多个
 |   ├── images                  #图片目录，会被copy到dist目录
 |   |   └── data                #存放一些json数据，便于被copy至dist
