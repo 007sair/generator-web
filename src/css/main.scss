@@ -16,15 +16,17 @@
 /*!
  * Sprites 具体用法参考：_sprites.scss 中的注释
  */
-$icons: '../images/icon-sprite.png'; //雪碧图生成后的图片地址
 @import "sprites.scss";
-@include sprites($spritesheet-sprites, $icons); //图片地址发生变化时，可使用第二个参数传入
+@include sprites($spritesheet-sprites); //图片地址发生变化时，可使用第二个参数传入
+
+
+//postcss使用方法
+@import "postcss.scss";
 
 
 /*!
  * Page Styles
  */
-
 body {
 	font-size: 12px;
 }
@@ -43,3 +45,4 @@ ul {
 		height: 2em;
 	}
 }
+

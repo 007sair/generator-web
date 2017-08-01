@@ -1,4 +1,7 @@
-/* 此文件专用于svg.html 实际开发请忽略 */
+/*!
+ * 此文件用于【dist/svg.html】预览使用
+ * 实际开发请忽略此文件
+ */
 .icon-svg {
     width: 3em;
     height: 3em;

@@ -133,7 +133,7 @@ gulp.task('sprite:svg', function () {
             svg: {
                 symbols: 'images/svg-icon.svg'
             },
-            cssFile: 'css/svg.css'
+            cssFile: 'css/main.css'
         }))
         .pipe(gulp.dest("dist/"));
 });
