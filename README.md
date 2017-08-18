@@ -4,14 +4,13 @@
 
 ```
 .
-├── build 
-|   ├── config.js               #多页面配置                      
-|   └── webpack.config.js       #webpack配置文件
+├── config                      #webpack配置目录
 ├── dist                        #生成目录
 |   └── svg.html                #svg-sprites预览文件
 ├── node_modules                #包文件夹
 │   └── node-sass               #解决node-sass在国内安装失败的问题
-├── spritesmith                 #修改雪碧图、px2rem的配置
+├── rev                         #版本号目录，只在gulp build任务时出现
+├── spritesmith                 #修改雪碧图配置，具体修改下方有说明
 ├── src                         #源文件
 |   ├── assets                  #资源目录，目录内文件会被加工后生成到dist中
 |   |   ├── sprites             #雪碧图
@@ -29,7 +28,7 @@
 |   |   ├── lib                 #库目录
 |   |   ├── mods                #模块目录
 |   |   ├── index.js            #页面1入口文件
-|   |   └── page2.js            #页面2入口文件
+|   |   └── index2.js            #页面2入口文件
 |   ├── index.html              #页面1
 |   └── page2.html              #页面2
 ├── .gitignore     

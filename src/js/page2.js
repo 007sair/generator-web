@@ -5,5 +5,5 @@
  *   $output: 640    ->   ./lib/rem640.js
  *   $output: 750    ->   ./lib/rem750.js
  */
-require('./lib/rem640.js');
+require('./lib/rem750.js');
 

@@ -33,6 +33,10 @@
     "postcss-cssnext": "^3.0.2",
     "postcss-short": "^4.1.0",
     "postcss-use": "^2.3.0",
-    "pixrem": "^4.0.1"
+    "pixrem": "^4.0.1",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.1.1",
+    "add-asset-html-webpack-plugin": "^2.1.1",
+    "html-webpack-include-assets-plugin": "^0.0.7"
   }
 }
