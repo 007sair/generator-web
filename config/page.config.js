@@ -3,7 +3,6 @@
  * 一个页面对应一个 new HtmlWebpackPlugin
  */
 
-
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {

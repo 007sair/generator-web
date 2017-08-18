@@ -34,11 +34,6 @@ var webpackConfig = {
         filename: prod ? 'js/[name].js' : 'js/[name].js?v=[chunkhash:10]',
         chunkFilename: "js/[name].js"
     },
-    resolve: {
-        extensions: ['.js', '.json'],
-        alias: {
-        }
-    },
     plugins: []
 };
 
