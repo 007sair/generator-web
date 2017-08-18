@@ -5,7 +5,6 @@
 var webpack = require('webpack');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 var path = require('path');
