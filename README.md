@@ -1,20 +1,21 @@
 # 脚手架工具
 
+## [修改日志](Log.md)
+
+
 > 启动gulp后会生成`dist`目录
 
 ```
 .
 ├── config                      #webpack配置目录
-├── dist                        #生成目录
+├── dist                        #最终文件存放目录
 |   └── svg.html                #svg-sprites预览文件
-├── node_modules                #包文件夹
-│   └── node-sass               #解决node-sass在国内安装失败的问题
-├── rev                         #版本号目录，只在gulp build任务时出现
+├── rev                         #版本号目录，只在gulp build任务后出现
 ├── spritesmith                 #修改雪碧图配置，具体修改下方有说明
 ├── src                         #源文件
 |   ├── assets                  #资源目录，目录内文件会被加工后生成到dist中
-|   |   ├── sprites             #雪碧图
-|   |   └── svg                 #svg
+|   |   ├── sprites             #雪碧图目录
+|   |   └── svg                 #svg目录
 |   ├── css                    
 |   |   ├── base                #sass库目录
 |   |   ├── _config.scss        #sass配置文件
