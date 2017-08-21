@@ -1,8 +1,5 @@
 # 脚手架工具
 
-## [修改日志](Log.md)
-
-
 > 启动gulp后会生成`dist`目录
 
 ```
@@ -100,3 +97,5 @@ new HtmlWebpackPlugin({
 ## TODO
 
 - null
+
+**[修改日志](Log.md)**
