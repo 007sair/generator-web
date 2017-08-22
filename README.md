@@ -91,8 +91,9 @@ new HtmlWebpackPlugin({
 
 插件`gulp.spritesmith`默认生成`px`为单位的雪碧图样式，将其改为`rem`单位的方法：
 
-将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件
+<del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件</del>
 
+执行`replace.bat`
 
 ## TODO
 
