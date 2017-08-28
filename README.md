@@ -38,26 +38,26 @@
 
 ## 功能
 
-- sass -> css
-- webpack—js合并压缩
+- sass转css
+- js合并压缩（webpack）
 - 浏览器实时刷新
 - rem单位（640/750）切换
 - css雪碧图（图片后缀须为.png）
 - svg-sprites(symbol)
 - PostCss
-    - rem转换
+    - rem、px转换
     - 新变量命名
     - 简短语法
 
 ## 使用方法
 
-**下载**
+**1. 下载：**
 
 ``` bash
 $ git clone git@github.com:007sair/hero.git
 ```
 
-**安装插件：**
+**2. 安装插件：**
 
 ``` bash
 #有淘宝镜像使用cnpm
@@ -68,16 +68,23 @@ cnpm install
 npm install
 ```
 
-**启动任务：**
+**3. 执行`sprite.bat`**
+
+
+**4. 启动任务：**
 
 ``` bash
 #开发环境
 gulp dev
 ```
 
-## 多页开发
+## 一些问题
 
-修改build/config.js，一个页面对应一个`new HtmlWebpackPlugin`、一个入口文件
+**多页开发：**
+
+`hero`使用了[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)插件。具体参考此插件用法。
+
+打开`config/page.config.js`，一个页面对应一个`new HtmlWebpackPlugin`。`chunks`为这个页面需要添加的js文件
 
 ``` javascript
 //页面1
@@ -92,16 +99,16 @@ new HtmlWebpackPlugin({
     template: 'src/page2.html',
     chunks: ['page2'] //chunks代表当前页使用的入口文件 src/js/page2.js
 }),
-...
+... //更多页面
 ```
 
-## spritesmith目录（px -> rem）
+**`spritesmith`目录：**
 
-插件`gulp.spritesmith`默认生成`px`为单位的雪碧图样式，将其改为`rem`单位的方法：
+插件`gulp.spritesmith`会生成`px`单位的雪碧图样式，本脚手架需要`rem`单位，修改方法：
 
 <del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件</del>
 
-执行`sprite.bat`
+执行`sprite.bat`（此工具会将`spritesmith`内文件复制到`node_modules`目录下对应位置，替代手动找目录替换）
 
 ## TODO
 
