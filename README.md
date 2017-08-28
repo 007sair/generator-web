@@ -2,7 +2,9 @@
 
 > 启动gulp后会生成`dist`目录
 
-```
+## 目录结构
+
+``` bash
 .
 ├── config                      #webpack配置目录
 ├── dist                        #最终文件存放目录
@@ -49,9 +51,15 @@
 
 ## 使用方法
 
+**下载**
+
+``` bash
+$ git clone git@github.com:007sair/hero.git
+```
+
 **安装插件：**
 
-```ruby
+``` bash
 #有淘宝镜像使用cnpm
 #修改命令：npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install
@@ -62,7 +70,7 @@ npm install
 
 **启动任务：**
 
-```ruby
+``` bash
 #开发环境
 gulp dev
 ```
@@ -71,7 +79,7 @@ gulp dev
 
 修改build/config.js，一个页面对应一个`new HtmlWebpackPlugin`、一个入口文件
 
-```javascript
+``` javascript
 //页面1
 new HtmlWebpackPlugin({
     filename: 'page1.html',
@@ -93,7 +101,7 @@ new HtmlWebpackPlugin({
 
 <del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件</del>
 
-执行`replace.bat`
+执行`sprite.bat`
 
 ## TODO
 
