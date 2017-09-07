@@ -44,7 +44,7 @@
 - css雪碧图（图片后缀须为.png）
 - svg-sprites（symbol）
 - PostCss
-    - rem、px转换
+    - rem2px
     - 新变量命名
     - 简短语法
 
@@ -68,8 +68,9 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install
 ```
 
-**3. 执行`sprite.bat`**
+**3. 插件修改**
 
+运行根目录下的`sprite.bat`文件
 
 **4. 启动任务：**
 
@@ -78,6 +79,7 @@ cnpm install
 gulp dev
 
 #生产环境
+gulp build
 ```
 
 ## 配置问题
@@ -110,7 +112,7 @@ new HtmlWebpackPlugin({
 
 <del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件</del>
 
-执行hero目录下`sprite.bat`完成自动复制。
+运行`sprite.bat`自动复制即可。
 
 ## TODO
 
