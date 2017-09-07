@@ -31,7 +31,7 @@ var config = {
         }),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require(path.join(process.cwd(), "dist/js/vendor.manifest.json")),
+            manifest: require(path.join(process.cwd(), "rev/vendor.manifest.json")),
         })
     ]
 };

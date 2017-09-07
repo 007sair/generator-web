@@ -10,28 +10,37 @@
 <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-	test
 
-	<h1>雪碧图：</h1>
-	<ul class="sprites-img">
-		<li class="icon-arr-rt"></li>
-		<li class="icon-cancel"></li>
-		<li class="icon-clear"></li>
-		<li class="icon-nav"></li>
-		<li class="icon-search"></li>
-	</ul>
+	<article>
+		<h2>雪碧图：</h2>
+		<section>
+			<h3>png</h3>
+			<div class="sprites-img">
+				<i class="icon-arr-rt"></i>
+				<i class="icon-cancel"></i>
+				<i class="icon-clear"></i>
+				<i class="icon-nav"></i>
+				<i class="icon-search"></i>
+			</div>
+		</section>
+		<section>
+			<h3>svg</h3>
+			<div class="sprites-svg">
+				<svg class="icon-svg svg-clock"><use xlink:href="images/icon-svg.svg#svg-clock"></use></svg>
+				<svg class="icon-svg svg-kf"><use xlink:href="images/icon-svg.svg#svg-kf"></use></svg>
+				<svg class="icon-svg svg-arrow"><use xlink:href="images/icon-svg.svg#svg-arrow"></use></svg>
+			</div>
+		</section>
+	</article>
 
-	<h1>svg：</h1>
-	<ul class="sprites-svg">
-		<li>
-			<svg class="icon-svg svg-arrow"><use xlink:href="images/svg-icon.svg#svg-arrow"></use></svg>
-		</li>
-		<li>
-			<svg class="icon-svg svg-clock"><use xlink:href="images/svg-icon.svg#svg-clock"></use></svg>
-		</li>
-		<li>
-			<svg class="icon-svg svg-kf"><use xlink:href="images/svg-icon.svg#svg-kf"></use></svg>
-		</li>
-	</ul>
+	<article>
+		<h2>em测试</h2>
+		<section>
+			<p class="test-em">此段文字字号使用em单位</p>
+			<p style="font-size:18px">此段文字字号使用18px</p>
+		</section>
+	</article>
+
+
 </body>
 </html>

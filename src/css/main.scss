@@ -1,29 +1,32 @@
 /**
  * Tools
  */
-@import "base/mixin.scss";
-@import "base/rem.scss";
-@import "base/css3.scss";
+@import "base/mixin";
+@import "base/rem";
+@import "base/css3";
 
 /**
  * Init Styles
  */
-// @import "base/reset.scss";
-// @import "base/media.scss";
-@import "common.scss";
+@import "base/reset";  //样式重置
+@import "base/media";  //媒体查询
+@import "common";	   //公共样式
 
 
 /*!
- * Sprites 具体用法参考【src/css/_sprites.scss】中的注释
+ * 雪碧图，参考【src/css/_sprites.scss】中的注释 176行
  */
-@import "sprites.scss";
-@include sprites($spritesheet-sprites); //图片地址发生变化时，可使用第二个参数传入
+$online: false; //false or true
+$sprite-icons: '../images/icon-sprite.png';
+@if $online {
+	$sprite-icons: 'https://img01.miyabaobei.com/d1/p5/2017/04/28/a1/a0/a1a0fd0f31e6f2dda75da391fc7b7b96630027848.jpg';
+}
+@import "sprites";
+@include sprites($spritesheet-sprites, $sprite-icons); //图片地址非默认地址，可使用第二个参数传入
 
 
-/*!
- * PostCss用法
- */
-@import "postcss.scss";
+/* PostCss用法 */
+@import "postcss";
 
 
 /*!
@@ -33,8 +36,12 @@ body {
 	font-size: 12px;
 }
 
-ul {
-	li {
+article {
+	padding: rem(15);
+}
+
+.sprites-img {
+	i {
 		display: inline-block;
 		vertical-align: middle;
 		margin: 0.25rem;
@@ -42,12 +49,16 @@ ul {
 }
 
 .sprites-svg {
-	.icon-svg {
+	font-size: rem(24);
+	svg {
+		margin: 0.25rem;
 		width: 2em;
 		height: 2em;
 	}
 }
 
-section {
-	
+.test-em {
+	font-size: em(18, 12);
+	position: relative;
+	visibility: visible;
 }

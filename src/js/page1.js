@@ -9,13 +9,9 @@ require('./lib/rem750.js');
 
 var $ = require('./lib/zepto.js');
 
-console.log( $(window).height() )
-
 document.body.addEventListener('click', function () {
     require.ensure(['./mod/utils.js'], function (require) {
         var utils = require('./mod/utils.js');
         console.log(utils)
     }, 'tool');
 })
-
-

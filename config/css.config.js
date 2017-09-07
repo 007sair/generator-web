@@ -23,6 +23,7 @@ var config = {
                 afterAtRule: true,
                 afterBlockEnds: true,//控制在一个块结束后是否有换行符,默认为`false`
                 afterRuleEnds: true,//控制在规则结束后是否有换行符;默认为`false`
+                afterComment: true //注释后是否换行，默认false
             }
         }
     }

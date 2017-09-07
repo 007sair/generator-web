@@ -7,7 +7,7 @@
 {{#block "sprites-comment"}}
 /*
 scss变量包含了icon的编译状态信息，存储在各自icon命名的变量下。
-例如：
+例如，一张名为icon-home.png的图标：
 .icon-home {
 	width: $icon-home-width;
 }
@@ -70,9 +70,10 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
 	$sprite-offset-x: nth($sprite, 3);
 	$sprite-offset-y: nth($sprite, 4);
 
-	/** 
-	* background-position百分比单位
-	* 参考自：https://github.com/banricho/webLog/issues/1
+	/* 
+	将定位换成百分比单位
+	background-position百分比单位
+	参考自：https://github.com/banricho/webLog/issues/1
 	*/
 	$offset_x: nth($sprite, 3);
 	$offset_y: nth($sprite, 4);
@@ -87,18 +88,17 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
 
 	background-position: percentage($offset_x / $x_fm) percentage($offset_y / $y_fm);
 
-	//background-position rem单位
+	/* rem单位 */
 	//background-position: $sprite-offset-x  $sprite-offset-y;
 }
 
 @mixin sprite-image($sprite, $url: '{{{spritesheet.escaped_image}}}') {
-	//$sprite-image: nth($sprite, 9);
 	background-image: url(#{$url});
 	background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
 }
 
-@mixin sprite($sprite) {
-	@include sprite-image($sprite);
+@mixin sprite($sprite, $url: '{{{spritesheet.escaped_image}}}') {
+	@include sprite-image($sprite, $url);
 	@include sprite-position($sprite);
 	@include sprite-width($sprite);
 	@include sprite-height($sprite);
@@ -110,39 +110,38 @@ ${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.
 {{#block "spritesheet-functions-comment"}}
 {{#if options.functions}}
 /*
- `sprites` mixin生成与CSS模板相同的输出，但可以在SCSS内部覆盖
- @include sprites($spritesheet-sprites, $url);
- sprites调用方法：
-     @param $spritesheet-sprites 	数组类型变量，所有图片名的变量
-     @param $url  图片地址，默认可以不传入，使用gulp生产的名称，当需要外部修改时可传入
-     $url使用场景：
-	   //定义：
-	   $online: true; //需要根据变量切换线上与线下图片链接
-	   $sprite-icons: '../images/icon-sprite.png'; //默认链接
-	   @if $online {
-	       $sprite-icons: 'http://xxx.xxx.icon-sprite.png'; //线上链接
-	   }
-	   //使用：
-	   @include sprites($spritesheet-sprites, $sprite-icons);
- */
+sprites混合器会直接生成样式，也能在scss内部被调用：
+@include sprites($spritesheet-sprites, $url);
+用法：
+@param $spritesheet-sprites 	数组类型，所有图标命名的变量集合
+@param $url  					图片地址，默认可不传入，使用gulp生成的路径，也可从外部传入自定义路径
+$url使用场景：
+	$online: true; 	//定义一个变量，标识当前使用环境 false or true
+	$sprite-icons: '../images/icon-sprite.png'; //图标地址变量，默认值为gulp生成的
+	@if $online { //如果是线上，将图标地址变量重新赋值
+		$sprite-icons: 'http://xxx.xxx.icon-sprite.png'; //线上链接
+	}
+	//再将图标地址变量当第二个参数传入即可
+	@include sprites($spritesheet-sprites, $sprite-icons);
+*/
 {{/if}}
 {{/block}}
 {{#block "spritesheet-functions"}}
 {{#if options.functions}}
 @mixin sprites($sprites, $url: '{{{spritesheet.escaped_image}}}') {
-  %sprite-common { //提取公共的url
-    background-image: url(#{$url});
-    background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
-  }
-  @each $sprite in $sprites {
-    $sprite-name: nth($sprite, 10);
-    .#{$sprite-name} {
-      @extend %sprite-common;
-      @include sprite-width($sprite);
-      @include sprite-height($sprite);
-      @include sprite-position($sprite);
-    }
-  }
+	%sprite-common { //提取图标样式公共代码
+		background-image: url(#{$url});
+		background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
+	}
+	@each $sprite in $sprites { //遍历每个图标，生成图标样式
+		$sprite-name: nth($sprite, 10);
+		.#{$sprite-name} {
+			@extend %sprite-common;
+			@include sprite-width($sprite);
+			@include sprite-height($sprite);
+			@include sprite-position($sprite);
+		}
+	}
 }
 {{/if}}
 {{/block}}

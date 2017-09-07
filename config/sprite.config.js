@@ -3,7 +3,7 @@
  * svg：src/assets/svg 的压缩合并
  * image：src/assets/sprites 图标的压缩合并
  */
-
+var path = require('path');
 var config = {
     svg: {
         mode: "symbols",
@@ -13,9 +13,8 @@ var config = {
             symbols: 'svg.html'
         },
         svg: {
-            symbols: 'images/svg-icon.svg'
-        },
-        cssFile: 'css/svg.css'
+            symbols: './dist/images/icon-svg.svg'
+        }
     },
     image: {
         cssName: '_sprites.scss',

@@ -104,24 +104,33 @@ gulp.task('sprite:image', function (done) {
 
 //修改css在html中的版本号，依赖build-js（生成html），sassmin（生成css）
 gulp.task('rev:css', ['build-js', 'sass'], function(done) {
-    return gulp.src(['./rev/*.json', './dist/**/*.html'])     //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
-        .pipe(revCollector())                                 //- 执行文件内css名的替换
-        .pipe(gulp.dest('dist/'))                             //- 替换后的文件输出的目录
+    //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
+    return gulp.src(['./rev/*.json', './dist/**/*.html', '!./rev/vendor.manifest.json'])  
+        .pipe(revCollector())      //- 执行文件内css名的替换
+        .pipe(gulp.dest('dist/'))  //- 替换后的文件输出的目录
     done()
 });
 
-//复制images目录到dist下
+//复制src/assets/data目录到dist/data下
+gulp.task('copy:data', function () {
+    return gulp.src(['src/assets/data/**/*'])
+        .pipe(gulp.dest('dist/data'))
+});
+
+//复制src/assets/img目录到dist/img下
 gulp.task('copy:images', function () {
-    return gulp.src(['src/images/**/*'])
+    return gulp.src(['src/assets/img/**/*'])
         .pipe(gulp.dest('dist/images'))
 });
+
+gulp.task('copy', ['copy:images', 'copy:data']);
 
 //合并src/assets目录下的svg到dist下，并生成一个svg.html页面用于预览svg icon
 gulp.task('sprite:svg', function () {
     return gulp.src('src/assets/svg/*.svg')
         .pipe(svgmin())
         .pipe(svgSprite(spriteConfig.svg))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('./'));
 });
 
 //监听
@@ -130,7 +139,7 @@ gulp.task('watch', function (done) {
     gulp.watch(['src/**/*.html', 'src/**/*.js'], ['build-js']).on('change', function (event) {
         gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
     });
-    gulp.watch('src/images/**', ['copy:images']);
+    gulp.watch(['src/assets/img/**', 'src/assets/data/**'], ['copy']);
     gulp.watch('src/assets/sprites/**', ['sprite:image']);
     gulp.watch('src/assets/svg/**', ['sprite:svg']);
     done()
@@ -163,15 +172,15 @@ gulp.task('clean', function(done) {
 
 //开发环境
 gulp.task('dev', ['clean'], function (cb) {
-    gulpSequence('sprite:image', ['build-js', 'sass'], ['copy:images', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
+    gulpSequence('sprite:image', ['build-js', 'sass'], ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
 });
 
 //生产环境
 gulp.task('build', ['clean'], function(cb) {
-    gulpSequence('sprite:image', 'rev:css', ['copy:images', 'sprite:svg'], cb);
+    gulpSequence('sprite:image', 'rev:css', ['copy', 'sprite:svg'], cb);
 });
 
 //生产环境带查看效果
 gulp.task('build:watch', ['clean'], function(cb) {
-    gulpSequence('sprite:image', 'rev:css', ['copy:images', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
+    gulpSequence('sprite:image', 'rev:css', ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
 });
