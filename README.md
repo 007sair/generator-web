@@ -82,10 +82,6 @@ gulp dev
 
 ## 配置问题
 
-### rem单位
-
-
-
 ### 多页开发
 
 `hero`使用了[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)插件。具体参考此插件用法。
@@ -118,7 +114,10 @@ new HtmlWebpackPlugin({
 
 ## TODO
 
-- null
+- px2rem
+- base64
+
+---
 
 ## 修改日志
 
