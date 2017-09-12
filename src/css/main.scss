@@ -17,12 +17,16 @@
  * 雪碧图，参考【src/css/_sprites.scss】中的注释 176行
  */
 $online: false; //false or true
-$sprite-icons: '../images/icon-sprite.png';
+$sprite-icons: '../images/icon-sprite.png'; //雪碧图插件生成的默认地址
 @if $online {
 	$sprite-icons: 'https://img01.miyabaobei.com/d1/p5/2017/04/28/a1/a0/a1a0fd0f31e6f2dda75da391fc7b7b96630027848.jpg';
 }
 @import "sprites";
-@include sprites($spritesheet-sprites, $sprite-icons); //图片地址非默认地址，可使用第二个参数传入
+/**
+ * 当雪碧图地址通过 $online 发现修改后，默认地址就无效了
+ * 此时需将 $sprite-icons 作为第二个参数手动传入，达到生成的样式内图片地址引用正确
+ */
+@include sprites($spritesheet-sprites); 
 
 
 /* PostCss用法 */
