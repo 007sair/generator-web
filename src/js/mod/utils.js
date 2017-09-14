@@ -1,7 +1,6 @@
 /**
- * 一些方法
+ * 公用工具库
  */
-
 
 	var utils = {};
 
@@ -94,6 +93,29 @@
 			}
 		}
 		return aArr;
+	};
+
+	//返回一个n到m（含n和m）的随机数
+	utils.rnd = function (n, m) {
+		return Math.floor(Math.random() * (m - n + 1) + n);
+	};
+
+	/**
+	 * 金山云图片替换
+	 * @param  {[string]} src     [图片链接]
+	 * @param  {[number]} w       [图片宽度]
+	 * @param  {[number]} q       [图片质量]
+	 * @return {[string]}         [返回一个生成后的图片链接]
+	 */
+	utils.replaceSrc = function (src, w, q) {
+		var reg = /img0[1-4]/;
+		if (reg.test(src)) {
+			src = src.replace(reg, 'img0' + this.rnd(5, 9));
+			if (/img0[5-9]/.test(src) && src.indexOf('@base') < 0) { //@base@tag=imgScale&w=447&q=100
+				src += '@base@tag=imgScale&w=' + (w || 100) + '&q=' + (q || 100);
+			}
+		}
+		return src;
 	};
 
 
