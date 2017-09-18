@@ -4,7 +4,7 @@
 
 ## 目录结构
 
-``` bash
+``` ruby
 .
 ├── config                      #webpack配置目录
 ├── rev                         #存放版本号文件与webpack.DllPlugin插件的配置文件
