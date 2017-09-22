@@ -1,6 +1,6 @@
 # 脚手架工具
 
-基于gulp + webpack创建的一套前端工作流的脚手架工具。
+基于gulp + webpack创建的一套前端工作流脚手架工具。
 
 > 启动gulp后会生成`dist`目录
 
@@ -118,7 +118,6 @@ new HtmlWebpackPlugin({
 
 ## TODO
 
-- px2rem
 - base64
 
 ---
