@@ -1,5 +1,7 @@
 # 脚手架工具
 
+基于gulp + webpack创建的一套前端工作流的脚手架工具。
+
 > 启动gulp后会生成`dist`目录
 
 ## 目录结构
@@ -20,7 +22,7 @@
 |   |   ├── _config.scss        #sass配置文件
 |   |   ├── _common.scss        #公共样式文件
 |   |   ├── _sprites.scss       #雪碧图插件生成的样式文件
-|   |   ├── _postcss.scss       #postcss用法示例
+|   |   ├── _postcss.scss       #postcss代码参考写法
 |   |   └── main.scss           #页面样式 可以有多个
 |   ├── js                      
 |   |   ├── lib                 #库目录
@@ -44,9 +46,9 @@
 - css雪碧图（图片后缀须为.png）
 - svg-sprites（symbol）
 - PostCss
-    - rem2px
-    - 新变量命名
-    - 简短语法
+    - px2rem
+    - 新变量命名方法
+    - 简短语法，见：_postcss.scss
 
 ## 使用方法
 
@@ -122,6 +124,10 @@ new HtmlWebpackPlugin({
 ---
 
 ## 修改日志
+
+### 2017-09-22
+
+- 添加`px2rem`插件，支持直接将px转换为rem单位
 
 ### 2017-09-07
 

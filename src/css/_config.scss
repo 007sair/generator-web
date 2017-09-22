@@ -10,19 +10,19 @@
  *   $output: 640
  */
 
-// by media.scss
+// used by media.scss
 $dpr: false; //是否使用dpr  @true： media中自带dpr  common中会有f12 f14...等样式
 
-// by reset.scss
-$device: 'wap';		//设置reset.css  项目重置方案
+// used by reset.scss
+$device: 'wap';		//设置reset.css项目重置方案，wap为移动端重置样式
 
-// by rem.scss
-$isPX: false; 		//是否输出px单位的尺寸
+// used by rem.scss
+$isPX: false; 		//是否输出px单位
 $design: 750; 		//设计稿尺寸
 
 /**
- * css实际rem单位 需与js脚本对应
- *     640  ->  src/js/lib/rem.js  			 ($px / 40 * 1rem)
- *     750  ->  src/js/lib/flexible.js       ($px / 75 * 1rem)
+ * 输出尺寸，需与js脚本对应
+ * 若想输出640尺寸的rem值，html内需引用src/js/lib/rem640.js
+ * 若想输出750尺寸的rem值，html内需引用src/js/lib/rem750.js
  */
-$output: 750;
+$output: 750;      

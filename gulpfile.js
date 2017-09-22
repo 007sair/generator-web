@@ -23,7 +23,7 @@ var imagemin = require('gulp-imagemin');
 var svgSprite = require("gulp-svg-sprites");
 var svgmin = require('gulp-svgmin');
 var rev = require('gulp-rev');
-var revCollector = require('gulp-rev-collector');  
+var revCollector = require('gulp-rev-collector');
 
 require('shelljs/global');
 
