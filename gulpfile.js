@@ -24,6 +24,7 @@ var svgSprite = require("gulp-svg-sprites");
 var svgmin = require('gulp-svgmin');
 var rev = require('gulp-rev');
 var revCollector = require('gulp-rev-collector');
+var base64 = require('gulp-base64');
 
 require('shelljs/global');
 
@@ -44,6 +45,7 @@ gulp.task('sass', function () {
     if (prod) { //dev
         return gulp.src(['src/css/*.scss', 'src/css/**/*.css'], { base: 'src/css/' })
             .pipe(sourcemaps.init())
+            .pipe(base64(cssConfig.base64))
             .pipe(sass({
                 precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
             })
@@ -55,6 +57,7 @@ gulp.task('sass', function () {
             .pipe(connect.reload())
     } else { //prod
         return gulp.src(['src/css/*.scss', 'src/css/**/*.css'])
+            .pipe(base64(cssConfig.base64))
             .pipe(sass({
                 precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
             }))
@@ -166,6 +169,7 @@ gulp.task('open', function (done) {
 gulp.task('clean', function(done) {
     rm('-rf', 'dist/');
     rm('-rf', 'rev/');
+    rm('-rf', 'svg.html');
     done();
 })
 

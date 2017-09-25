@@ -36,6 +36,7 @@
     "gulp-rev": "^7.1.2",
     "gulp-rev-collector": "^1.1.1",
     "html-webpack-include-assets-plugin": "^0.0.7",
-    "postcss-pxtorem": "^4.0.1"
+    "postcss-pxtorem": "^4.0.1",
+    "gulp-base64": "^0.1.3"
   }
 }

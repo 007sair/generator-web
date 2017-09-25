@@ -13,8 +13,9 @@
 ├── spritesmith                 #修改雪碧图配置，具体修改下方有说明
 ├── src                         #源目录
 |   ├── assets                  #资源目录
-|   |   ├── data                #存放json数据，便于在dist目录下使用
-|   |   ├── img                 #图片目录，存放未被处理的图片，会直接被复制到dist下
+|   |   ├── base64              #存放小于8k的图片，用于生产base64
+|   |   ├── data                #存放json数据，便于ajax使用，会被复制到dist目录下
+|   |   ├── img                 #图片目录，存放未被处理的图片，会被复制到dist目录下
 |   |   ├── sprites             #雪碧图目录，加工后的文件被生成到dist/img内
 |   |   └── svg                 #svg目录，加工后的文件被生成到dist/img内
 |   ├── css                    
@@ -40,15 +41,16 @@
 ## 功能
 
 - sass转css
-- js合并压缩（webpack）
+- Javascript合并压缩
 - 浏览器实时刷新
 - 根据设计稿自由定制rem单位
 - css雪碧图（图片后缀须为.png）
 - svg-sprites（symbol）
 - PostCss
-    - px2rem
-    - 新变量命名方法
+    - px2rem：直接书写px，会被转换为rem
     - 简短语法，见：_postcss.scss
+    - 新变量命名方法
+- base64图片转换
 
 ## 使用方法
 
@@ -70,9 +72,9 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install
 ```
 
-**3. 插件修改**
+**3. 修改插件**
 
-运行根目录下的`sprite.bat`文件
+运行根目录下的`sprite.bat`。
 
 **4. 启动任务：**
 
@@ -90,17 +92,15 @@ gulp build
 
 `hero`使用了[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)插件。具体参考此插件用法。
 
-打开`config/page.config.js`，一个页面对应一个`new HtmlWebpackPlugin`。`chunks`为这个页面需要添加的js文件
+打开`config/page.config.js`，一个页面对应一个`new HtmlWebpackPlugin`，`chunks`为这个页面需要添加的js文件。
 
 ``` javascript
-//页面1
-new HtmlWebpackPlugin({
+new HtmlWebpackPlugin({ //页面1 项目开发请填写注释
     filename: 'page1.html',
     template: 'src/page1.html',
     chunks: ['page1'] //chunks代表当前页使用的入口文件 src/js/page1.js
 }),
-//页面2
-new HtmlWebpackPlugin({
+new HtmlWebpackPlugin({ //页面2
     filename: 'page2.html',
     template: 'src/page2.html',
     chunks: ['page2'] //chunks代表当前页使用的入口文件 src/js/page2.js
@@ -108,21 +108,38 @@ new HtmlWebpackPlugin({
 ... //更多页面
 ```
 
-### `spritesmith`目录
+### 雪碧图配置
 
-插件`gulp.spritesmith`会生成`px`单位的雪碧图样式，本脚手架需要`rem`单位，修改方法：
+本脚手架对雪碧图插件(`gulp.spritesmith`)略做修改，使其支持`rem`单位（原插件只支持`px`），且`rem`基数为75，修改方法：
 
 <del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件</del>
 
 运行`sprite.bat`自动复制即可。
 
+#### 修改基数
+
+打开`./spritesmith/spritesheet-templates.js`，174行：
+
+```
+['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
+    if (item[key] !== undefined) {
+        // px[key] = item[key] + 'px';
+        px[key] = fomatFloat(item[key]/75, 5) + 'rem'; //75为当前基数，5为小数点个数
+    }
+});
+```
+
 ## TODO
 
-- base64
+- null
 
 ---
 
 ## 修改日志
+
+### 2017-09-25
+
+- 添加`base64`插件，使用方法见`main.scss`
 
 ### 2017-09-22
 

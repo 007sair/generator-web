@@ -7,12 +7,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     pages: [
-        new HtmlWebpackPlugin({
+        new HtmlWebpackPlugin({ //页面1 项目开发请填写注释
             filename: 'page1.html',
             template: 'src/page1.html',
             chunks: ['common','page1']
         }),
-        new HtmlWebpackPlugin({
+        new HtmlWebpackPlugin({ //页面2
             filename: 'page2.html',
             template: 'src/page2.html',
             chunks: ['common','page2']

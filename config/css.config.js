@@ -28,6 +28,14 @@ var config = {
                 afterComment: true //注释后是否换行，默认false
             }
         }
+    },
+    base64: {
+        baseDir: './src/assets/base64',
+        extensions: ['svg', 'png', /\.jpg#datauri$/i],
+        exclude:    [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+        maxImageSize: 8*1024, // bytes,
+        deleteAfterEncoding: false,
+        debug: true
     }
 };
 

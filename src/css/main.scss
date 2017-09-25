@@ -38,21 +38,53 @@ article {
 	i {
 		display: inline-block;
 		vertical-align: middle;
-		margin: 0.25rem;
+		margin: 20px;
 	}
 }
 
 .sprites-svg {
 	font-size: rem(24);
 	svg {
-		margin: 0.25rem;
+		margin: 20px;
 		width: 2em;
 		height: 2em;
 	}
 }
 
-.test-em {
-	font-size: em(18, 12); //18为想转换的字号，12为父元素字号
-	position: relative;
-	visibility: visible;
+.b64 {
+	i {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 20px;
+	}
+}
+
+.b64-cancel {
+	size: 24px;
+	background: url('icon-cancel.png') no-repeat;
+	background-size: 24px;
+}
+
+.b64-arr-rt {
+	size: 12px 22px;
+	background: url('icon-arr-rt.png') no-repeat;
+	background-size: 12px 22px;
+}
+
+.b64-clear {
+	size: 24px;
+	background: url('icon-clear.png') no-repeat;
+	background-size: 24px;
+}
+
+.b64-nav {
+	size: 42px;
+	background: url('icon-nav.png') no-repeat;
+	background-size: 42px;
+}
+
+.b64-search {
+	size: 42px;
+	background: url('icon-search.png') no-repeat;
+	background-size: 42px;
 }
