@@ -145,6 +145,7 @@ gulp.task('watch', function (done) {
     gulp.watch(['src/assets/img/**', 'src/assets/data/**'], ['copy']);
     gulp.watch('src/assets/sprites/**', ['sprite:image']);
     gulp.watch('src/assets/svg/**', ['sprite:svg']);
+    gulp.watch('src/assets/base64/**', ['sass']);
     done()
 });
 
