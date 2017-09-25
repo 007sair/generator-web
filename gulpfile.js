@@ -26,6 +26,10 @@ var rev = require('gulp-rev');
 var revCollector = require('gulp-rev-collector');
 var base64 = require('gulp-base64');
 
+var replace = require('gulp-replace');
+var revFormat = require('gulp-rev-format');
+var revReplace = require('gulp-rev-replace');
+
 require('shelljs/global');
 
 //config
@@ -63,8 +67,13 @@ gulp.task('sass', function () {
             }))
             .pipe(postCss(cssConfig.postCss))
             .pipe(cleanCSS(cssConfig.cleanCss))
-            .pipe(rev())
             .pipe(gulp.dest('./dist/css/'))
+            .pipe(rev())
+            .pipe(revFormat({
+                prefix: '.', // 在版本号前增加字符  
+                suffix: '.cache', // 在版本号后增加字符  
+                lastExt: false
+            }))
             .pipe(rev.manifest('css-version.json'))
             .pipe(gulp.dest('./rev'))
     }
@@ -105,14 +114,38 @@ gulp.task('sprite:image', function (done) {
     done()
 });
 
-//修改css在html中的版本号，依赖build-js（生成html），sassmin（生成css）
-gulp.task('rev:css', ['build-js', 'sass'], function(done) {
-    //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
-    return gulp.src(['./rev/*.json', './dist/**/*.html', '!./rev/vendor.manifest.json'])  
-        .pipe(revCollector())      //- 执行文件内css名的替换
-        .pipe(gulp.dest('dist/'))  //- 替换后的文件输出的目录
-    done()
-});
+//添加版本号
+gulp.task('add-version', function () {
+    var manifest = gulp.src(["./rev/css-version.json"]);
+    function modifyUnreved(filename) {
+        return filename;
+    }
+    function modifyReved(filename) {
+        //filename是：admin.69cef10fff.cache.css的一个文件名  
+        //在这里才发现刚才用gulp-rev-format的作用了吧？就是为了做正则匹配，  
+        if (filename.indexOf('.cache') > -1) {
+            //通过正则和relace得到版本号：69cef10fff  
+            var _version = filename.match(/\.[\w]*\.cache/)[0].replace(/(\.|cache)*/g, "");
+            //把版本号和gulp-rev-format生成的字符去掉，剩下的就是原文件名：admin.css  
+            var _filename = filename.replace(/\.[\w]*\.cache/, "");
+            //重新定义文件名和版本号：admin.css?v=69cef10fff  
+            filename = _filename + "?v=" + _version;
+            //返回由gulp-rev-replace替换文件名  
+            return filename;
+        }
+        return filename;
+    }
+    gulp.src(['./dist/*.html'])
+        //删除原来的版本
+        .pipe(replace(/(\.[a-z]+)\?(v=)?[^\'\"\&].css/g, "$1"))
+        .pipe(revReplace({
+            manifest: manifest,
+            modifyUnreved: modifyUnreved,
+            modifyReved: modifyReved
+        }))
+        .pipe(gulp.dest('dist/'));
+});  
+
 
 //复制src/assets/data目录到dist/data下
 gulp.task('copy:data', function () {
@@ -182,10 +215,10 @@ gulp.task('dev', ['clean'], function (cb) {
 
 //生产环境
 gulp.task('build', ['clean'], function(cb) {
-    gulpSequence('sprite:image', 'rev:css', ['copy', 'sprite:svg'], cb);
+    gulpSequence('sprite:image', ['build-js', 'sass'], 'add-version', ['copy', 'sprite:svg'], cb);
 });
 
 //生产环境带查看效果
 gulp.task('build:watch', ['clean'], function(cb) {
-    gulpSequence('sprite:image', 'rev:css', ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
+    gulpSequence('sprite:image', ['build-js', 'sass'], 'add-version', ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
 });
