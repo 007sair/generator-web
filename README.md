@@ -2,13 +2,12 @@
 
 基于gulp + webpack创建的一套前端工作流脚手架工具。
 
-> 启动gulp后会生成`dist`目录
-
 ## 目录结构
 
 ``` ruby
 .
 ├── config                      #webpack配置目录
+├── dist                        #最终生成目录
 ├── rev                         #存放版本号文件与webpack.DllPlugin插件的配置文件
 ├── spritesmith                 #修改雪碧图配置，具体修改下方有说明
 ├── src                         #源目录
@@ -40,21 +39,21 @@
 
 ## 功能
 
-- sass转css
-- Javascript合并压缩
+- Sass转CSS
+- Javascript合并压缩抽离
 - 浏览器实时刷新
 - 根据设计稿自由定制rem单位
-- css雪碧图（图片后缀须为.png）
-- svg-sprites（symbol）
-- PostCss
-    - px2rem：直接书写px，会被转换为rem
+- CSS雪碧图（图片后缀须为.png）
+- SVG雪碧图（symbol标签）
+- PostCSS
+    - px2rem，直接书写px，会被转换为rem
     - 简短语法，见：_postcss.scss
     - 新变量命名方法
-- base64图片转换
+- 图标转换（base64）
 
 ## 使用方法
 
-**1. 下载：**
+**1. 下载**
 
 ``` bash
 git clone git@github.com:007sair/hero.git
@@ -66,7 +65,7 @@ git clone git@github.com:007sair/hero.git
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
-**2. 安装插件：**
+**2. 安装插件**
 
 ``` bash
 cnpm install
@@ -76,7 +75,7 @@ cnpm install
 
 运行根目录下的`sprite.bat`。
 
-**4. 启动任务：**
+**4. 启动任务**
 
 ``` bash
 #开发环境
@@ -112,7 +111,7 @@ new HtmlWebpackPlugin({ //页面2
 
 本脚手架对雪碧图插件(`gulp.spritesmith`)略做修改，使其支持`rem`单位（原插件只支持`px`），且`rem`基数为75，修改方法：
 
-<del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件</del>
+<del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件。</del>
 
 运行`sprite.bat`自动复制即可。
 

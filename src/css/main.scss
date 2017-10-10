@@ -7,14 +7,14 @@
 
 /*** Sass工具 ***/
 @import "base/mixin";  //混合器
-@import "base/rem";    //rem & em sass函数
+@import "base/rem";    //rem、em函数
 
 /*** 样式初始化 ***/
 @import "base/reset";  //样式重置
 @import "base/media";  //媒体查询
 @import "common";	   //公共样式
 
-/*** 雪碧图模块，用法参考src/css/_sprites.scss中的176行 ***/
+/*** 雪碧图模块（用法参考src/css/_sprites.scss中的176行） ***/
 $online: false; //线上与本地 环境切换
 $sprite-icons: '../images/icon-sprite.png'; //gulp雪碧图插件生成的图片默认地址
 @if $online {
