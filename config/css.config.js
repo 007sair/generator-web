@@ -4,36 +4,41 @@ var pxtorem = require('postcss-pxtorem');
 var short = require('postcss-short');
 
 var config = {
+    sass: {
+        precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
+    },
     postCss: [
         cssnext({
-            browsers: ['ie >= 9', 'Chrome >= 20', 'Android >= 3.0', 'Firefox >= 10']
+            browsers: ['ie >= 9', 'Chrome >= 28', 'Android >= 4.0']
         }),
         short({
-            position: { //使用'_'下划线跳过，默认的星号跳过在scss中会被运算
-                skip: '_',
-                prefix: 's' //只识别-s-position属性，因为position:-webkit-sticky有误
+            position: { 
+                skip: '_',  //默认*号跳过，改为'_'下划线是因为*号跳过在scss中会进行乘法运算
+                prefix: 's' //只识别前缀为-s-的属性，因为position:-webkit-sticky有冲突
             },
-            spacing: { skip: '_' }
+            spacing: {
+                skip: '_'
+            }
         }),
-        postuse({
-            modules: ['pixrem', 'postcss-pxtorem']
+        postuse({ //便于在.scss文件中直接使用
+            modules: ['postcss-pxtorem']
         })
     ],
     cleanCss: {
         format: {
-            breaks: {//控制在哪里插入断点
+            breaks: {  //控制在哪里插入断点
                 afterAtRule: true,
-                afterBlockEnds: true,//控制在一个块结束后是否有换行符,默认为`false`
-                afterRuleEnds: true,//控制在规则结束后是否有换行符;默认为`false`
-                afterComment: true //注释后是否换行，默认false
+                afterBlockEnds: true,  //控制在一个块结束后是否有换行符,默认为`false`
+                afterRuleEnds: true,   //控制在规则结束后是否有换行符;默认为`false`
+                afterComment: true     //注释后是否换行，默认false
             }
         }
     },
     base64: {
         baseDir: './src/assets/base64',
         extensions: ['svg', 'png', /\.jpg#datauri$/i],
-        exclude:    [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
-        maxImageSize: 8*1024, // bytes,
+        exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+        maxImageSize: 8*1024, //bytes,
         deleteAfterEncoding: false,
         debug: true
     }

@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
 var gutil = require('gulp-util');
-var prod = gutil.env._[0] == 'dev' ? true : false;
+var isProd = gutil.env._[0] == 'dev' ? true : false;
 var srcDir = path.resolve(process.cwd(), 'src');
 var pluginConfig = require('./plugin.config.js');
 
@@ -26,12 +26,12 @@ function getEntry() {
 
 var webpackConfig = {
     cache: true,
-    devtool: prod ? "source-map" : '',
+    devtool: isProd ? "source-map" : '',
     entry: getEntry(),
     output: {
         path: path.join(process.cwd(), "dist/"),
         publicPath: "",
-        filename: prod ? 'js/[name].js' : 'js/[name].js?v=[chunkhash:10]',
+        filename: isProd ? 'js/[name].js' : 'js/[name].js?v=[chunkhash:10]',
         chunkFilename: "js/[name].js"
     },
     plugins: []

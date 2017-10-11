@@ -29,6 +29,10 @@ $dpr: false !default;
     display: none;
 }
 
+[class^=J_], [class^=js_] { //解决移动端div点击事件不可点的bug
+    cursor: pointer;
+}
+
 //是否使用dpr的共用单位
 @mixin font-dpr($font-size) {
     font-size: $font-size;
@@ -41,7 +45,6 @@ $dpr: false !default;
         }
     }
 }
-
 
 /**
  * DPR公共字体

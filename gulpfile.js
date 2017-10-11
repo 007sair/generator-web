@@ -8,6 +8,7 @@ var gulp = require('gulp');
 var path = require('path');
 var os = require('os');
 var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var gulpOpen = require('gulp-open');
@@ -37,7 +38,7 @@ var cssConfig = require('./config/css.config.js');
 var spriteConfig = require('./config/sprite.config.js');
 
 //环境判断
-var prod = gutil.env._[0] == 'dev' ? true : false;
+var isProd = gutil.env._[0] == 'dev' ? true : false;
 
 //mac chrome: "Google chrome"
 var browser = os.platform() === 'linux' ? 'Google chrome' : (
@@ -46,44 +47,32 @@ var browser = os.platform() === 'linux' ? 'Google chrome' : (
 
 //压缩合并生成新的css文件，生产环境有版本号功能
 gulp.task('sass', function () {
-    if (prod) { //dev
-        return gulp.src(['src/css/*.scss', 'src/css/**/*.css'], { base: 'src/css/' })
-            .pipe(sourcemaps.init())
-            .pipe(base64(cssConfig.base64))
-            .pipe(sass({
-                precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
-            })
-            .on('error', sass.logError))
-            .pipe(postCss(cssConfig.postCss))
-            .pipe(cleanCSS(cssConfig.cleanCss))
-            .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest('dist/css/'))
-            .pipe(connect.reload())
-    } else { //prod
-        return gulp.src(['src/css/*.scss', 'src/css/**/*.css'])
-            .pipe(base64(cssConfig.base64))
-            .pipe(sass({
-                precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
-            }))
-            .pipe(postCss(cssConfig.postCss))
-            .pipe(cleanCSS(cssConfig.cleanCss))
-            .pipe(gulp.dest('./dist/css/'))
-            .pipe(rev())
-            .pipe(revFormat({
-                prefix: '.', // 在版本号前增加字符  
-                suffix: '.cache', // 在版本号后增加字符  
-                lastExt: false
-            }))
-            .pipe(rev.manifest('css-version.json'))
-            .pipe(gulp.dest('./rev'))
-    }
+    return gulp.src(['src/css/*.scss', 'src/css/**/*.css'], { base: 'src/css/' })
+               .pipe(gulpif(isProd, sourcemaps.init()))
+               .pipe(base64(cssConfig.base64))
+               .pipe(sass(cssConfig.sass)
+               .on('error', sass.logError))
+               .pipe(postCss(cssConfig.postCss))
+               .pipe(gulpif(isProd, cleanCSS(cssConfig.cleanCss)))
+               .pipe(gulpif(!isProd, cleanCSS()))
+               .pipe(gulpif(isProd, sourcemaps.write('.')))
+               .pipe(gulp.dest('dist/css/'))
+               .pipe(gulpif(isProd, connect.reload()))
+               .pipe(gulpif(!isProd, rev()))
+               .pipe(gulpif(!isProd, revFormat({
+                    prefix: '.', // 在版本号前增加字符  
+                    suffix: '.cache', // 在版本号后增加字符  
+                    lastExt: false
+                })))
+               .pipe(gulpif(!isProd, rev.manifest('css-version.json')))
+               .pipe(gulpif(!isProd, gulp.dest('./rev')))
 });
 
 //引用webpack对公共库进行dll打包，生成vendor.js
 gulp.task("build-dll-js", function (callback) {
     webpack(require('./config/webpack.dll.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-dll-js", err);
-        if (!prod) {
+        if (!isProd) {
             gutil.log("[webpack:build-dll-js]", stats.toString({
                 colors: true
             }));
@@ -96,7 +85,7 @@ gulp.task("build-dll-js", function (callback) {
 gulp.task("build-js", ['build-dll-js'], function (callback) {
     webpack(require('./config/webpack.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-js", err);
-        if (!prod) {
+        if (!isProd) {
             gutil.log("[webpack:build-js]", stats.toString({
                 colors: true
             }));
@@ -129,7 +118,7 @@ gulp.task('add-version', function () {
             //把版本号和gulp-rev-format生成的字符去掉，剩下的就是原文件名：admin.css  
             var _filename = filename.replace(/\.[\w]*\.cache/, "");
             //重新定义文件名和版本号：admin.css?v=69cef10fff  
-            filename = _filename + "?v=" + _version;
+            filename = _filename + "?vcss=" + _version;
             //返回由gulp-rev-replace替换文件名  
             return filename;
         }

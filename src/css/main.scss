@@ -25,13 +25,9 @@ $sprite-icons: '../images/icon-sprite.png'; //gulp雪碧图插件生成的图片
 
 
 /*** 页面样式从这里开始 ***/
-
-body {
-	font-size: 12px;
-}
-
 article {
 	padding: 15px;
+	font-size: 28px;
 }
 
 .sprites-img {
@@ -45,18 +41,16 @@ article {
 .sprites-svg {
 	font-size: rem(24);
 	svg {
-		margin: 20px;
+		margin: 20PX;
 		width: 2em;
 		height: 2em;
 	}
 }
 
-.b64 {
-	i {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 20px;
-	}
+[class^=b64] {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 20px;
 }
 
 .b64-cancel {
