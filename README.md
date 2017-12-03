@@ -4,7 +4,7 @@
 
 ## 目录结构
 
-``` ruby
+``` bash
 .
 ├── config                      #webpack配置目录
 ├── dist                        #最终生成目录
