@@ -1,13 +1,6 @@
-/**
- * rem脚本js
- * ----------------
- * 根据 /src/css/_config.scss 中的变量 $output 的值引入对应js
- *   $output: 640    ->   ./lib/rem640.js
- *   $output: 750    ->   ./lib/rem750.js
- */
-require('./lib/rem750.js');
+import './lib/rem750';
+import $ from "./lib/zepto";
 
-var $ = require('./lib/zepto.js');
 
 // document.body.addEventListener('click', function () {
 //     require.ensure(['./mod/utils.js'], function (require) {
@@ -16,7 +9,7 @@ var $ = require('./lib/zepto.js');
 //     }, 'tool');
 // })
 
-var a = 1,
+let a = 1,
     b = 4;
 
 function add(m, n) {

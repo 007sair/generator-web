@@ -11,7 +11,6 @@ var os = require('os');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var sass = require('gulp-sass');
-var concat = require('gulp-concat');
 var gulpOpen = require('gulp-open');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');

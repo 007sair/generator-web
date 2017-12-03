@@ -40,6 +40,14 @@ var config = {
         filename: __DEV__ ? 'js/[name].min.js' : 'js/[name].min.js?v=[chunkhash:10]',
         chunkFilename: "js/[name].js"
     },
+    resolve: {
+        alias: {
+            'Lib': path.resolve(dirVars.srcDir, './js/lib'),
+            'Mod': path.resolve(dirVars.srcDir, './js/mod'),
+            'CSS': path.resolve(dirVars.srcDir, './css')
+        },
+        extensions: ['.js', '.css', '.scss'],
+    },
     plugins: [
         new CommonsChunkPlugin({
             name: 'common',
