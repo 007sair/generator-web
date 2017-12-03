@@ -5,6 +5,7 @@
  */
 
 var gulp = require('gulp');
+var webpack = require('webpack');
 var path = require('path');
 var os = require('os');
 var gutil = require('gulp-util');
@@ -14,7 +15,6 @@ var concat = require('gulp-concat');
 var gulpOpen = require('gulp-open');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
-var webpack = require('webpack');
 var connect = require('gulp-connect');
 var gulpSequence = require('gulp-sequence');  //- gulp串行任务   //gulpSequence：圆括号串行，中括号并行
 var postCss = require('gulp-postcss');
@@ -23,10 +23,9 @@ var spritesmith = require('gulp.spritesmith');
 var imagemin = require('gulp-imagemin');
 var svgSprite = require("gulp-svg-sprites");
 var svgmin = require('gulp-svgmin');
+var base64 = require('gulp-base64');
 var rev = require('gulp-rev');
 var revCollector = require('gulp-rev-collector');
-var base64 = require('gulp-base64');
-
 var replace = require('gulp-replace');
 var revFormat = require('gulp-rev-format');
 var revReplace = require('gulp-rev-replace');
@@ -36,9 +35,10 @@ require('shelljs/global');
 //config
 var cssConfig = require('./config/css.config.js');
 var spriteConfig = require('./config/sprite.config.js');
+var dirVars = require('./config/dir-vars.config.js');
 
 //环境判断
-var isProd = gutil.env._[0] == 'dev' ? true : false;
+var __DEV__ = gutil.env._[0] == 'dev' ? true : false;
 
 //mac chrome: "Google chrome"
 var browser = os.platform() === 'linux' ? 'Google chrome' : (
@@ -47,32 +47,32 @@ var browser = os.platform() === 'linux' ? 'Google chrome' : (
 
 //压缩合并生成新的css文件，生产环境有版本号功能
 gulp.task('sass', function () {
-    return gulp.src(['src/css/*.scss', 'src/css/**/*.css'], { base: 'src/css/' })
-               .pipe(gulpif(isProd, sourcemaps.init()))
+    return gulp.src(['src/css/*.scss', '!src/**/_*.scss'], { base: 'src/css/' })
+               .pipe(gulpif(__DEV__, sourcemaps.init()))
                .pipe(base64(cssConfig.base64))
                .pipe(sass(cssConfig.sass)
                .on('error', sass.logError))
                .pipe(postCss(cssConfig.postCss))
-               .pipe(gulpif(isProd, cleanCSS(cssConfig.cleanCss)))
-               .pipe(gulpif(!isProd, cleanCSS()))
-               .pipe(gulpif(isProd, sourcemaps.write('.')))
+               .pipe(gulpif(__DEV__, cleanCSS(cssConfig.cleanCss)))
+               .pipe(gulpif(!__DEV__, cleanCSS()))
+               .pipe(gulpif(__DEV__, sourcemaps.write('.')))
                .pipe(gulp.dest('dist/css/'))
-               .pipe(gulpif(isProd, connect.reload()))
-               .pipe(gulpif(!isProd, rev()))
-               .pipe(gulpif(!isProd, revFormat({
+               .pipe(gulpif(__DEV__, connect.reload()))
+               .pipe(gulpif(!__DEV__, rev()))
+               .pipe(gulpif(!__DEV__, revFormat({
                     prefix: '.', // 在版本号前增加字符  
                     suffix: '.cache', // 在版本号后增加字符  
                     lastExt: false
                 })))
-               .pipe(gulpif(!isProd, rev.manifest('css-version.json')))
-               .pipe(gulpif(!isProd, gulp.dest('./rev')))
+               .pipe(gulpif(!__DEV__, rev.manifest('css.manifest.json')))
+               .pipe(gulpif(!__DEV__, gulp.dest('./')))
 });
 
 //引用webpack对公共库进行dll打包，生成vendor.js
 gulp.task("build-dll-js", function (callback) {
     webpack(require('./config/webpack.dll.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-dll-js", err);
-        if (!isProd) {
+        if (!__DEV__) {
             gutil.log("[webpack:build-dll-js]", stats.toString({
                 colors: true
             }));
@@ -82,10 +82,10 @@ gulp.task("build-dll-js", function (callback) {
 });
 
 //引用webpack对js进行合并压缩提取，并生成html页面到dist下
-gulp.task("build-js", ['build-dll-js'], function (callback) {
+gulp.task("build-js", function (callback) {
     webpack(require('./config/webpack.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-js", err);
-        if (!isProd) {
+        if (!__DEV__) {
             gutil.log("[webpack:build-js]", stats.toString({
                 colors: true
             }));
@@ -94,18 +94,9 @@ gulp.task("build-js", ['build-dll-js'], function (callback) {
     });
 });
 
-//合并src/sprites目录下的png到dist/images下，并生成_sprites.scss到src/css下
-gulp.task('sprite:image', function (done) {
-    var spriteData = gulp.src('src/assets/sprites/*.png')
-        .pipe(spritesmith(spriteConfig.image));
-    spriteData.img.pipe(imagemin()).pipe(gulp.dest('dist/images'));
-    spriteData.css.pipe(gulp.dest('src/css'));
-    done()
-});
-
 //添加版本号
 gulp.task('add-version', function () {
-    var manifest = gulp.src(["./rev/css-version.json"]);
+    var manifest = gulp.src(["./css.manifest.json"]);
     function modifyUnreved(filename) {
         return filename;
     }
@@ -155,17 +146,20 @@ gulp.task('sprite:svg', function () {
     return gulp.src('src/assets/svg/*.svg')
         .pipe(svgmin())
         .pipe(svgSprite(spriteConfig.svg))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./dist/'));
 });
 
 //监听
 gulp.task('watch', function (done) {
-    gulp.watch(['src/**/*.scss', 'src/**/*.css'], ['sass']);
-    gulp.watch(['src/**/*.html', 'src/**/*.js'], ['build-js']).on('change', function (event) {
-        gulp.src(['src/**/*.html', 'src/**/*.js']).pipe(connect.reload())
+    gulp.watch(['src/**/*.scss', '!src/**/_*.scss'], ['sass']).on('change', function (event) {
+        // console.log(event);
+    });
+    gulp.watch(['src/*.html', 'src/**/*.js'], ['build-js']).on('change', function (event) {
+        // console.log(event);
+        gulp.src(['src/*.html', 'src/**/*.js']).pipe(connect.reload())
     });
     gulp.watch(['src/assets/img/**', 'src/assets/data/**'], ['copy']);
-    gulp.watch('src/assets/sprites/**', ['sprite:image']);
+    gulp.watch('src/assets/sprites/**', ['build-js']);
     gulp.watch('src/assets/svg/**', ['sprite:svg']);
     gulp.watch('src/assets/base64/**', ['sass']);
     done()
@@ -192,22 +186,21 @@ gulp.task('open', function (done) {
 gulp.task('clean', function(done) {
     rm('-rf', 'dist/');
     rm('-rf', 'rev/');
-    rm('-rf', 'svg.html');
     done();
 })
 
 
 //开发环境
 gulp.task('dev', ['clean'], function (cb) {
-    gulpSequence('sprite:image', ['build-js', 'sass'], ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
+    gulpSequence('build-dll-js', 'build-js', 'sass', ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
 });
 
 //生产环境
 gulp.task('build', ['clean'], function(cb) {
-    gulpSequence('sprite:image', ['build-js', 'sass'], 'add-version', ['copy', 'sprite:svg'], cb);
+    gulpSequence('build-dll-js', 'build-js', 'sass', 'add-version', ['copy', 'sprite:svg'], cb);
 });
 
 //生产环境带查看效果
 gulp.task('build:watch', ['clean'], function(cb) {
-    gulpSequence('sprite:image', ['build-js', 'sass'], 'add-version', ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
+    gulpSequence('build-dll-js', 'build-js', 'sass', 'add-version', ['copy', 'sprite:svg'], ['connect', 'open'], 'watch', cb);
 });

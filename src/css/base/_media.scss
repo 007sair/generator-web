@@ -10,7 +10,7 @@ $dpr: false !default;
 
 @mixin htmlFont($px) {
 	html {
-		font-size: $px;
+		font-size: $px / 1px * 1PX;
 	}
 	@if $dpr {
 		html[data-dpr="2"] {

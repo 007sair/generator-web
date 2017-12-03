@@ -9,9 +9,18 @@ require('./lib/rem750.js');
 
 var $ = require('./lib/zepto.js');
 
-document.body.addEventListener('click', function () {
-    require.ensure(['./mod/utils.js'], function (require) {
-        var utils = require('./mod/utils.js');
-        console.log(utils)
-    }, 'tool');
-})
+// document.body.addEventListener('click', function () {
+//     require.ensure(['./mod/utils.js'], function (require) {
+//         var utils = require('./mod/utils.js');
+//         console.log(utils)
+//     }, 'tool');
+// })
+
+var a = 1,
+    b = 4;
+
+function add(m, n) {
+    return m + n
+}
+
+console.log(add(a, b));

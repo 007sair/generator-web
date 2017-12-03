@@ -21,7 +21,7 @@ $sprite-icons: '../images/icon-sprite.png'; //gulp雪碧图插件生成的图片
 	$sprite-icons: '//www.baidu.com/img/bd_logo1.png'; //test
 }
 @import "sprites"; //引入gulp雪碧图插件生成的sass样式
-@include sprites($spritesheet-sprites); 
+@include sprites($spritesheet-sprites, $sprite-icons);
 
 
 /*** 页面样式从这里开始 ***/
@@ -69,20 +69,4 @@ article {
 	size: 24px;
 	background: url('icon-clear.png') no-repeat;
 	background-size: 24px;
-}
-
-.b64-nav {
-	size: 42px;
-	background: url('icon-nav.png') no-repeat;
-	background-size: 42px;
-}
-
-.b64-search {
-	size: 42px;
-	background: url('icon-search.png') no-repeat;
-	background-size: 42px;
-}
-
-.poss {
-	position: relative;
 }

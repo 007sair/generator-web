@@ -29,7 +29,8 @@ $dpr: false !default;
     display: none;
 }
 
-[class^=J_], [class^=js_] { //解决移动端div点击事件不可点的bug
+//解决移动端某些元素（如：div）点击事件失效bug
+[class^=J_], [class^=js_] {
     cursor: pointer;
 }
 
@@ -65,7 +66,6 @@ $dpr: false !default;
  * <p class="sp">现价：<em>56</em></p>
  * <p class="mp">市场价：<del>100</del></p>
  */
-
 %rmb {
     &:before {
         content: '\00A5';
@@ -81,7 +81,7 @@ $dpr: false !default;
     @extend %rmb;
 }
 
-.icon-svg {
-    width: 1em;
-    height: 1em;
+//for svg preview html
+[id^=icon-box-] svg {
+    size: 4em;
 }

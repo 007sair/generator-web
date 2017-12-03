@@ -8,11 +8,10 @@
 .
 ├── config                      #webpack配置目录
 ├── dist                        #最终生成目录
-├── rev                         #存放版本号文件与webpack.DllPlugin插件的配置文件
-├── spritesmith                 #修改雪碧图配置，具体修改下方有说明
+|   └── symbols.html            #svg预览页面
 ├── src                         #源目录
 |   ├── assets                  #资源目录
-|   |   ├── base64              #存放小于8k的图片，用于生产base64
+|   |   ├── base64              #存放小于4k的图片，用于生成base64
 |   |   ├── data                #存放json数据，便于ajax使用，会被复制到dist目录下
 |   |   ├── img                 #图片目录，存放未被处理的图片，会被复制到dist目录下
 |   |   ├── sprites             #雪碧图目录，加工后的文件被生成到dist/img内
@@ -33,56 +32,40 @@
 |   └── page2.html              #页面2
 ├── .gitignore     
 ├── gulpfile.js   
-├── svg.html                    #svg图标预览查看页面                 
+├── vendor.manifest.json        #第三方js的版本号管理配置
+├── css.manifest.json           #css的版本号管理，只在build下生成
 └── package.json
 ```
 
 ## 功能
 
-- Sass转CSS
-- Javascript合并压缩抽离
+- `SASS`转`CSS`
+- `Javascript`合并压缩抽离
 - 浏览器实时刷新
-- 根据设计稿自由定制rem单位
-- CSS雪碧图（图片后缀须为.png）
-- SVG雪碧图（symbol标签）
-- PostCSS
-    - px2rem，直接书写px，会被转换为rem
-    - 简短语法，见：_postcss.scss
+- 根据设计稿自由定制`rem`单位
+- `CSS`雪碧图（图片后缀须为`.png`）
+- `SVG`雪碧图（`symbol`标签）
+- `PostCSS`
+    - `pxtorem`，直接书写px，会被转换为rem
+    - 简短写法，见：`_postcss.scss`
     - 新变量命名方法
-- 图标转换（base64）
+- 图标转换（`base64`）
 
 ## 使用方法
 
-**1. 下载**
-
 ``` bash
+# 1.下载
 git clone git@github.com:007sair/hero.git
-```
 
-**2. 修改npm镜像**
-
-``` bash
+# 2.修改npm镜像
 npm install -g cnpm --registry=https://registry.npm.taobao.org
-```
 
-**2. 安装插件**
-
-``` bash
+# 3.安装插件
 cnpm install
-```
 
-**3. 修改插件**
-
-运行根目录下的`sprite.bat`。
-
-**4. 启动任务**
-
-``` bash
-#开发环境
-gulp dev
-
-#生产环境
-gulp build
+# 4.启动任务
+gulp dev  #开发环境
+gulp build  #生产环境
 ```
 
 ## 配置问题
@@ -107,27 +90,6 @@ new HtmlWebpackPlugin({ //页面2
 ... //更多页面
 ```
 
-### 雪碧图配置
-
-本脚手架对雪碧图插件(`gulp.spritesmith`)略做修改，使其支持`rem`单位（原插件只支持`px`），且`rem`基数为75，修改方法：
-
-<del>将目录`spritesmith`下的文件复制到`node_modules\gulp.spritesmith\node_modules\spritesheet-templates\lib\`下替换原文件。</del>
-
-运行`sprite.bat`自动复制即可。
-
-#### 修改基数
-
-打开`./spritesmith/spritesheet-templates.js`，174行：
-
-```
-['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
-    if (item[key] !== undefined) {
-        // px[key] = item[key] + 'px';
-        px[key] = fomatFloat(item[key]/75, 5) + 'rem'; //75为当前基数，5为小数点个数
-    }
-});
-```
-
 ## TODO
 
 - null
@@ -135,6 +97,10 @@ new HtmlWebpackPlugin({ //页面2
 ---
 
 ## 修改日志
+
+### 2017-12-03
+
+- 去掉`.bat`的繁琐操作，简化目录
 
 ### 2017-10-11
 

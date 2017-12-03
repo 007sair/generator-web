@@ -1,22 +1,24 @@
 /**
  * sass 配置文件
- * --------------------
+ * ------------
  * 解决问题:
- *   1. 根据端的不同，reset样式也会不同
- *   2. 自动计算输出rem单位
+ *   1. 根据端的不同，设置对应reset样式
+ *   2. 根据定义$desigin $output输出rem单位
  * 应用场景:
- *   设计稿为750px，页面引用了src/js/lib/rem640.js，变量设置如下：
- *   $design: 750
- *   $output: 640
+ *   当我们拿到的是新设计稿（750），而页面使用了rem640.js（说明老页面使用的640设计稿）
+ *   则变量设置如下：
+ *      $design: 750
+ *      $output: 640
+ *   然后按照750设计稿输入值，计算出的rem单位会自动转换为640比例值，如
  */
 
-// used by media.scss
-$dpr: false; //是否使用dpr  @true： media中自带dpr  common中会有f12 f14...等样式
+//used in media.scss
+$dpr: false; //是否使用dpr  true： media中自带dpr  common中会有f12 f14...等样式
 
-// used by reset.scss
+//used in reset.scss
 $device: 'wap';		//设置reset.css项目重置方案，wap为移动端重置样式
 
-// used by rem.scss
+//used in rem.scss
 $isPX: false; 		//是否输出px单位
 $design: 750; 		//设计稿尺寸
 

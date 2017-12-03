@@ -38,9 +38,9 @@ var config = {
         baseDir: './src/assets/base64',
         extensions: ['svg', 'png', /\.jpg#datauri$/i],
         exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
-        maxImageSize: 8*1024, //bytes,
+        maxImageSize: 4 * 1024, //bytes,
         deleteAfterEncoding: false,
-        debug: true
+        debug: false //是否在任务台显示信息
     }
 };
 
