@@ -9,11 +9,10 @@ import $ from "./lib/zepto";
 //     }, 'tool');
 // })
 
-let a = 1,
-    b = 4;
+let arr = [4, 5, 6];
 
-function add(m, n) {
-    return m + n
-}
+var fn = (x, y, z) => {
+    return x + y + z
+};
 
-console.log(add(a, b));
+console.log(fn(...arr));

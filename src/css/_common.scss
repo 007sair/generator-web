@@ -80,8 +80,3 @@ $dpr: false !default;
 .mp del {
     @extend %rmb;
 }
-
-//for svg preview html
-[id^=icon-box-] svg {
-    size: 4em;
-}

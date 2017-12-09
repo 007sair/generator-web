@@ -2,9 +2,9 @@
  * 公共库 dll 打包
  */
 
-var webpack = require('webpack');
-var path = require('path');
-var dirVars = require('./dir-vars.config.js');
+const webpack = require('webpack');
+const path = require('path');
+const dirVars = require('./dir-vars.config.js');
 
 module.exports = {
     entry: {
@@ -24,4 +24,4 @@ module.exports = {
             context: dirVars.rootDir
         })
     ]
-};
+}

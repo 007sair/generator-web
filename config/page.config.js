@@ -3,7 +3,7 @@
  * 一个页面对应一个 new HtmlWebpackPlugin
  */
 
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = [
     new HtmlWebpackPlugin({ //页面1 项目开发请填写注释
@@ -15,5 +15,5 @@ module.exports = [
         filename: 'page2.html',
         template: 'src/page2.html',
         chunks: ['common', 'page2']
-    }),
+    })
 ];

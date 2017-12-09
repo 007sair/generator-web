@@ -2,26 +2,25 @@
  * webpack config
  */
 
-var webpack = require('webpack');
-var path = require('path');
-var fs = require('fs');
-var gutil = require('gulp-util');
+const fs = require('fs');
+const path = require('path');
+const webpack = require('webpack');
+const gutil = require('gulp-util');
 
-var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-var HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
-var SpritesmithPlugin = require('webpack-spritesmith');
+const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const SpritesmithPlugin = require('webpack-spritesmith');
 
-var __DEV__ = gutil.env._[0] == 'dev' ? true : false;
-
-var pageConfig = require('./page.config.js');
-var dirVars = require('./dir-vars.config.js');
+let __DEV__ = gutil.env._[0] == 'dev' ? true : false;
+let pageConfig = require('./page.config.js');
+let dirVars = require('./dir-vars.config.js');
 
 //获取多页面的每个入口文件，用于配置中的entry
 function getEntry() {
-    var jsPath = path.resolve(dirVars.srcDir, 'js');
-    var dirs = fs.readdirSync(jsPath);
-    var matchs = [], files = {};
+    let jsPath = path.resolve(dirVars.srcDir, 'js');
+    let dirs = fs.readdirSync(jsPath);
+    let matchs = [], files = {};
     dirs.forEach(function (item) {
         matchs = item.match(/(.+)\.js$/);
         if (matchs) {
@@ -31,11 +30,11 @@ function getEntry() {
     return files;
 }
 
-var config = {
-    devtool: __DEV__ ? 'eval' : '',
+let config = {
+    // devtool: __DEV__ ? 'eval' : '',
     entry: getEntry(),
     output: {
-        path: path.resolve(dirVars.rootDir, "dist/"),
+        path: path.resolve(dirVars.distDir),
         publicPath: "/",
         filename: __DEV__ ? 'js/[name].min.js' : 'js/[name].min.js?v=[chunkhash:10]',
         chunkFilename: "js/[name].js"
@@ -48,15 +47,15 @@ var config = {
         },
         extensions: ['.js', '.css', '.scss'],
     },
+    module: {
+        rules: [
+            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+        ]
+    },
     plugins: [
         new CommonsChunkPlugin({
             name: 'common',
             minChunks: 2
-        }),
-        new uglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
         }),
         new HtmlWebpackIncludeAssetsPlugin({
             assets: ['js/vendor.min.js'],
@@ -76,23 +75,36 @@ var config = {
             target: {
                 image: path.resolve(dirVars.distDir, 'images/icon-sprite.png'),
                 css: [
-                    [path.resolve(dirVars.srcDir, 'css/_sprites.scss'), {
-                        format: 'scss_template_handlebars'
-                    }]
+                    [
+                        path.resolve(dirVars.srcDir, 'css/_sprites.scss'), {
+                            format: 'scss_template_handlebars'
+                        }
+                    ]
                 ]
             },
             spritesmithOptions: {
-                padding: 20
+                padding: 15
             },
             apiOptions: {
                 cssImageRef: "/images/icon-sprite.png"
             },
             customTemplates: { //自定义模板
                 'scss_template_handlebars': path.resolve(dirVars.rootDir, 'config/scss.template.handlebars')
-            },
+            }
         }),
     ]
 };
+
+if (!__DEV__) {
+    config.plugins = config.plugins.concat([
+        new uglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    ])
+}
+
 
 config.plugins = config.plugins.concat(pageConfig);
 

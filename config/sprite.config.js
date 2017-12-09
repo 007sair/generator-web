@@ -3,7 +3,9 @@
  * svg：src/assets/svg 的压缩合并
  */
 
-var config = {
+const fs = require('fs');
+
+let config = {
     svg: {
         mode: "symbols",
         common: 'icon-svg',
@@ -11,7 +13,9 @@ var config = {
         svg: {
             symbols: 'images/icon-svg.svg'
         },
-        cssFile: 'css/main.css'
+        templates: {
+            previewSymbols: fs.readFileSync(__dirname + '/preview-symbol.html', "utf-8")
+        }
     }
 }
 

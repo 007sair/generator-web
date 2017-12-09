@@ -1,9 +1,9 @@
-var cssnext = require("postcss-cssnext"); //http://cssnext.io/features/
-var postuse = require('postcss-use'); //https://github.com/postcss/postcss-use
-var pxtorem = require('postcss-pxtorem');
-var short = require('postcss-short');
+const cssnext = require("postcss-cssnext"); //http://cssnext.io/features/
+const postuse = require('postcss-use'); //https://github.com/postcss/postcss-use
+const pxtorem = require('postcss-pxtorem');
+const short = require('postcss-short');
 
-var config = {
+let config = {
     sass: {
         precision: 4 //保留小数点后几位 #https://github.com/sass/node-sass#precision
     },
