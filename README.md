@@ -6,7 +6,7 @@
 
 ``` bash
 .
-├── config                      #webpack配置目录
+├── build                       #webpack配置目录
 ├── dist                        #最终生成目录
 |   └── symbols.html            #svg预览页面
 ├── src                         #源目录
@@ -17,7 +17,7 @@
 |   |   ├── sprites             #雪碧图目录，加工后的文件被生成到dist/img内
 |   |   └── svg                 #svg目录，加工后的文件被生成到dist/img内
 |   ├── css                    
-|   |   ├── base                #sass库目录
+|   |   ├── base                #sass基础库目录
 |   |   ├── _config.scss        #sass配置文件
 |   |   ├── _common.scss        #公共样式文件
 |   |   ├── _sprites.scss       #雪碧图插件生成的样式文件
@@ -26,11 +26,10 @@
 |   ├── js                      
 |   |   ├── lib                 #库目录
 |   |   ├── mods                #模块目录
-|   |   ├── index.js            #页面1入口文件
-|   |   └── index2.js           #页面2入口文件
-|   ├── index.html              #页面1
+|   |   ├── page1.js            #页面1入口文件
+|   |   └── page2.js            #页面2入口文件
+|   ├── page1.html              #页面1
 |   └── page2.html              #页面2
-├── .gitignore     
 ├── gulpfile.js   
 ├── vendor.manifest.json        #第三方js的版本号管理配置
 ├── css.manifest.json           #css的版本号管理，只在build下生成

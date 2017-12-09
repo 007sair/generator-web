@@ -32,9 +32,9 @@ const revReplace = require('gulp-rev-replace');
 require('shelljs/global');
 
 //config
-let cssConfig = require('./config/css.config.js');
-let spriteConfig = require('./config/sprite.config.js');
-let dirVars = require('./config/dir-vars.config.js');
+let cssConfig = require('./build/config/css.config.js');
+let spriteConfig = require('./build/config/sprite.config.js');
+let dirVars = require('./build/config/dir-vars.config.js');
 
 //环境判断
 let __DEV__ = gutil.env._[0] == 'dev' ? true : false;
@@ -69,7 +69,7 @@ gulp.task('sass', function () {
 
 //引用webpack对公共库进行dll打包，生成vendor.js
 gulp.task("build-dll-js", function (callback) {
-    webpack(require('./config/webpack.dll.config.js')).run(function (err, stats) {
+    webpack(require('./build/webpack.dll.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-dll-js", err);
         if (!__DEV__) {
             gutil.log("[webpack:build-dll-js]", stats.toString({
@@ -82,7 +82,7 @@ gulp.task("build-dll-js", function (callback) {
 
 //引用webpack对js进行合并压缩提取，并生成html页面到dist下
 gulp.task("build-js", function (callback) {
-    webpack(require('./config/webpack.config.js')).run(function (err, stats) {
+    webpack(require('./build/webpack.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-js", err);
         if (!__DEV__) {
             gutil.log("[webpack:build-js]", stats.toString({

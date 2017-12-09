@@ -4,7 +4,8 @@
 
 const webpack = require('webpack');
 const path = require('path');
-const dirVars = require('./dir-vars.config.js');
+
+let dirVars = require('./config/dir-vars.config.js');
 
 module.exports = {
     entry: {

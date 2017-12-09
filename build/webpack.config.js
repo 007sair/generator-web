@@ -13,8 +13,9 @@ const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plug
 const SpritesmithPlugin = require('webpack-spritesmith');
 
 let __DEV__ = gutil.env._[0] == 'dev' ? true : false;
-let pageConfig = require('./page.config.js');
-let dirVars = require('./dir-vars.config.js');
+
+let pageConfig = require('./config/page.config.js');
+let dirVars = require('./config/dir-vars.config.js');
 
 //获取多页面的每个入口文件，用于配置中的entry
 function getEntry() {
@@ -89,7 +90,7 @@ let config = {
                 cssImageRef: "/images/icon-sprite.png"
             },
             customTemplates: { //自定义模板
-                'scss_template_handlebars': path.resolve(dirVars.rootDir, 'config/scss.template.handlebars')
+                'scss_template_handlebars': path.resolve(dirVars.tmplDir, 'scss.template.handlebars')
             }
         }),
     ]

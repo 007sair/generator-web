@@ -4,6 +4,9 @@
  */
 
 const fs = require('fs');
+const path = require('path');
+
+let dirVars = require('./dir-vars.config.js');
 
 let config = {
     svg: {
@@ -14,7 +17,7 @@ let config = {
             symbols: 'images/icon-svg.svg'
         },
         templates: {
-            previewSymbols: fs.readFileSync(__dirname + '/preview-symbol.html', "utf-8")
+            previewSymbols: fs.readFileSync(path.resolve(dirVars.tmplDir, 'preview-symbol.html'), "utf-8")
         }
     }
 }
