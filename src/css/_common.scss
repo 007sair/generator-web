@@ -7,7 +7,6 @@ $dpr: false !default;
 @import "config.scss";
 
 /* 公共样式 */
-
 .fl {
     float: left;
 }
@@ -32,6 +31,14 @@ $dpr: false !default;
 //解决移动端某些元素（如：div）点击事件失效bug
 [class^=J_], [class^=js_] {
     cursor: pointer;
+}
+
+.icon-svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
 }
 
 //是否使用dpr的共用单位

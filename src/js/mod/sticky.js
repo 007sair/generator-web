@@ -86,6 +86,9 @@ Sticky.prototype = {
 		});
 	},
 	getOffsetTop: function() { //有待优化：当有tab悬浮时，找一个最优的获取top值的方法
+		if (!this.$elem.length) {
+			return false
+		}
 		var me = this;
 		var top;
 		this.arr_tops = [];

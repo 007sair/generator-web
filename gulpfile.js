@@ -18,7 +18,6 @@ const connect = require('gulp-connect');
 const gulpSequence = require('gulp-sequence');  //- gulp串行任务   //gulpSequence：圆括号串行，中括号并行
 const postCss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
-const spritesmith = require('gulp.spritesmith');
 const imagemin = require('gulp-imagemin');
 const svgSprite = require("gulp-svg-sprites");
 const svgmin = require('gulp-svgmin');
@@ -184,7 +183,7 @@ gulp.task('open', function (done) {
 
 gulp.task('clean', function (done) {
     rm('-rf', 'dist/');
-    rm('-rf', 'rev/');
+    rm('-rf', ['css.manifest.json', 'vendor.manifest.json']);
     done();
 })
 

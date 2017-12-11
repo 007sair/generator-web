@@ -32,7 +32,7 @@ function getEntry() {
 }
 
 let config = {
-    // devtool: __DEV__ ? 'eval' : '',
+    devtool: __DEV__ ? 'eval' : '',
     entry: getEntry(),
     output: {
         path: path.resolve(dirVars.distDir),
@@ -42,15 +42,23 @@ let config = {
     },
     resolve: {
         alias: {
-            'Lib': path.resolve(dirVars.srcDir, './js/lib'),
-            'Mod': path.resolve(dirVars.srcDir, './js/mod'),
-            'CSS': path.resolve(dirVars.srcDir, './css')
+            '_lib': path.resolve(dirVars.srcDir, 'js/lib'),
+            '_mod': path.resolve(dirVars.srcDir, 'js/mod'),
+            '_css': path.resolve(dirVars.srcDir, 'css'),
+            '_assets': path.resolve(dirVars.srcDir, 'assets'),
         },
         extensions: ['.js', '.css', '.scss'],
     },
     module: {
         rules: [
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+            {
+                test: /\.svg$/,
+                use: [
+                    { loader: 'svg-sprite-loader', options:{} },
+                    'svgo-loader'
+                ]
+            }
         ]
     },
     plugins: [
