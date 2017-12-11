@@ -27,6 +27,7 @@ const revCollector = require('gulp-rev-collector');
 const replace = require('gulp-replace');
 const revFormat = require('gulp-rev-format');
 const revReplace = require('gulp-rev-replace');
+const args = require('yargs').argv;
 
 require('shelljs/global');
 
@@ -83,7 +84,7 @@ gulp.task("build-dll-js", function (callback) {
 gulp.task("build-js", function (callback) {
     webpack(require('./build/webpack.config.js')).run(function (err, stats) {
         if (err) throw new gutil.PluginError("webpack:build-js", err);
-        if (!__DEV__) {
+        if (true) {
             gutil.log("[webpack:build-js]", stats.toString({
                 colors: true
             }));
@@ -153,6 +154,14 @@ gulp.task('watch', function (done) {
         // console.log(event);
     });
     gulp.watch(['src/*.html', 'src/**/*.js'], ['build-js']).on('change', function (event) {
+        if (args.s || args.single) {
+            let str = event.path.match(/(.+)\.js$/)[1];
+            let index = str.lastIndexOf("\/");
+            let _entry = {};
+            str = str.substring(index + 1, str.length);
+            _entry[str] = event.path;
+            webpackConfig.entry = _entry;
+        }
         // console.log(event);
         gulp.src(['src/*.html', 'src/**/*.js']).pipe(connect.reload())
     });

@@ -16,4 +16,4 @@ let arr = [4, 5, 6];
 let fn = (x, y, z) => {
     return x + y + z
 };
-console.log(fn(...arr));
+console.log(fn(...arr), 'test11为');

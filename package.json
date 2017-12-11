@@ -49,6 +49,7 @@
     "svgo": "^1.0.3",
     "svgo-loader": "^2.1.0",
     "webpack": "^3.9.1",
-    "webpack-spritesmith": "^0.3.3"
+    "webpack-spritesmith": "^0.3.3",
+    "yargs": "^10.0.3"
   }
 }
